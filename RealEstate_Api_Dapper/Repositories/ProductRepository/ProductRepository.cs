@@ -26,11 +26,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetAllProductWithRelationshipsResponseDto>> GetAllProductWithRelationshipsAsync()
     {
-        //string query = "Select TblProduct.Id,Title,Price,City,District,CategoryName where CategoryName = TblCategory.Name From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id";
-        //" inner join TblEmployee on TblProduct.EmployeId = TblEmployee.Id";
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblCategory.Name as CategoryName, TblEmployee.Name as EmployeeName From TblProduct" +
-            " inner join TblCategory on TblProduct.CategoryId=TblCategory.Id" +
-            " inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblCategory.Name as CategoryName, TblEmployee.Name as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetAllProductWithRelationshipsResponseDto> values = await connection.QueryAsync<GetAllProductWithRelationshipsResponseDto>(query);

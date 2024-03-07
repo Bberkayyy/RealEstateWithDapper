@@ -10,6 +10,7 @@ public class ResultProductViewModel
     public string district { get; set; }
     public string address { get; set; }
     public string description { get; set; }
+    public string type { get; set; }
     public string categoryName { get; set; }
     public string employeeName { get; set; }
 }
