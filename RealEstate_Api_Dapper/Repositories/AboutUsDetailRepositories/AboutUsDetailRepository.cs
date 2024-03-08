@@ -4,7 +4,7 @@ using RealEstate_Api_Dapper.Dtos.AboutUsDetailDtos.Responses;
 using RealEstate_Api_Dapper.Models.DapperContext;
 using System.Data;
 
-namespace RealEstate_Api_Dapper.Repositories.AboutUsDetailRepository;
+namespace RealEstate_Api_Dapper.Repositories.AboutUsDetailRepositories;
 
 public class AboutUsDetailRepository : IAboutUsDetailRepository
 {

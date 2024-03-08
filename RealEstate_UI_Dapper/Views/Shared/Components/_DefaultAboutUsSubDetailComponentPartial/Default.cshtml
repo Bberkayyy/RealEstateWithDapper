@@ -1,0 +1,8 @@
+﻿@model List<ResultAboutUsSubDetailViewModel>
+
+<ul class="w3l-right-book w3l-right-book-grid mt-md-5 mt-4">
+    @foreach (var item in Model)
+    {
+        <li><span class="fa fa-check" aria-hidden="@item.status"></span>@item.name</li>
+    }
+</ul>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
-using RealEstate_Api_Dapper.Repositories.ProductRepository;
+using RealEstate_Api_Dapper.Repositories.ProductRepositories;
 
 namespace RealEstate_Api_Dapper.Controllers;
 

@@ -1,7 +1,7 @@
 ﻿using RealEstate_Api_Dapper.Dtos.CategoryDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.CategoryDtos.Responses;
 
-namespace RealEstate_Api_Dapper.Repositories.CategoryRepository;
+namespace RealEstate_Api_Dapper.Repositories.CategoryRepositories;
 
 public interface ICategoryRepository
 {

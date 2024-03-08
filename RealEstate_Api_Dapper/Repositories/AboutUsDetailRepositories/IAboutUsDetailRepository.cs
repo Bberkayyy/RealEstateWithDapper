@@ -1,7 +1,7 @@
 ﻿using RealEstate_Api_Dapper.Dtos.AboutUsDetailDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.AboutUsDetailDtos.Responses;
 
-namespace RealEstate_Api_Dapper.Repositories.AboutUsDetailRepository;
+namespace RealEstate_Api_Dapper.Repositories.AboutUsDetailRepositories;
 
 public interface IAboutUsDetailRepository
 {

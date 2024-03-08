@@ -4,7 +4,7 @@ using RealEstate_Api_Dapper.Dtos.CategoryDtos.Responses;
 using RealEstate_Api_Dapper.Models.DapperContext;
 using System.Data;
 
-namespace RealEstate_Api_Dapper.Repositories.CategoryRepository;
+namespace RealEstate_Api_Dapper.Repositories.CategoryRepositories;
 
 public class CategoryRepository : ICategoryRepository
 {

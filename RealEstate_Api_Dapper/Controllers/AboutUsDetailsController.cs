@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RealEstate_Api_Dapper.Dtos.AboutUsDetailDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.AboutUsDetailDtos.Responses;
-using RealEstate_Api_Dapper.Repositories.AboutUsDetailRepository;
+using RealEstate_Api_Dapper.Repositories.AboutUsDetailRepositories;
 
 namespace RealEstate_Api_Dapper.Controllers;
 
