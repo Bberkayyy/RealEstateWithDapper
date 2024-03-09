@@ -3,5 +3,4 @@
 public class CreateAboutUsSubDetailRequestDto
 {
     public string Name { get; set; }
-    public bool Status { get; set; }
 }

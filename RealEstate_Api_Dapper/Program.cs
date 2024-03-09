@@ -3,6 +3,7 @@ using RealEstate_Api_Dapper.Repositories.AboutUsDetailRepositories;
 using RealEstate_Api_Dapper.Repositories.AboutUsSubDetailRepositories;
 using RealEstate_Api_Dapper.Repositories.BottomGridRepositories;
 using RealEstate_Api_Dapper.Repositories.CategoryRepositories;
+using RealEstate_Api_Dapper.Repositories.ClientRepositories;
 using RealEstate_Api_Dapper.Repositories.LocationRepositories;
 using RealEstate_Api_Dapper.Repositories.ProductRepositories;
 
@@ -22,6 +23,7 @@ builder.Services.AddTransient<IAboutUsDetailRepository, AboutUsDetailRepository>
 builder.Services.AddTransient<IAboutUsSubDetailRepository, AboutUsSubDetailRepository>();
 builder.Services.AddTransient<IBottomGridRepository, BottomGridRepository>();
 builder.Services.AddTransient<ILocationRepository, LocationRepository>();
+builder.Services.AddTransient<IClientRepository, ClientRepository>();
 
 var app = builder.Build();
 
