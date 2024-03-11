@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RealEstate_Api_Dapper.Dtos.ProductDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
 using RealEstate_Api_Dapper.Repositories.ProductRepositories;
 
@@ -26,5 +27,35 @@ public class ProductsController : ControllerBase
     {
         List<GetAllProductWithRelationshipsResponseDto> values = await _productRepository.GetAllProductWithRelationshipsAsync();
         return Ok(values);
+    }
+    [HttpPost]
+    public async Task<IActionResult> CreateProduct(CreateProductRequestDto createProductRequestDto)
+    {
+        _productRepository.CreateProduct(createProductRequestDto);
+        return Ok("İlan Başarılı Bir Şekilde Eklendi.");
+    }
+    [HttpDelete]
+    public async Task<IActionResult> DeleteProduct(int id)
+    {
+        _productRepository.DeleteProduct(id);
+        return Ok("İlan Başarılı Bir Şekilde Silindi.");
+    }
+    [HttpPut]
+    public async Task<IActionResult> UpdateProduct(UpdateProductRequestDto updateProductRequestDto)
+    {
+        _productRepository.UpdateProduct(updateProductRequestDto);
+        return Ok("İlan Başarılı Bir Şekilde Güncellendi.");
+    }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductById(int id)
+    {
+        GetProductByIdResponseDto value = await _productRepository.GetProductByIdAsync(id);
+        return Ok(value);
+    }
+    [HttpGet("GetWithRelationships/{id}")]
+    public async Task<IActionResult> GetProductByIdWithRelationships(int id)
+    {
+        GetProductByIdWithRelationshipsResponseDto value = await _productRepository.GetProductByIdWithRelationshipsAsync(id);
+        return Ok(value);
     }
 }

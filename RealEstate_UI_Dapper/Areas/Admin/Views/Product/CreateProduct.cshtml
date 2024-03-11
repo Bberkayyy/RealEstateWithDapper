@@ -1,0 +1,51 @@
+﻿@model AdminPanelCreateProductViewModel
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/Default/Index.cshtml";
+}
+
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">İlan Ekleme Sayfası</h6>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">İlan Başlığı</label>
+                <input type="text" class="form-control" asp-for="Title" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Kategori</label>
+                @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.Categories, new { @class = "form-control" })
+            </div>
+            <div class="mb-3">
+                <label class="form-label">İlan Sahibi</label>
+                @Html.DropDownListFor(x => x.EmployeeId, (List<SelectListItem>)ViewBag.Employees, new { @class = "form-control" })
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fiyat</label>
+                <input type="text" class="form-control" asp-for="Price" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Durum</label>
+                <input type="text" class="form-control" asp-for="Type" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">İl</label>
+                <input type="text" class="form-control" asp-for="City" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">İlçe</label>
+                <input type="text" class="form-control" asp-for="District" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Adres</label>
+                <textarea class="form-control" asp-for="Address"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fotoğraf</label>
+                <input type="text" class="form-control" asp-for="CoverImage" />
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+</div>
+
