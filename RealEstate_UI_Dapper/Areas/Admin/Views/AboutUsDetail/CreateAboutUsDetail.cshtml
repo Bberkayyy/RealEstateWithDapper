@@ -1,0 +1,29 @@
+﻿@model AdminPanelCreateAboutUsDetailViewModel
+@{
+    ViewData["Title"] = "CreateAboutUsDetail";
+    Layout = "~/Areas/Admin/Views/Default/Index.cshtml";
+}
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Hakkımızda Bilgisi Ekleme Sayfası</h6>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Başlık</label>
+                <input type="text" class="form-control" asp-for="Title" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alt Başlık</label>
+                <input type="text" class="form-control" asp-for="Subtitle" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Açıklama</label>
+                <textarea rows="5" class="form-control" asp-for="Description1"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alt Açıklama</label>
+                <textarea rows="5" class="form-control" asp-for="Description2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+</div>

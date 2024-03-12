@@ -42,7 +42,11 @@ public class StatisticRepository : IStatisticRepository
 
     public decimal AverageRentPrice()
     {
-        throw new NotImplementedException();
+        string query = "SELECT AVG(Price) FROM TblProduct WHERE Type COLLATE Latin1_General_CI_AI = 'Kiralık'";
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            return connection.ExecuteScalar<int>(query);
+        }
     }
 
     public int AverageRoomCount()
@@ -56,7 +60,11 @@ public class StatisticRepository : IStatisticRepository
 
     public decimal AverageSalePrice()
     {
-        throw new NotImplementedException();
+        string query = "SELECT AVG(Price) FROM TblProduct WHERE Type COLLATE Latin1_General_CI_AI = 'Satılık'";
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            return connection.ExecuteScalar<int>(query);
+        }
     }
 
     public int CategoryCount()
