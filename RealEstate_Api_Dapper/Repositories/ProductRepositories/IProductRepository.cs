@@ -12,4 +12,8 @@ public interface IProductRepository
     void DeleteProduct(int id);
     Task<GetProductByIdResponseDto> GetProductByIdAsync(int id);
     Task<GetProductByIdWithRelationshipsResponseDto> GetProductByIdWithRelationshipsAsync(int id);
+    void ProductDealOfTheDayStatusChangeToTrue(int id);
+    void ProductDealOfTheDayStatusChangeToFalse(int id);
+    Task<List<GetLast5ProductResponseDto>> GetLast5ProductAsync();
+    Task<List<GetLast5ProductWithRelationshipsResponseDto>> GetLast5ProductWithRelationshipsAsync();
 }

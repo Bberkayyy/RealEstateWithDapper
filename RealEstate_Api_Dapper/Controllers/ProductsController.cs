@@ -58,4 +58,28 @@ public class ProductsController : ControllerBase
         GetProductByIdWithRelationshipsResponseDto value = await _productRepository.GetProductByIdWithRelationshipsAsync(id);
         return Ok(value);
     }
+    [HttpGet("ProductDealOfTheDayStatusChangeToTrue")]
+    public async Task<IActionResult> ProductDealOfTheDayStatusChangeToTrue(int id)
+    {
+        _productRepository.ProductDealOfTheDayStatusChangeToTrue(id);
+        return Ok("İlan Günün Fırsatı Olarak Belirlendi.");
+    }
+    [HttpGet("ProductDealOfTheDayStatusChangeToFalse")]
+    public async Task<IActionResult> ProductDealOfTheDayStatusChangeToFalse(int id)
+    {
+        _productRepository.ProductDealOfTheDayStatusChangeToFalse(id);
+        return Ok("İlan Günün Fırsatlarından Çıkarıldı.");
+    }
+    [HttpGet("Last5ProductList")]
+    public async Task<IActionResult> Last5ProductList()
+    {
+        List<GetLast5ProductResponseDto> value = await _productRepository.GetLast5ProductAsync();
+        return Ok(value);
+    }
+    [HttpGet("Last5ProductListWithRelationships")]
+    public async Task<IActionResult> Last5ProductListWithRelationships()
+    {
+        List<GetLast5ProductWithRelationshipsResponseDto> value = await _productRepository.GetLast5ProductWithRelationshipsAsync();
+        return Ok(value);
+    }
 }

@@ -43,6 +43,7 @@ public class ProductController : Controller
     [Route("CreateProduct")]
     public async Task<IActionResult> CreateProduct(AdminPanelCreateProductViewModel adminPanelCreateProductViewModel)
     {
+        adminPanelCreateProductViewModel.DealOfTheDay = false;
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelCreateProductViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
@@ -88,6 +89,24 @@ public class ProductController : Controller
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
     }
+    [Route("ProductDealOfTheDayStatusChangeToTrue/{id}")]
+    public async Task<IActionResult> ProductDealOfTheDayStatusChangeToTrue(int id)
+    {
+        HttpClient client = _httpClientFactory.CreateClient();
+        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductDealOfTheDayStatusChangeToTrue?id={id}");
+        if (responseMessage.IsSuccessStatusCode)
+            return RedirectToAction("Index", "Product", new { area = "Admin" });
+        return View();
+    }
+    [Route("ProductDealOfTheDayStatusChangeToFalse/{id}")]
+    public async Task<IActionResult> ProductDealOfTheDayStatusChangeToFalse(int id)
+    {
+        HttpClient client = _httpClientFactory.CreateClient();
+        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductDealOfTheDayStatusChangeToFalse?id={id}");
+        if (responseMessage.IsSuccessStatusCode)
+            return RedirectToAction("Index", "Product", new { area = "Admin" });
+        return View();
+    }
 
     private async Task<List<SelectListItem>> GetCategoriesList()
     {
@@ -103,6 +122,7 @@ public class ProductController : Controller
                                            }).ToList();
         return categories;
     }
+
     private async Task<List<SelectListItem>> GetEmployeesList()
     {
         HttpClient client = _httpClientFactory.CreateClient();

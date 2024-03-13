@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
 
-public class GetProductByIdResponseDto
+public class GetLast5ProductWithRelationshipsResponseDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -13,6 +13,6 @@ public class GetProductByIdResponseDto
     public string Type { get; set; }
     public bool DealOfTheDay { get; set; }
     public DateTime CreatedDate { get; set; }
-    public int CategoryId { get; set; }
-    public int EmployeeId { get; set; }
+    public string CategoryName { get; set; }
+    public string EmployeeName { get; set; }
 }

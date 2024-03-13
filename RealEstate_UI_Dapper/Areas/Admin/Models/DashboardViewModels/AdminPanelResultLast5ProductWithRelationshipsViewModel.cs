@@ -1,6 +1,6 @@
-﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.ProductViewModels;
+﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.DashboardViewModels;
 
-public class AdminPanelResultProductViewModel
+public class AdminPanelResultLast5ProductWithRelationshipsViewModel
 {
     public int id { get; set; }
     public string title { get; set; }

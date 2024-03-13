@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
 
-public class GetProductByIdResponseDto
+public class GetLast5ProductResponseDto
 {
     public int Id { get; set; }
     public string Title { get; set; }

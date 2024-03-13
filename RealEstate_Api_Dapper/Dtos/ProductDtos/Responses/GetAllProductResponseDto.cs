@@ -11,6 +11,8 @@ public class GetAllProductResponseDto
     public string Address { get; set; }
     public string Description { get; set; }
     public string Type { get; set; }
-    public string CategoryId { get; set; }
-    public string EmployeeId { get; set; }
+    public bool DealOfTheDay { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public int CategoryId { get; set; }
+    public int EmployeeId { get; set; }
 }
