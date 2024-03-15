@@ -4,10 +4,12 @@ using RealEstate_Api_Dapper.Repositories.AboutUsSubDetailRepositories;
 using RealEstate_Api_Dapper.Repositories.BottomGridRepositories;
 using RealEstate_Api_Dapper.Repositories.CategoryRepositories;
 using RealEstate_Api_Dapper.Repositories.ClientRepositories;
+using RealEstate_Api_Dapper.Repositories.ContactRepositories;
 using RealEstate_Api_Dapper.Repositories.EmployeeRepositories;
 using RealEstate_Api_Dapper.Repositories.LocationRepositories;
 using RealEstate_Api_Dapper.Repositories.ProductRepositories;
 using RealEstate_Api_Dapper.Repositories.StatisticRepositories;
+using RealEstate_Api_Dapper.Repositories.ToDoListRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,8 @@ builder.Services.AddTransient<ILocationRepository, LocationRepository>();
 builder.Services.AddTransient<IClientRepository, ClientRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IStatisticRepository, StatisticRepository>();
+builder.Services.AddTransient<IContactRepository, ContactRepository>();
+builder.Services.AddTransient<IToDoListRepository, ToDoListRepository>();
 
 var app = builder.Build();
 
