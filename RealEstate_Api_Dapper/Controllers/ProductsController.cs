@@ -82,4 +82,16 @@ public class ProductsController : ControllerBase
         List<GetLast5ProductWithRelationshipsResponseDto> value = await _productRepository.GetLast5ProductWithRelationshipsAsync();
         return Ok(value);
     }
+    [HttpGet("GetProductListByEmployeeId")]
+    public async Task<IActionResult> GetProductListByEmployeeId(int id)
+    {
+        List<GetProductListByEmployeeIdResponseDto> values = await _productRepository.GetProductListByEmployeeIdAsync(id);
+        return Ok(values);
+    }
+    [HttpGet("GetProductListByEmployeeIdWithRelationships")]
+    public async Task<IActionResult> GetProductListByEmployeeIdWithRelationships(int id)
+    {
+        List<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await _productRepository.GetProductListByEmployeeIdWithRelationshipsAsync(id);
+        return Ok(values);
+    }
 }

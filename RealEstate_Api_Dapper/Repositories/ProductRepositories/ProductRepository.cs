@@ -113,6 +113,30 @@ public class ProductRepository : IProductRepository
         }
     }
 
+    public async Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAsync(int id)
+    {
+        string query = "Select * from TblProduct where EmployeeId=@id";
+        DynamicParameters parameters = new();
+        parameters.Add("@id", id);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetProductListByEmployeeIdResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdResponseDto>(query, parameters);
+            return values.ToList();
+        }
+    }
+
+    public async Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdWithRelationshipsAsync(int id)
+    {
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.EmployeeId = @id";
+        DynamicParameters parameters = new();
+        parameters.Add("@id", id);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdWithRelationshipsResponseDto>(query, parameters);
+            return values.ToList();
+        }
+    }
+
     public async void ProductDealOfTheDayStatusChangeToFalse(int id)
     {
         string query = "update TblProduct set DealOfTheDay = 0 where Id=@id";
