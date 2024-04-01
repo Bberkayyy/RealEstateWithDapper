@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RealEstate_Api_Dapper.Dtos.ToDoListDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.ToDoListDtos.Responses;
+using RealEstate_Api_Dapper.Hubs;
 using RealEstate_Api_Dapper.Repositories.ToDoListRepositories;
 
 namespace RealEstate_Api_Dapper.Controllers;
@@ -45,5 +46,17 @@ public class ToDoListsController : ControllerBase
     {
         GetToDoListByIdResponseDto value = await _ToDoListRepository.GetToDoListByIdAsync(id);
         return Ok(value);
+    }
+    [HttpGet("ToDoStatusChangeToFalse")]
+    public async Task<IActionResult> ToDoStatusChangeToFalse(int id)
+    {
+        _ToDoListRepository.ToDoStatusChangeToFalse(id);
+        return Ok("Yapılacak durumu tamamlanmadı olarak değiştirildi.");
+    }
+    [HttpGet("ToDoStatusChangeToTrue")]
+    public async Task<IActionResult> ToDoStatusChangeToTrue(int id)
+    {
+        _ToDoListRepository.ToDoStatusChangeToTrue(id);
+        return Ok("Yapılacak durumu tamamlandı olarak değiştirildi.");
     }
 }

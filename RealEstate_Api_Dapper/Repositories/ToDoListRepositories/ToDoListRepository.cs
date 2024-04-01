@@ -62,6 +62,28 @@ public class ToDoListRepository : IToDoListRepository
         }
     }
 
+    public async void ToDoStatusChangeToFalse(int id)
+    {
+        string query = "update TblToDoList set Status = 0 where Id = @id";
+        DynamicParameters parameters = new();
+        parameters.Add("@id", id);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            await connection.ExecuteAsync(query, parameters);
+        }
+    }
+
+    public async void ToDoStatusChangeToTrue(int id)
+    {
+        string query = "update TblToDoList set Status = 1 where Id = @id";
+        DynamicParameters parameters = new();
+        parameters.Add("@id", id);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            await connection.ExecuteAsync(query, parameters);
+        }
+    }
+
     public async void UpdateToDoList(UpdateToDoListRequestDto updateToDoListRequestDto)
     {
         string query = "Update TblToDoList set Description = @description, Status = @status where Id = @id";

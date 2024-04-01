@@ -10,4 +10,6 @@ public interface IToDoListRepository
     void UpdateToDoList(UpdateToDoListRequestDto updateToDoListRequestDto);
     void DeleteToDoList(int id);
     Task<GetToDoListByIdResponseDto> GetToDoListByIdAsync(int id);
+    void ToDoStatusChangeToTrue(int id);
+    void ToDoStatusChangeToFalse(int id);
 }
