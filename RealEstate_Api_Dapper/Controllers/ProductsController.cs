@@ -82,16 +82,40 @@ public class ProductsController : ControllerBase
         List<GetLast5ProductWithRelationshipsResponseDto> value = await _productRepository.GetLast5ProductWithRelationshipsAsync();
         return Ok(value);
     }
-    [HttpGet("GetProductListByEmployeeId")]
-    public async Task<IActionResult> GetProductListByEmployeeId(int id)
+    [HttpGet("GetProductListByEmployeeIdAndIsActiveTrue")]
+    public async Task<IActionResult> GetProductListByEmployeeIdAndIsActiveTrue(int id)
     {
-        List<GetProductListByEmployeeIdResponseDto> values = await _productRepository.GetProductListByEmployeeIdAsync(id);
+        List<GetProductListByEmployeeIdResponseDto> values = await _productRepository.GetProductListByEmployeeIdAndIsActiveTrueAsync(id);
         return Ok(values);
     }
-    [HttpGet("GetProductListByEmployeeIdWithRelationships")]
-    public async Task<IActionResult> GetProductListByEmployeeIdWithRelationships(int id)
+    [HttpGet("GetProductListByEmployeeIdAndIsActiveTrueWithRelationships")]
+    public async Task<IActionResult> GetProductListByEmployeeIdAndIsActiveTrueWithRelationships(int id)
     {
-        List<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await _productRepository.GetProductListByEmployeeIdWithRelationshipsAsync(id);
+        List<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await _productRepository.GetProductListByEmployeeIdAndIsActiveTrueWithRelationshipsAsync(id);
         return Ok(values);
+    }
+    [HttpGet("GetProductListByEmployeeIdAndIsActiveFalse")]
+    public async Task<IActionResult> GetProductListByEmployeeIdAndIsActiveFalse(int id)
+    {
+        List<GetProductListByEmployeeIdResponseDto> values = await _productRepository.GetProductListByEmployeeIdAndIsActiveFalseAsync(id);
+        return Ok(values);
+    }
+    [HttpGet("GetProductListByEmployeeIdAndIsActiveFalseWithRelationships")]
+    public async Task<IActionResult> GetProductListByEmployeeIdAndIsActiveFalseWithRelationships(int id)
+    {
+        List<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await _productRepository.GetProductListByEmployeeIdAndIsActiveFalseWithRelationshipsAsync(id);
+        return Ok(values);
+    }
+    [HttpGet("ProductIsActiveChangeToTrue")]
+    public IActionResult ProductIsActiveChangeToTrue(int id)
+    {
+        _productRepository.ProductIsActiveChangeToTrue(id);
+        return Ok("İlan durumu aktif olarak değiştirildi.");
+    }
+    [HttpGet("ProductIsActiveChangeToFalse")]
+    public IActionResult ProductIsActiveChangeToFalse(int id)
+    {
+        _productRepository.ProductIsActiveChangeToFalse(id);
+        return Ok("İlan durumu pasif olarak değiştirildi.");
     }
 }

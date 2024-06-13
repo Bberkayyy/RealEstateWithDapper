@@ -13,6 +13,7 @@ public class AdminPanelResultProductViewModel
     public string type { get; set; }
     public bool dealOfTheDay { get; set; }
     public DateTime createdDate { get; set; }
+    public bool IsActive { get; set; }
     public string categoryName { get; set; }
     public string employeeName { get; set; }
 }

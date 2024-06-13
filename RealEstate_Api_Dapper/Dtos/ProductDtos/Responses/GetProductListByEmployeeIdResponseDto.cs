@@ -13,6 +13,7 @@ public class GetProductListByEmployeeIdResponseDto
     public string Type { get; set; }
     public bool DealOfTheDay { get; set; }
     public DateTime CreatedDate { get; set; }
+    public bool IsActive { get; set; }
     public int CategoryId { get; set; }
     public int EmployeeId { get; set; }
 }

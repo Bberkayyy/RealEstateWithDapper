@@ -28,7 +28,7 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
 
     public int GetEstateAgentProductCountByStatusFalse(int id)
     {
-        string query = "select count(*) from TblProduct where EmployeeId = @employeeId and  Status = 0";
+        string query = "select count(*) from TblProduct where EmployeeId = @employeeId and  IsActive = 0";
         DynamicParameters parameters = new();
         parameters.Add("@employeeId", id);
         using (IDbConnection connection = _context.CreateConnection())
@@ -39,7 +39,7 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
 
     public int GetEstateAgentProductCountByStatusTrue(int id)
     {
-        string query = "select count(*) from TblProduct where EmployeeId = @employeeId and  Status = 1";
+        string query = "select count(*) from TblProduct where EmployeeId = @employeeId and  IsActive = 1";
         DynamicParameters parameters = new();
         parameters.Add("@employeeId", id);
         using (IDbConnection connection = _context.CreateConnection())

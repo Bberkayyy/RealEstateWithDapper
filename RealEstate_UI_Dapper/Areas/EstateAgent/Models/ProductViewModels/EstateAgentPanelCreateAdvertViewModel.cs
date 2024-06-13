@@ -1,8 +1,7 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
+﻿namespace RealEstate_UI_Dapper.Areas.EstateAgent.Models.ProductViewModels;
 
-public class GetLast5ProductResponseDto
+public class EstateAgentPanelCreateAdvertViewModel
 {
-    public int Id { get; set; }
     public string Title { get; set; }
     public decimal Price { get; set; }
     public string CoverImage { get; set; }

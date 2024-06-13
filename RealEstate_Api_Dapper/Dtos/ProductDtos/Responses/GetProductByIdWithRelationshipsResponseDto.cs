@@ -13,6 +13,7 @@ public class GetProductByIdWithRelationshipsResponseDto
     public string Type { get; set; }
     public bool DealOfTheDay { get; set; }
     public DateTime CreatedDate { get; set; }
+    public bool IsActive { get; set; }
     public string CategoryName { get; set; }
     public string EmployeeName { get; set; }
 }

@@ -20,6 +20,7 @@
                     <th scope="col">Kategori</th>
                     <th scope="col">Durumu</th>
                     <th scope="col">İlan Sahibi</th>
+                    <th scope="col">İlan Aktiflik Durumu</th>
                     <th scope="col">Sil</th>
                     <th scope="col">Güncelle</th>
                     <th scope="col">Günün Fırsatı</th>
@@ -42,6 +43,16 @@
                         <td>@item.categoryName</td>
                         <td>@item.type</td>
                         <td>@item.employeeName</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <a href="/Admin/Product/ProductIsActiveChangeToFalse/@item.id" class="btn btn-outline-default">Pasif Yap</a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Product/ProductIsActiveChangeToTrue/@item.id" class="btn btn-outline-default">Aktif Yap</a>
+                            }
+                        </td>
                         <td><a href="/Admin/Product/DeleteProduct/@item.id" class="btn btn-outline-danger">Sil</a></td>
                         <td><a href="/Admin/Product/UpdateProduct/@item.id" class="btn btn-outline-success">Güncelle</a></td>
                         <td>

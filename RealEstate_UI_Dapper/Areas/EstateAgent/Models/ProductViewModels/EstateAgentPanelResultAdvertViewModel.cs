@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_UI_Dapper.Areas.EstateAgent.Models.ProductViewModels;
 
-public class EstateAgentPanelResultProductViewModel
+public class EstateAgentPanelResultAdvertViewModel
 {
     public int id { get; set; }
     public string title { get; set; }
@@ -12,6 +12,7 @@ public class EstateAgentPanelResultProductViewModel
     public string description { get; set; }
     public string type { get; set; }
     public bool dealOfTheDay { get; set; }
+    public bool isActive { get; set; }
     public DateTime createdDate { get; set; }
     public string categoryName { get; set; }
     public string employeeName { get; set; }

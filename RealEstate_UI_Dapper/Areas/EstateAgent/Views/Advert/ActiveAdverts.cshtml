@@ -1,0 +1,60 @@
+﻿@model List<EstateAgentPanelResultAdvertViewModel>
+@{
+    ViewData["Title"] = "ActiveAdverts";
+    Layout = "~/Areas/EstateAgent/Views/Layout/Index.cshtml";
+}
+
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        @if (Model.Count() > 0)
+        {
+            <h6 class="mb-4">Aktif İlanlarım Listesi</h6>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Giriş Tarihi</th>
+                        <th scope="col">İlan Başlığı</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">İl</th>
+                        <th scope="col">İlçe</th>
+                        <th scope="col">Adres</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Durumu</th>
+                        <th scope="col">Pasif Yap</th>
+                        <th scope="col">Sil</th>
+                        <th scope="col">Güncelle</th>
+                        <th scope="col">Sitede Gör</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                @item.createdDate.ToShortDateString()
+                                <img class="img-fluid" style="height:50px;width:80px;border-radius:50%" src="@item.coverImage" alt="">
+                            </th>
+                            <td>@item.title</td>
+                            <td>@item.price</td>
+                            <td>@item.city</td>
+                            <td>@item.district</td>
+                            <td>@item.address</td>
+                            <td>@item.categoryName</td>
+                            <td>@item.type</td>
+                            <td><a href="/EstateAgent/Advert/AdvertIsActiveChangeToFalse/@item.id" class="btn btn-outline-secondary">Pasif Yap</a></td>
+                            <td><a href="/EstateAgent/Advert/DeleteAdvert/@item.id" class="btn btn-outline-danger">Sil</a></td>
+                            <td><a href="/EstateAgent/Advert/UpdateAdvert/@item.id" class="btn btn-outline-success">Güncelle</a></td>
+                            <td><a href="#" class="btn btn-outline-dark">İlana Git</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a href="/EstateAgent/Advert/CreateAdvert/" class="btn btn-outline-primary">İlan Ekle</a>
+        }
+        else
+        {
+            <p class="bg-danger text-white p-4 text-center card-body table-responsive">Aktif ilanınınız bulunmamaktadır.İlan eklemek için "İlan Ekle" butonuna tıklayınız.</p>
+            <a href="/EstateAgent/Advert/CreateAdvert/" class="btn btn-outline-primary">İlan Ekle</a>
+        }
+    </div>
+</div>
