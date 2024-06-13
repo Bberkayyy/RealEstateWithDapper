@@ -9,6 +9,7 @@ using RealEstate_Api_Dapper.Repositories.ContactRepositories;
 using RealEstate_Api_Dapper.Repositories.EmployeeRepositories;
 using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRepositories;
 using RealEstate_Api_Dapper.Repositories.LocationRepositories;
+using RealEstate_Api_Dapper.Repositories.MessageRepositories;
 using RealEstate_Api_Dapper.Repositories.ProductRepositories;
 using RealEstate_Api_Dapper.Repositories.StatisticRepositories;
 using RealEstate_Api_Dapper.Repositories.ToDoListRepositories;
@@ -35,6 +36,7 @@ builder.Services.AddTransient<IStatisticRepository, StatisticRepository>();
 builder.Services.AddTransient<IContactRepository, ContactRepository>();
 builder.Services.AddTransient<IToDoListRepository, ToDoListRepository>();
 builder.Services.AddTransient<IEstateAgentDashboardRepository, EstateAgentDashboardRepository>();
+builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 builder.Services.AddHttpClient();
 
 builder.Services.AddCors(opt =>
