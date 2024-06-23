@@ -15,7 +15,7 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async void CreateProduct(CreateProductRequestDto createProductRequestDto)
+    public async Task CreateProduct(CreateProductRequestDto createProductRequestDto)
     {
         string query = "insert into TblProduct (Title,Price,CoverImage,City,District,Address,Description,Type,DealOfTheDay,CreatedDate,IsActive,CategoryId,EmployeeId) values (@title,@price,@coverImage,@city,@district,@address,@description,@type,@dealOfTheDay,@createdDate,@isActive,@categoryId,@employeeId)";
         DynamicParameters parameters = new();
@@ -38,7 +38,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void DeleteProduct(int id)
+    public async Task DeleteProduct(int id)
     {
         string query = "Delete from TblProduct where Id=@id";
         DynamicParameters parameters = new();
@@ -162,7 +162,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void ProductDealOfTheDayStatusChangeToFalse(int id)
+    public async Task ProductDealOfTheDayStatusChangeToFalse(int id)
     {
         string query = "update TblProduct set DealOfTheDay = 0 where Id=@id";
         DynamicParameters parameters = new();
@@ -173,7 +173,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void ProductDealOfTheDayStatusChangeToTrue(int id)
+    public async Task ProductDealOfTheDayStatusChangeToTrue(int id)
     {
         string query = "update TblProduct set DealOfTheDay = 1 where Id=@id";
         DynamicParameters parameters = new();
@@ -184,7 +184,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void ProductIsActiveChangeToFalse(int id)
+    public async Task ProductIsActiveChangeToFalse(int id)
     {
         string query = "update TblProduct set IsActive = 0 where Id=@id";
         DynamicParameters parameters = new();
@@ -195,7 +195,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void ProductIsActiveChangeToTrue(int id)
+    public async Task ProductIsActiveChangeToTrue(int id)
     {
         string query = "update TblProduct set IsActive = 1 where Id=@id";
         DynamicParameters parameters = new();
@@ -206,7 +206,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async void UpdateProduct(UpdateProductRequestDto updateProductRequestDto)
+    public async Task UpdateProduct(UpdateProductRequestDto updateProductRequestDto)
     {
         string query = "Update TblProduct set Title = @title, Price = @price, CoverImage = @coverImage, City = @city, District = @district, Address = @address, Description = @description, Type = @type, DealOfTheDay = @dealOfTheDay, IsActive = @isActive, CategoryId = @categoryId, EmployeeId = @employeeId where Id = @id";
         DynamicParameters parameters = new();

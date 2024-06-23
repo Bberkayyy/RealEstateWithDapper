@@ -1,0 +1,24 @@
+﻿@model ResultProductViewModel
+<div class="inner mb-4">
+    <ul class="blog-single-author-date align-items-center">
+        <li>
+            <div class="listing-category"><span>@Model.type</span></div>
+        </li>
+        <li><span class="fa fa-clock-o"></span> 5 months ago</li>
+        <li><span class="fa fa-eye"></span> 250 views</li>
+    </ul>
+</div>
+<div class="post-content">
+    <h2 class="title-single">@Model.title</h2>
+</div>
+<div class="blo-singl mb-4">
+    <ul class="blog-single-author-date align-items-center">
+        <li>
+            <p>@Model.address, @Model.district/@Model.city</p>
+        </li>
+        @await Component.InvokeAsync("_PropertyDetailHeaderDetailsComponentPartial", new { id = Model.id })
+    </ul>
+    <ul class="share-post">
+        <a href="#url" class="cost-estate m-o">@Model.price</a>
+    </ul>
+</div>

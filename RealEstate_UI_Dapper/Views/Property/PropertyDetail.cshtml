@@ -1,0 +1,142 @@
+﻿@model ResultProductDetailsViewModel
+@{
+    ViewData["Title"] = "PropertyDetail";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+
+    string location = ViewBag.location;
+    string video = ViewBag.video;
+}
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="/Default/Index/">Ana Sayfa</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> İlanlar</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> İlan Detayı</li>
+        </ul>
+    </div>
+</section>
+<!--/blog-post-->
+<section class="w3l-blog post-content py-5">
+    <div class="container py-lg-4 py-md-3 py-2">
+        @await Component.InvokeAsync("_PropertyDetailHeaderComponentPartial", new { id = @ViewBag.productId })
+        <div class="row">
+            <div class="col-lg-8 w3l-news">
+                <div class="blog-single-post">
+                    @await Component.InvokeAsync("_PropertyDetailPropertyImagesComponentPartial", new { id = @ViewBag.productId })
+                    <div class="single-post-content">
+                        @await Component.InvokeAsync("_PropertyDetailPropertyDescriptionComponentPartial", new { id = @ViewBag.productId })
+                        @await Component.InvokeAsync("_PropertyDetailPropertyDetailsComponentPartial", new { id = @ViewBag.productId })
+                        @await Component.InvokeAsync("_PropertyDetailPropertyAmenitiesComponentPartial", new { id = @ViewBag.productId })
+                    </div>
+
+                    <div class="single-bg-white">
+                        <h3 class="post-content-title mb-4">Lokasyon</h3>
+                        <div class="agent-map">
+                            @if (!string.IsNullOrEmpty(location))
+                            {
+                                <iframe src="@location"
+                                        frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                            }
+                            else
+                            {
+                                <p>Lokasyon bulunamadı.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="single-bg-white mb-0">
+                        <h3 class="post-content-title mb-4">Video</h3>
+                        <div class="post-content">
+                            @if (!string.IsNullOrEmpty(video))
+                            {
+                                <iframe src="@video" frameborder="0"
+                                        allowfullscreen=""></iframe>
+                            }
+                            else
+                            {
+                                <p>Video bulunamadı.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
+                <aside class="sidebar">
+
+                    <!-- Popular Post Widget-->
+                    <div class="sidebar-widget popular-posts">
+                        <div class="sidebar-title">
+                            <h4>Contact an Agent</h4>
+                        </div>
+
+                        <article class="post">
+                            <figure class="post-thumb">
+                                <img src="~/starter/assets/images/l5.jpg" class="radius-image" alt="">
+                            </figure>
+                            <div class="text mb-0">
+                                <a href="#blog-single">
+                                    Company realty
+                                </a>
+                                <div class="post-info">+(12) 324 567 89</div>
+                                <div class="post-info">companyrealty@mail.com</div>
+                            </div>
+                        </article>
+                        <button type="submit" class="btn btn-primary btn-style w-100">Request details</button>
+                    </div>
+
+
+                    <!-- Popular Post Widget-->
+                    <div class="sidebar-widget popular-posts">
+                        <div class="sidebar-title">
+                            <h4>Popular Post</h4>
+                        </div>
+
+                        <article class="post">
+                            <figure class="post-thumb">
+                                <img src="~/starter/assets/images/l1.jpg" class="radius-image" alt="">
+                            </figure>
+                            <div class="text">
+                                <a href="#blog-single">
+                                    Why we are the best in the business
+                                </a>
+                                <div class="post-info">Sep 09, 2020 - 2 comments</div>
+                            </div>
+                        </article>
+
+                        <article class="post">
+                            <figure class="post-thumb">
+                                <img src="~/starter/assets/images/l2.jpg" class="radius-image" alt="">
+                            </figure>
+                            <div class="text">
+                                <a href="#blog-single">
+                                    Build your next landing page.
+                                </a>
+                                <div class="post-info">Sep 09, 2020 - 2 comments</div>
+                            </div>
+                        </article>
+
+                        <article class="post">
+                            <figure class="post-thumb">
+                                <img src="~/starter/assets/images/l3.jpg" class="radius-image" alt="">
+                            </figure>
+                            <div class="text">
+                                <a href="#blog-single">
+                                    Simply the best. Better than the rest.
+                                </a>
+                                <div class="post-info">Sep 10, 2020 - 2 comments</div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
