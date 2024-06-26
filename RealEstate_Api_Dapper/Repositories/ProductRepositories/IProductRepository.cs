@@ -22,4 +22,5 @@ public interface IProductRepository
     Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseWithRelationshipsAsync(int id);
     Task ProductIsActiveChangeToTrue(int id);
     Task ProductIsActiveChangeToFalse(int id);
+    Task<List<GetProductListBySearchFilterWithRelationshipsResponseDto>> GetProductListBySearchFilterWithRelationshipsAsync(string containsWord, int categoryId, string city);
 }

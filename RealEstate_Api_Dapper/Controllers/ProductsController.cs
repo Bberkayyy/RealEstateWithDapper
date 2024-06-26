@@ -118,4 +118,10 @@ public class ProductsController : ControllerBase
         await _productRepository.ProductIsActiveChangeToFalse(id);
         return Ok("İlan durumu pasif olarak değiştirildi.");
     }
+    [HttpGet("ProductListBySearchFilterWithRelationships")]
+    public async Task<IActionResult> ProductListBySearchFilterWithRelationships(string containsWord, int categoryId, string city)
+    {
+        List<GetProductListBySearchFilterWithRelationshipsResponseDto> values = await _productRepository.GetProductListBySearchFilterWithRelationshipsAsync(containsWord, categoryId, city);
+        return Ok(values);
+    }
 }

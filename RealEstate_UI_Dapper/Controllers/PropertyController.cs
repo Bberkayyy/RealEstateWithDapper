@@ -44,6 +44,25 @@ public class PropertyController : Controller
         }
         return View();
     }
+    public async Task<IActionResult> FilteredIndex(string containsWord, int categoryId, string city)
+    {
+        //containsWord = TempData["containsWord"].ToString();
+        //city = TempData["city"].ToString();
+        //categoryId = int.Parse(TempData["categoryId"].ToString());
+        HttpClient client = _httpClientFactory.CreateClient();
+        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductListBySearchFilterWithRelationships?containsWord={containsWord}&categoryId={categoryId}&city={city}");
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            string jsonData = await responseMessage.Content.ReadAsStringAsync();
+            List<ResultProductViewModel>? values = JsonConvert.DeserializeObject<List<ResultProductViewModel>>(jsonData);
+            return View(values);
+        }
+        return View();
+    }
+    public IActionResult SearchFilter(string containsWord, int categoryId, string city)
+    {
+        return RedirectToAction("FilteredIndex", "Property", new { containsWord = containsWord, categoryId = categoryId, city = city });
+    }
     private string ExtractPlaceName(string url)
     {
         try

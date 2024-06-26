@@ -1,4 +1,5 @@
-﻿<section class="w3l-cover-3">
+﻿@model List<ResultCategoryViewModel>
+<section class="w3l-cover-3">
     <div class="cover top-bottom">
         <div class="container">
             <div class="middle-section text-center">
@@ -13,24 +14,21 @@
                             <li><a href="#link">Yazlık</a></li>
                         </ul>
                     </div>
-                    <form action="#" class="w3l-cover-3-gd" method="GET">
-                        <input type="search" name="text" placeholder="Anahtar kelimeyi girin" required>
+                    <form asp-action="SearchFilter" asp-controller="Property" class="w3l-cover-3-gd" method="post">
+                        <input type="search" name="containsWord" placeholder="Anahtar kelimeyi girin" required>
                         <span class="input-group-btn">
-                            <select class="btn btn-default" name="ext" required>
-                                <option selected="">Tür</option>
-                                <option>Villa</option>
-                                <option>Apartment</option>
-                                <option>Private house</option>
-                                <option>Building</option>
-                                <option>Shop</option>
-                                <option>Social housing</option>
-                                <option>Town house</option>
+                            <select class="btn btn-default" name="categoryId" required>
+                                <option selected="">Gayrimenkul Türü</option>
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
                             </select>
                         </span>
                         <span class="input-group-btn">
-                            <select class="btn btn-default" name="ext" required>
-                                <option selected="">Ülke Seçin</option>
-                                <option>Australia</option>
+                            <select class="btn btn-default" name="city" required>
+                                <option selected="">Şehir Seçiniz</option>
+                                <option>Balıkesir</option>
                                 <option>London</option>
                                 <option>India</option>
                                 <option>Bangladesh</option>

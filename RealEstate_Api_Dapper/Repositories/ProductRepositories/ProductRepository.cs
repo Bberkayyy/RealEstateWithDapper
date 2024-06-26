@@ -114,6 +114,21 @@ public class ProductRepository : IProductRepository
         }
     }
 
+    public async Task<List<GetProductListBySearchFilterWithRelationshipsResponseDto>> GetProductListBySearchFilterWithRelationshipsAsync(string containsWord, int categoryId, string city)
+    {
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.Title like '%" +
+            containsWord +
+            "%' and TblProduct.CategoryId = @categoryId and TblProduct.City = @city";
+        DynamicParameters parameters = new();
+        parameters.Add("@categoryId", categoryId);
+        parameters.Add("@city", city);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetProductListBySearchFilterWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListBySearchFilterWithRelationshipsResponseDto>(query, parameters);
+            return values.ToList();
+        }
+    }
+
     public async Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseAsync(int id)
     {
         string query = "Select * from TblProduct where EmployeeId=@id and IsActive=0";
