@@ -16,6 +16,8 @@ public interface IProductRepository
     Task ProductDealOfTheDayStatusChangeToFalse(int id);
     Task<List<GetLast5ProductResponseDto>> GetLast5ProductAsync();
     Task<List<GetLast5ProductWithRelationshipsResponseDto>> GetLast5ProductWithRelationshipsAsync();
+    Task<List<GetLast3ProductResponseDto>> GetLast3ProductAsync();
+    Task<List<GetLast3ProductWithRelationshipsResponseDto>> GetLast3ProductWithRelationshipsAsync();
     Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueAsync(int id);
     Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseAsync(int id);
     Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueWithRelationshipsAsync(int id);

@@ -253,4 +253,24 @@ public class ProductRepository : IProductRepository
             return values.ToList();
         }
     }
+
+    public async Task<List<GetLast3ProductResponseDto>> GetLast3ProductAsync()
+    {
+        string query = "Select top(3) * from TblProduct order by Id desc";
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetLast3ProductResponseDto> value = await connection.QueryAsync<GetLast3ProductResponseDto>(query);
+            return value.ToList();
+        }
+    }
+
+    public async Task<List<GetLast3ProductWithRelationshipsResponseDto>> GetLast3ProductWithRelationshipsAsync()
+    {
+        string query = "Select top(3) TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId = TblEmployee.Id order by Id desc";
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetLast3ProductWithRelationshipsResponseDto> value = await connection.QueryAsync<GetLast3ProductWithRelationshipsResponseDto>(query);
+            return value.ToList();
+        }
+    }
 }
