@@ -16,7 +16,7 @@ public class AmenityRepository : IAmenityRepository
     {
         _context = context;
     }
-    public async Task CreateAmenity(CreateAmenityRequestDto createAmenityRequestDto)
+    public async Task CreateAmenityAsync(CreateAmenityRequestDto createAmenityRequestDto)
     {
         string query = "insert into TblAmenity (Title) values (@title)";
         DynamicParameters parameters = new();
@@ -27,7 +27,7 @@ public class AmenityRepository : IAmenityRepository
         }
     }
 
-    public async Task DeleteAmenity(int id)
+    public async Task DeleteAmenityAsync(int id)
     {
         string query = "Delete From TblAmenity Where Id=@id";
         DynamicParameters parameters = new();
@@ -48,7 +48,7 @@ public class AmenityRepository : IAmenityRepository
         }
     }
 
-    public async Task UpdateAmenity(UpdateAmenityRequestDto updateAmenityRequestDto)
+    public async Task UpdateAmenityAsync(UpdateAmenityRequestDto updateAmenityRequestDto)
     {
         string query = "Update TblAmenity Set Title = @title where Id=@id";
         DynamicParameters parameters = new();

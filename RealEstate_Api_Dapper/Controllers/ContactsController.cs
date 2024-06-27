@@ -25,19 +25,19 @@ public class ContactsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateContact(CreateContactRequestDto createContactRequestDto)
     {
-        _ContactRepository.CreateContact(createContactRequestDto);
+        await _ContactRepository.CreateContactAsync(createContactRequestDto);
         return Ok("İletişim Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteContact(int id)
     {
-        _ContactRepository.DeleteContact(id);
+        await _ContactRepository.DeleteContactAsync(id);
         return Ok("İletişim Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateContact(UpdateContactRequestDto updateContactRequestDto)
     {
-        _ContactRepository.UpdateContact(updateContactRequestDto);
+        await _ContactRepository.UpdateContactAsync(updateContactRequestDto);
         return Ok("İletişim Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

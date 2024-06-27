@@ -17,7 +17,7 @@ public class ToDoListRepository : IToDoListRepository
         _context = context;
     }
 
-    public async void CreateToDoList(CreateToDoListRequestDto createToDoListRequestDto)
+    public async Task CreateToDoListAsync(CreateToDoListRequestDto createToDoListRequestDto)
     {
         string query = "insert into TblToDoList Description,Status values (@description,@status)";
         DynamicParameters parameters = new();
@@ -29,7 +29,7 @@ public class ToDoListRepository : IToDoListRepository
         }
     }
 
-    public async void DeleteToDoList(int id)
+    public async Task DeleteToDoListAsync(int id)
     {
         string query = "delete * from TblStatus where Id = @id";
         DynamicParameters parameters = new();
@@ -57,12 +57,12 @@ public class ToDoListRepository : IToDoListRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetToDoListByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetToDoListByIdResponseDto>(query, parameters);
+            GetToDoListByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetToDoListByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async void ToDoStatusChangeToFalse(int id)
+    public async Task ToDoStatusChangeToFalseAsync(int id)
     {
         string query = "update TblToDoList set Status = 0 where Id = @id";
         DynamicParameters parameters = new();
@@ -73,7 +73,7 @@ public class ToDoListRepository : IToDoListRepository
         }
     }
 
-    public async void ToDoStatusChangeToTrue(int id)
+    public async Task ToDoStatusChangeToTrueAsync(int id)
     {
         string query = "update TblToDoList set Status = 1 where Id = @id";
         DynamicParameters parameters = new();
@@ -84,7 +84,7 @@ public class ToDoListRepository : IToDoListRepository
         }
     }
 
-    public async void UpdateToDoList(UpdateToDoListRequestDto updateToDoListRequestDto)
+    public async Task UpdateToDoListAsync(UpdateToDoListRequestDto updateToDoListRequestDto)
     {
         string query = "Update TblToDoList set Description = @description, Status = @status where Id = @id";
         DynamicParameters parameters = new();

@@ -7,13 +7,13 @@ public interface IProductRepository
 {
     Task<List<GetAllProductResponseDto>> GetAllProductAsync();
     Task<List<GetAllProductWithRelationshipsResponseDto>> GetAllProductWithRelationshipsAsync();
-    Task CreateProduct(CreateProductRequestDto createProductRequestDto);
-    Task UpdateProduct(UpdateProductRequestDto updateProductRequestDto);
-    Task DeleteProduct(int id);
+    Task CreateProductAsync(CreateProductRequestDto createProductRequestDto);
+    Task UpdateProductAsync(UpdateProductRequestDto updateProductRequestDto);
+    Task DeleteProductAsync(int id);
     Task<GetProductByIdResponseDto> GetProductByIdAsync(int id);
     Task<GetProductByIdWithRelationshipsResponseDto> GetProductByIdWithRelationshipsAsync(int id);
-    Task ProductDealOfTheDayStatusChangeToTrue(int id);
-    Task ProductDealOfTheDayStatusChangeToFalse(int id);
+    Task ProductDealOfTheDayStatusChangeToTrueAsync(int id);
+    Task ProductDealOfTheDayStatusChangeToFalseAsync(int id);
     Task<List<GetLast5ProductResponseDto>> GetLast5ProductAsync();
     Task<List<GetLast5ProductWithRelationshipsResponseDto>> GetLast5ProductWithRelationshipsAsync();
     Task<List<GetLast3ProductResponseDto>> GetLast3ProductAsync();
@@ -22,8 +22,8 @@ public interface IProductRepository
     Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseAsync(int id);
     Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueWithRelationshipsAsync(int id);
     Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseWithRelationshipsAsync(int id);
-    Task ProductIsActiveChangeToTrue(int id);
-    Task ProductIsActiveChangeToFalse(int id);
+    Task ProductIsActiveChangeToTrueAsync(int id);
+    Task ProductIsActiveChangeToFalseAsync(int id);
     Task<List<GetProductListBySearchFilterWithRelationshipsResponseDto>> GetProductListBySearchFilterWithRelationshipsAsync(string containsWord, int categoryId, string city);
     Task<List<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto>> GetProductListByDealOfTheDayTrueWithRelationshipsAsync();
 }

@@ -28,7 +28,7 @@ public class LoginsController : ControllerBase
         parameters.Add("@password", createLoginDto.Password);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            SuccessLoginDto value = await connection.QueryFirstOrDefaultAsync<SuccessLoginDto>(query, parameters);
+            SuccessLoginDto? value = await connection.QueryFirstOrDefaultAsync<SuccessLoginDto>(query, parameters);
             if (value is not null)
             {
                 GetCheckAppUserDto model = new();

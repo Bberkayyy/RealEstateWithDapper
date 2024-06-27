@@ -21,7 +21,7 @@ public class ProductDetailRepository : IProductDetailRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetProductDetailByProductIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetProductDetailByProductIdResponseDto>(query, parameters);
+            GetProductDetailByProductIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetProductDetailByProductIdResponseDto>(query, parameters);
             return value;
         }
     }

@@ -26,19 +26,19 @@ public class ToDoListsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateToDoList(CreateToDoListRequestDto createToDoListRequestDto)
     {
-        _ToDoListRepository.CreateToDoList(createToDoListRequestDto);
+        await _ToDoListRepository.CreateToDoListAsync(createToDoListRequestDto);
         return Ok("Yapılacak Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteToDoList(int id)
     {
-        _ToDoListRepository.DeleteToDoList(id);
+        await _ToDoListRepository.DeleteToDoListAsync(id);
         return Ok("Yapılacak Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateToDoList(UpdateToDoListRequestDto updateToDoListRequestDto)
     {
-        _ToDoListRepository.UpdateToDoList(updateToDoListRequestDto);
+        await _ToDoListRepository.UpdateToDoListAsync(updateToDoListRequestDto);
         return Ok("Yapılacak Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]
@@ -50,13 +50,13 @@ public class ToDoListsController : ControllerBase
     [HttpGet("ToDoStatusChangeToFalse")]
     public async Task<IActionResult> ToDoStatusChangeToFalse(int id)
     {
-        _ToDoListRepository.ToDoStatusChangeToFalse(id);
+        await _ToDoListRepository.ToDoStatusChangeToFalseAsync(id);
         return Ok("Yapılacak durumu tamamlanmadı olarak değiştirildi.");
     }
     [HttpGet("ToDoStatusChangeToTrue")]
     public async Task<IActionResult> ToDoStatusChangeToTrue(int id)
     {
-        _ToDoListRepository.ToDoStatusChangeToTrue(id);
+        await _ToDoListRepository.ToDoStatusChangeToTrueAsync(id);
         return Ok("Yapılacak durumu tamamlandı olarak değiştirildi.");
     }
 }

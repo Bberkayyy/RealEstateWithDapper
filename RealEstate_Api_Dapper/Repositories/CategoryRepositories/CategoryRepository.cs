@@ -15,7 +15,7 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public async void CreateCategory(CreateCategoryRequestDto createCategoryRequestDto)
+    public async Task CreateCategoryAsync(CreateCategoryRequestDto createCategoryRequestDto)
     {
         string query = "Insert Into TblCategory (Name,Status) values (@categoryName,@categoryStatus)";
         DynamicParameters parameters = new();
@@ -27,7 +27,7 @@ public class CategoryRepository : ICategoryRepository
         }
     }
 
-    public async void DeleteCategory(int id)
+    public async Task DeleteCategoryAsync(int id)
     {
         string query = "Delete From TblCategory Where Id=@id";
         DynamicParameters parameters = new();
@@ -55,12 +55,12 @@ public class CategoryRepository : ICategoryRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetCategoryByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetCategoryByIdResponseDto>(query,parameters);
+            GetCategoryByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetCategoryByIdResponseDto>(query,parameters);
             return value;
         }
     }
 
-    public async void UpdateCategory(UpdateCategoryRequestDto updateCategoryRequestDto)
+    public async Task UpdateCategoryAsync(UpdateCategoryRequestDto updateCategoryRequestDto)
     {
         string query = "Update TblCategory Set Name = @categoryName, Status = @categoryStatus where Id=@categoryId";
         DynamicParameters parameters = new();

@@ -7,8 +7,8 @@ public interface IContactRepository
 {
     Task<List<GetAllContactResponseDto>> GetAllContactAsync();
     Task<List<GetLast4ContactResponseDto>> GetLast4ContactAsync();
-    void CreateContact(CreateContactRequestDto createContactRequestDto);
-    void UpdateContact(UpdateContactRequestDto updateContactRequestDto);
-    void DeleteContact(int id);
+    Task CreateContactAsync(CreateContactRequestDto createContactRequestDto);
+    Task UpdateContactAsync(UpdateContactRequestDto updateContactRequestDto);
+    Task DeleteContactAsync(int id);
     Task<GetContactByIdResponseDto> GetContactByIdAsync(int id);
 }

@@ -58,7 +58,7 @@ public class SubFeatureRepository : ISubFeatureRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetSubFeatureByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetSubFeatureByIdResponseDto>(query, parameters);
+            GetSubFeatureByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetSubFeatureByIdResponseDto>(query, parameters);
             return value;
         }
     }

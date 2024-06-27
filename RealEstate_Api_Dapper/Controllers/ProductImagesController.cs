@@ -25,25 +25,25 @@ public class ProductImagesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateProductImage(CreateProductImageRequestDto createProductImageRequestDto)
     {
-        await _productImageRepository.CreateProductImage(createProductImageRequestDto);
+        await _productImageRepository.CreateProductImageAsync(createProductImageRequestDto);
         return Ok("İlan Fotoğrafı Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteProductImage(int id)
     {
-        await _productImageRepository.DeleteProductImage(id);
+        await _productImageRepository.DeleteProductImageAsync(id);
         return Ok("İlan Fotoğrafı Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateProductImage(UpdateProductImageRequestDto updateProductImageRequestDto)
     {
-        await _productImageRepository.UpdateProductImage(updateProductImageRequestDto);
+        await _productImageRepository.UpdateProductImageAsync(updateProductImageRequestDto);
         return Ok("İlan Fotoğrafı Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("GetProductImagesByProductId")]
     public async Task<IActionResult> GetProductImagesByProductId(int id)
     {
-        List<GetProductImagesByProductIdResponseDto> value = await _productImageRepository.GetProductImagesByProductId(id);
+        List<GetProductImagesByProductIdResponseDto> value = await _productImageRepository.GetProductImagesByProductIdAsync(id);
         return Ok(value);
     }
 }

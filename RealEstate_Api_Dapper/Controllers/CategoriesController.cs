@@ -25,19 +25,19 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto createCategoryRequestDto)
     {
-        _categoryRepository.CreateCategory(createCategoryRequestDto);
+        await _categoryRepository.CreateCategoryAsync(createCategoryRequestDto);
         return Ok("Kategory Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteCategory(int id)
     {
-        _categoryRepository.DeleteCategory(id);
+        await _categoryRepository.DeleteCategoryAsync(id);
         return Ok("Kategori Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestDto updateCategoryRequestDto)
     {
-        _categoryRepository.UpdateCategory(updateCategoryRequestDto);
+        await _categoryRepository.UpdateCategoryAsync(updateCategoryRequestDto);
         return Ok("Kategori Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

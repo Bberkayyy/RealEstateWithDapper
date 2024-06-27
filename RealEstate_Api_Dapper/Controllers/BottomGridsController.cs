@@ -25,19 +25,19 @@ public class BottomGridsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateBottomGrid(CreateBottomGridRequestDto createBottomGridRequestDto)
     {
-        _BottomGridRepository.CreateBottomGrid(createBottomGridRequestDto);
+      await  _BottomGridRepository.CreateBottomGridAsync(createBottomGridRequestDto);
         return Ok("Alt Bilgi Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteBottomGrid(int id)
     {
-        _BottomGridRepository.DeleteBottomGrid(id);
+       await _BottomGridRepository.DeleteBottomGridAsync(id);
         return Ok("Alt Bilgi Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateBottomGrid(UpdateBottomGridRequestDto updateBottomGridRequestDto)
     {
-        _BottomGridRepository.UpdateBottomGrid(updateBottomGridRequestDto);
+        await _BottomGridRepository.UpdateBottomGridAsync(updateBottomGridRequestDto);
         return Ok("Alt Bilgi Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

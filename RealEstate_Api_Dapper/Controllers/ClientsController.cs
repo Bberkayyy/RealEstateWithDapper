@@ -25,19 +25,19 @@ public class ClientsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateClient(CreateClientRequestDto createClientRequestDto)
     {
-        _clientRepository.CreateClient(createClientRequestDto);
+        await _clientRepository.CreateClientAsync(createClientRequestDto);
         return Ok("Müşteri Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteClient(int id)
     {
-        _clientRepository.DeleteClient(id);
+        await _clientRepository.DeleteClientAsync(id);
         return Ok("Müşteri Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateClient(UpdateClientRequestDto updateClientRequestDto)
     {
-        _clientRepository.UpdateClient(updateClientRequestDto);
+        await _clientRepository.UpdateClientAsync(updateClientRequestDto);
         return Ok("Müşteri Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

@@ -18,13 +18,13 @@ public class MessagesController : ControllerBase
     [HttpGet("Last5MessageByReceiverId")]
     public async Task<IActionResult> GetLast5MessageByReceiverId(int id)
     {
-        List<GetLast5MessageByReceiverIdResponseDto> values = await _messageRepository.GetLast5MessageByReceiverId(id);
+        List<GetLast5MessageByReceiverIdResponseDto> values = await _messageRepository.GetLast5MessageByReceiverIdAsync(id);
         return Ok(values);
     }
     [HttpGet("Last5MessageByReceiverIdWithRelationships")]
     public async Task<IActionResult> GetLast5MessageByReceiverIdWithRelationships(int id)
     {
-        List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto> values = await _messageRepository.GetLast5MessageByReceiverIdWithRelationships(id);
+        List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto> values = await _messageRepository.GetLast5MessageByReceiverIdWithRelationshipsAsync(id);
         return Ok(values);
     }
 }

@@ -15,7 +15,7 @@ public class LocationRepository : ILocationRepository
         _context = context;
     }
 
-    public async void CreateLocation(CreateLocationRequestDto createLocationRequestDto)
+    public async Task CreateLocationAsync(CreateLocationRequestDto createLocationRequestDto)
     {
         string query = "Insert into TblLocation (City,ImageUrl,PropertyCount) values (@city,@imageUrl,@propertyCount)";
         DynamicParameters parameters = new();
@@ -28,7 +28,7 @@ public class LocationRepository : ILocationRepository
         }
     }
 
-    public async void DeleteLocation(int id)
+    public async Task DeleteLocationAsync(int id)
     {
         string query = "Delete From TblLocation where Id=@id";
         DynamicParameters parameters = new();
@@ -56,12 +56,12 @@ public class LocationRepository : ILocationRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetLocationByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetLocationByIdResponseDto>(query, parameters);
+            GetLocationByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetLocationByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async void UpdateLocation(UpdateLocationRequestDto updateLocationRequestDto)
+    public async Task UpdateLocationAsync(UpdateLocationRequestDto updateLocationRequestDto)
     {
         string query = "Update TblLocation set City = @city, ImageUrl = @imageUrl, PropertyCount = @propertyCount where Id = @id";
         DynamicParameters parameters = new();

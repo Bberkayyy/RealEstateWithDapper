@@ -15,7 +15,7 @@ public class ContactRepository : IContactRepository
         _context = context;
     }
 
-    public async void CreateContact(CreateContactRequestDto createContactRequestDto)
+    public async Task CreateContactAsync(CreateContactRequestDto createContactRequestDto)
     {
         string query = "insert into TblContact Name,Subject,Email,Message,SendDate values (@name,@subject,@email,@message,@sendDate)";
         DynamicParameters parameters = new();
@@ -30,7 +30,7 @@ public class ContactRepository : IContactRepository
         }
     }
 
-    public async void DeleteContact(int id)
+    public async Task DeleteContactAsync(int id)
     {
         string query = "delete * from TblContact where Id = @id";
         DynamicParameters parameters = new();
@@ -58,7 +58,7 @@ public class ContactRepository : IContactRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetContactByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetContactByIdResponseDto>(query, parameters);
+            GetContactByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetContactByIdResponseDto>(query, parameters);
             return value;
         }
     }
@@ -73,7 +73,7 @@ public class ContactRepository : IContactRepository
         }
     }
 
-    public async void UpdateContact(UpdateContactRequestDto updateContactRequestDto)
+    public async Task UpdateContactAsync(UpdateContactRequestDto updateContactRequestDto)
     {
         string query = "Update TblContact set Name = @name, Subject = @subject, Email = @email,Message = @message where Id=@id)";
         DynamicParameters parameters = new();

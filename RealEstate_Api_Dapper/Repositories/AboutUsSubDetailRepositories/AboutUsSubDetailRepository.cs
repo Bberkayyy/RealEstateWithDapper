@@ -15,7 +15,7 @@ public class AboutUsSubDetailRepository : IAboutUsSubDetailRepository
         _context = context;
     }
 
-    public async void CreateAboutUsSubDetail(CreateAboutUsSubDetailRequestDto createAboutUsSubDetailRequestDto)
+    public async Task CreateAboutUsSubDetailAsync(CreateAboutUsSubDetailRequestDto createAboutUsSubDetailRequestDto)
     {
         string query = "Inser into TblAboutUsSubDetail (Name,Status) values (@aboutUsSubDetailName,@aboutUsSubDetailStatus)";
         DynamicParameters parameters = new();
@@ -27,7 +27,7 @@ public class AboutUsSubDetailRepository : IAboutUsSubDetailRepository
         }
     }
 
-    public async void DeleteAboutUsSubDetail(int id)
+    public async Task DeleteAboutUsSubDetailAsync(int id)
     {
         string query = "Delete from TblAboutUsSubDetail where Id=@id";
         DynamicParameters parameters = new();
@@ -45,7 +45,7 @@ public class AboutUsSubDetailRepository : IAboutUsSubDetailRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetAboutUsSubDetailByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetAboutUsSubDetailByIdResponseDto>(query, parameters);
+            GetAboutUsSubDetailByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetAboutUsSubDetailByIdResponseDto>(query, parameters);
             return value;
         }
     }
@@ -60,7 +60,7 @@ public class AboutUsSubDetailRepository : IAboutUsSubDetailRepository
         }
     }
 
-    public async void UpdateAboutUsSubDetail(UpdateAboutUsSubDetailRequestDto updateAboutUsSubDetailRequestDto)
+    public async Task UpdateAboutUsSubDetailAsync(UpdateAboutUsSubDetailRequestDto updateAboutUsSubDetailRequestDto)
     {
         string query = "Update TblAboutUsSubDetail Set Name = @aboutUsSubDetailName, Status = @aboutUsSubDetailStatus where Id=@aboutUsSubDetailId";
         DynamicParameters parameters = new();

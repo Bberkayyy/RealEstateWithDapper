@@ -25,19 +25,19 @@ public class EmployeesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateEmployee(CreateEmployeeRequestDto createEmployeeRequestDto)
     {
-        _employeeRepository.CreateEmployee(createEmployeeRequestDto);
+        await _employeeRepository.CreateEmployeeAsync(createEmployeeRequestDto);
         return Ok("Çalışan Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
-        _employeeRepository.DeleteEmployee(id);
+        await _employeeRepository.DeleteEmployeeAsync(id);
         return Ok("Çalışan Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateEmployee(UpdateEmployeeRequestDto updateEmployeeRequestDto)
     {
-        _employeeRepository.UpdateEmployee(updateEmployeeRequestDto);
+        await _employeeRepository.UpdateEmployeeAsync(updateEmployeeRequestDto);
         return Ok("Çalışan Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

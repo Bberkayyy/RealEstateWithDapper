@@ -25,19 +25,19 @@ public class AboutUsSubDetailsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAboutUsSubDetail(CreateAboutUsSubDetailRequestDto createAboutUsSubDetailRequestDto)
     {
-        _aboutUsSubDetailRepository.CreateAboutUsSubDetail(createAboutUsSubDetailRequestDto);
+        await _aboutUsSubDetailRepository.CreateAboutUsSubDetailAsync(createAboutUsSubDetailRequestDto);
         return Ok("Hakkımızda Alt Detayı Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteAboutUsSubDetail(int id)
     {
-        _aboutUsSubDetailRepository.DeleteAboutUsSubDetail(id);
+        await _aboutUsSubDetailRepository.DeleteAboutUsSubDetailAsync(id);
         return Ok("Hakkımızda Alt Detayı Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateAboutUsSubDetail(UpdateAboutUsSubDetailRequestDto updateAboutUsSubDetailRequestDto)
     {
-        _aboutUsSubDetailRepository.UpdateAboutUsSubDetail(updateAboutUsSubDetailRequestDto);
+        await _aboutUsSubDetailRepository.UpdateAboutUsSubDetailAsync(updateAboutUsSubDetailRequestDto);
         return Ok("Hakkımızda Alt Detayı Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

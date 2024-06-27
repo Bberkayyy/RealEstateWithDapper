@@ -25,19 +25,19 @@ public class LocationsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateLocation(CreateLocationRequestDto createLocationRequestDto)
     {
-        _locationRepository.CreateLocation(createLocationRequestDto);
+        await _locationRepository.CreateLocationAsync(createLocationRequestDto);
         return Ok("Lokasyon Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteLocation(int id)
     {
-        _locationRepository.DeleteLocation(id);
+        await _locationRepository.DeleteLocationAsync(id);
         return Ok("Lokasyon Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateLocation(UpdateLocationRequestDto updateLocationRequestDto)
     {
-        _locationRepository.UpdateLocation(updateLocationRequestDto);
+        await _locationRepository.UpdateLocationAsync(updateLocationRequestDto);
         return Ok("Lokasyon Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]

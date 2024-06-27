@@ -8,9 +8,9 @@ namespace RealEstate_Api_Dapper.Repositories.ProductImageRepositories;
 public interface IProductImageRepository
 {
     Task<List<GetAllProductImagesResponseDto>> GetAllProductImageAsync();
-    Task CreateProductImage(CreateProductImageRequestDto createProductRequestDto);
-    Task UpdateProductImage(UpdateProductImageRequestDto updateProductRequestDto);
-    Task DeleteProductImage(int id);
+    Task CreateProductImageAsync(CreateProductImageRequestDto createProductRequestDto);
+    Task UpdateProductImageAsync(UpdateProductImageRequestDto updateProductRequestDto);
+    Task DeleteProductImageAsync(int id);
     Task<GetProductImageByIdResponseDto> GetProductImageByIdAsync(int id);
-    Task<List<GetProductImagesByProductIdResponseDto>> GetProductImagesByProductId(int id);
+    Task<List<GetProductImagesByProductIdResponseDto>> GetProductImagesByProductIdAsync(int id);
 }

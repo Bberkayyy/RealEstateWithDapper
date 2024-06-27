@@ -15,7 +15,7 @@ public class BottomGridRepository : IBottomGridRepository
         _context = context;
     }
 
-    public async void CreateBottomGrid(CreateBottomGridRequestDto createBottomGridRequestDto)
+    public async Task CreateBottomGridAsync(CreateBottomGridRequestDto createBottomGridRequestDto)
     {
         string query = "Insert into TblBottomGrid (Icon,Title,Description) values (@icon,@title,@description)";
         DynamicParameters parameters = new();
@@ -28,7 +28,7 @@ public class BottomGridRepository : IBottomGridRepository
         }
     }
 
-    public async void DeleteBottomGrid(int id)
+    public async Task DeleteBottomGridAsync(int id)
     {
         string query = "Delete From TblBottomGrid where Id=@id";
         DynamicParameters parameters = new();
@@ -56,12 +56,12 @@ public class BottomGridRepository : IBottomGridRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetBottomGridByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetBottomGridByIdResponseDto>(query, parameters);
+            GetBottomGridByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetBottomGridByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async void UpdateBottomGrid(UpdateBottomGridRequestDto updateBottomGridRequestDto)
+    public async Task UpdateBottomGridAsync(UpdateBottomGridRequestDto updateBottomGridRequestDto)
     {
         string query = "Update TblBottomGrid set Icon = @icon, Title = @title, Description = @description where Id=@id";
         DynamicParameters parameters = new();

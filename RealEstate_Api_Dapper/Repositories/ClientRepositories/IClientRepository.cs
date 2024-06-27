@@ -6,8 +6,8 @@ namespace RealEstate_Api_Dapper.Repositories.ClientRepositories;
 public interface IClientRepository
 {
     Task<List<GetAllClientResponseDto>> GetAllClientAsync();
-    void CreateClient(CreateClientRequestDto createClientRequestDto);
-    void UpdateClient(UpdateClientRequestDto updateClientRequestDto);
-    void DeleteClient(int id);
+    Task CreateClientAsync(CreateClientRequestDto createClientRequestDto);
+    Task UpdateClientAsync(UpdateClientRequestDto updateClientRequestDto);
+    Task DeleteClientAsync(int id);
     Task<GetClientByIdResponseDto> GetClientByIdAsync(int id);
 }

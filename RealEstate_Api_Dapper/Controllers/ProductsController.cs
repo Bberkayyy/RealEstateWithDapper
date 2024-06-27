@@ -31,19 +31,19 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateProduct(CreateProductRequestDto createProductRequestDto)
     {
-        await _productRepository.CreateProduct(createProductRequestDto);
+        await _productRepository.CreateProductAsync(createProductRequestDto);
         return Ok("İlan Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteProduct(int id)
     {
-        await _productRepository.DeleteProduct(id);
+        await _productRepository.DeleteProductAsync(id);
         return Ok("İlan Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateProduct(UpdateProductRequestDto updateProductRequestDto)
     {
-        await _productRepository.UpdateProduct(updateProductRequestDto);
+        await _productRepository.UpdateProductAsync(updateProductRequestDto);
         return Ok("İlan Başarılı Bir Şekilde Güncellendi.");
     }
     [HttpGet("{id}")]
@@ -61,13 +61,13 @@ public class ProductsController : ControllerBase
     [HttpGet("ProductDealOfTheDayStatusChangeToTrue")]
     public async Task<IActionResult> ProductDealOfTheDayStatusChangeToTrue(int id)
     {
-        await _productRepository.ProductDealOfTheDayStatusChangeToTrue(id);
+        await _productRepository.ProductDealOfTheDayStatusChangeToTrueAsync(id);
         return Ok("İlan Günün Fırsatı Olarak Belirlendi.");
     }
     [HttpGet("ProductDealOfTheDayStatusChangeToFalse")]
     public async Task<IActionResult> ProductDealOfTheDayStatusChangeToFalse(int id)
     {
-        await _productRepository.ProductDealOfTheDayStatusChangeToFalse(id);
+        await _productRepository.ProductDealOfTheDayStatusChangeToFalseAsync(id);
         return Ok("İlan Günün Fırsatlarından Çıkarıldı.");
     }
     [HttpGet("Last5ProductList")]
@@ -121,13 +121,13 @@ public class ProductsController : ControllerBase
     [HttpGet("ProductIsActiveChangeToTrue")]
     public async Task<IActionResult> ProductIsActiveChangeToTrue(int id)
     {
-        await _productRepository.ProductIsActiveChangeToTrue(id);
+        await _productRepository.ProductIsActiveChangeToTrueAsync(id);
         return Ok("İlan durumu aktif olarak değiştirildi.");
     }
     [HttpGet("ProductIsActiveChangeToFalse")]
     public async Task<IActionResult> ProductIsActiveChangeToFalse(int id)
     {
-        await _productRepository.ProductIsActiveChangeToFalse(id);
+        await _productRepository.ProductIsActiveChangeToFalseAsync(id);
         return Ok("İlan durumu pasif olarak değiştirildi.");
     }
     [HttpGet("ProductListBySearchFilterWithRelationships")]

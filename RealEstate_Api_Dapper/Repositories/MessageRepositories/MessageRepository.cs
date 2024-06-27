@@ -14,7 +14,7 @@ public class MessageRepository : IMessageRepository
         _context = context;
     }
 
-    public async Task<List<GetLast5MessageByReceiverIdResponseDto>> GetLast5MessageByReceiverId(int id)
+    public async Task<List<GetLast5MessageByReceiverIdResponseDto>> GetLast5MessageByReceiverIdAsync(int id)
     {
         string query = "Select Top(5)* from TblMessage where ReceiverId=@receiverId order by Id desc";
         DynamicParameters parameters = new();
@@ -26,7 +26,7 @@ public class MessageRepository : IMessageRepository
         }
     }
 
-    public async Task<List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto>> GetLast5MessageByReceiverIdWithRelationships(int id)
+    public async Task<List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto>> GetLast5MessageByReceiverIdWithRelationshipsAsync(int id)
     {
         string query = "Select Top(5) TblMessage.Id, Sender.Name as SenderName, Receiver.Name as ReceiverName, TblMessage.Subject, TblMessage.Content, TblMessage.SendDate, TblMessage.IsRead From TblMessage inner join TblAppUser as Sender on TblMessage.SenderId=Sender.Id inner join TblAppUser as Receiver on TblMessage.ReceiverId = Receiver.Id where TblMessage.ReceiverId = @receiverId order by Id desc";
         DynamicParameters parameters = new();

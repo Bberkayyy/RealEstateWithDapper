@@ -6,8 +6,8 @@ namespace RealEstate_Api_Dapper.Repositories.AboutUsDetailRepositories;
 public interface IAboutUsDetailRepository
 {
     Task<List<GetAllAboutUsDetailResponseDto>> GetAllAboutUsDetailAsync();
-    void CreateAboutUsDetail(CreateAboutUsDetailRequestDto createAboutUsDetailRequestDto);
-    void UpdateAboutUsDetail(UpdateAboutUsDetailRequestDto updateAboutUsDetailRequestDto);
-    void DeleteAboutUsDetail(int id);
+    Task CreateAboutUsDetailAsync(CreateAboutUsDetailRequestDto createAboutUsDetailRequestDto);
+    Task UpdateAboutUsDetailAsync(UpdateAboutUsDetailRequestDto updateAboutUsDetailRequestDto);
+    Task DeleteAboutUsDetailAsync(int id);
     Task<GetAboutUsDetailByIdResponseDto> GetAboutUsDetailByIdAsync(int id);
 }

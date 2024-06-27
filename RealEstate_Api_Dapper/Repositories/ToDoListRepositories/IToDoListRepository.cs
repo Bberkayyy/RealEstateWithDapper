@@ -6,10 +6,10 @@ namespace RealEstate_Api_Dapper.Repositories.ToDoListRepositories;
 public interface IToDoListRepository
 {
     Task<List<GetAllToDoListResponseDto>> GetAllToDoListAsync();
-    void CreateToDoList(CreateToDoListRequestDto createToDoListRequestDto);
-    void UpdateToDoList(UpdateToDoListRequestDto updateToDoListRequestDto);
-    void DeleteToDoList(int id);
+    Task CreateToDoListAsync(CreateToDoListRequestDto createToDoListRequestDto);
+    Task UpdateToDoListAsync(UpdateToDoListRequestDto updateToDoListRequestDto);
+    Task DeleteToDoListAsync(int id);
     Task<GetToDoListByIdResponseDto> GetToDoListByIdAsync(int id);
-    void ToDoStatusChangeToTrue(int id);
-    void ToDoStatusChangeToFalse(int id);
+    Task ToDoStatusChangeToTrueAsync(int id);
+    Task ToDoStatusChangeToFalseAsync(int id);
 }

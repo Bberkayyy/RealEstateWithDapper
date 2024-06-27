@@ -6,8 +6,8 @@ namespace RealEstate_Api_Dapper.Repositories.LocationRepositories;
 public interface ILocationRepository
 {
     Task<List<GetAllLocationResponseDto>> GetAllLocationAsync();
-    void CreateLocation(CreateLocationRequestDto createLocationRequestDto);
-    void UpdateLocation(UpdateLocationRequestDto updateLocationRequestDto);
-    void DeleteLocation(int id);
+    Task CreateLocationAsync(CreateLocationRequestDto createLocationRequestDto);
+    Task UpdateLocationAsync(UpdateLocationRequestDto updateLocationRequestDto);
+    Task DeleteLocationAsync(int id);
     Task<GetLocationByIdResponseDto> GetLocationByIdAsync(int id);
 }

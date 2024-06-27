@@ -17,7 +17,7 @@ public class ProductImageRepository : IProductImageRepository
         _context = context;
     }
 
-    public async Task CreateProductImage(CreateProductImageRequestDto createProductRequestDto)
+    public async Task CreateProductImageAsync(CreateProductImageRequestDto createProductRequestDto)
     {
         string query = "insert into TblProductImage (ProductId,ImageUrl) values (@productId,@imageUrl)";
         DynamicParameters parameters = new();
@@ -29,7 +29,7 @@ public class ProductImageRepository : IProductImageRepository
         }
     }
 
-    public async Task DeleteProductImage(int id)
+    public async Task DeleteProductImageAsync(int id)
     {
         string query = "Delete from TblProductImage where Id=@id";
         DynamicParameters parameters = new();
@@ -57,12 +57,12 @@ public class ProductImageRepository : IProductImageRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetProductImageByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetProductImageByIdResponseDto>(query, parameters);
+            GetProductImageByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetProductImageByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async Task<List<GetProductImagesByProductIdResponseDto>> GetProductImagesByProductId(int id)
+    public async Task<List<GetProductImagesByProductIdResponseDto>> GetProductImagesByProductIdAsync(int id)
     {
         string query = "Select * from TblProductImage where ProductId=@id";
         DynamicParameters parameters = new();
@@ -74,7 +74,7 @@ public class ProductImageRepository : IProductImageRepository
         }
     }
 
-    public async Task UpdateProductImage(UpdateProductImageRequestDto updateProductRequestDto)
+    public async Task UpdateProductImageAsync(UpdateProductImageRequestDto updateProductRequestDto)
     {
         string query = "Update TblProductImage set ProductId=@productId,ImageUrl=@imageUrl where Id=@id";
         DynamicParameters parameters = new();

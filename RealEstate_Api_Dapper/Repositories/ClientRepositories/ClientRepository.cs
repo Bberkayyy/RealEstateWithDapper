@@ -15,7 +15,7 @@ public class ClientRepository : IClientRepository
         _context = context;
     }
 
-    public async void CreateClient(CreateClientRequestDto createClientRequestDto)
+    public async Task CreateClientAsync(CreateClientRequestDto createClientRequestDto)
     {
         string query = "insert into TblClient (FullName,Title,Comment,Status) values (@fullName,@title,@comment,@status)";
         DynamicParameters parameters = new();
@@ -29,7 +29,7 @@ public class ClientRepository : IClientRepository
         }
     }
 
-    public async void DeleteClient(int id)
+    public async Task DeleteClientAsync(int id)
     {
         string query = "delete from TblClient where Id=@id";
         DynamicParameters parameters = new();
@@ -57,12 +57,12 @@ public class ClientRepository : IClientRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetClientByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetClientByIdResponseDto>(query, parameters);
+            GetClientByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetClientByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async void UpdateClient(UpdateClientRequestDto updateClientRequestDto)
+    public async Task UpdateClientAsync(UpdateClientRequestDto updateClientRequestDto)
     {
         string query = "update TblClient set FullName = @fullName, Title = @title, Comment = @comment, Status = @status where Id = @id";
         DynamicParameters parameters = new();

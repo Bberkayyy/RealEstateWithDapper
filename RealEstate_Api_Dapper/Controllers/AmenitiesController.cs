@@ -25,19 +25,19 @@ public class AmenitiesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAmenity(CreateAmenityRequestDto createAmenityRequestDto)
     {
-        await _amenityRepository.CreateAmenity(createAmenityRequestDto);
+        await _amenityRepository.CreateAmenityAsync(createAmenityRequestDto);
         return Ok("Kolaylık Başarılı Bir Şekilde Eklendi.");
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteAmenity(int id)
     {
-        await _amenityRepository.DeleteAmenity(id);
+        await _amenityRepository.DeleteAmenityAsync(id);
         return Ok("Kolaylık Başarılı Bir Şekilde Silindi.");
     }
     [HttpPut]
     public async Task<IActionResult> UpdateAmenity(UpdateAmenityRequestDto updateAmenityRequestDto)
     {
-        await _amenityRepository.UpdateAmenity(updateAmenityRequestDto);
+        await _amenityRepository.UpdateAmenityAsync(updateAmenityRequestDto);
         return Ok("Kolaylık Başarılı Bir Şekilde Güncellendi.");
     }
 }

@@ -4,6 +4,6 @@ namespace RealEstate_Api_Dapper.Repositories.MessageRepositories;
 
 public interface IMessageRepository
 {
-    Task<List<GetLast5MessageByReceiverIdResponseDto>> GetLast5MessageByReceiverId(int id);
-    Task<List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto>> GetLast5MessageByReceiverIdWithRelationships(int id);
+    Task<List<GetLast5MessageByReceiverIdResponseDto>> GetLast5MessageByReceiverIdAsync(int id);
+    Task<List<GetLast5MessageByReceiverIdWithRelationshipsResponseDto>> GetLast5MessageByReceiverIdWithRelationshipsAsync(int id);
 }

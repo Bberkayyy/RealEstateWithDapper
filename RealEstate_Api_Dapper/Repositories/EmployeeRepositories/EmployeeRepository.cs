@@ -15,7 +15,7 @@ public class EmployeeRepository : IEmployeeRepository
         _context = context;
     }
 
-    public async void CreateEmployee(CreateEmployeeRequestDto createEmployeeRequestDto)
+    public async Task CreateEmployeeAsync(CreateEmployeeRequestDto createEmployeeRequestDto)
     {
         string query = "insert into TblEmployee (FullName,Title,Mail,PhoneNumber,ImageUrl,Status) values (@fullName,@title,@mail,@phoneNumber,@imageUrl,@status)";
         DynamicParameters parameters = new();
@@ -31,7 +31,7 @@ public class EmployeeRepository : IEmployeeRepository
         }
     }
 
-    public async void DeleteEmployee(int id)
+    public async Task DeleteEmployeeAsync(int id)
     {
         string query = "delete from TblEmployee where Id=@id";
         DynamicParameters parameters = new();
@@ -59,12 +59,12 @@ public class EmployeeRepository : IEmployeeRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetEmployeeByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetEmployeeByIdResponseDto>(query, parameters);
+            GetEmployeeByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetEmployeeByIdResponseDto>(query, parameters);
             return value;
         }
     }
 
-    public async void UpdateEmployee(UpdateEmployeeRequestDto updateEmployeeRequestDto)
+    public async Task UpdateEmployeeAsync(UpdateEmployeeRequestDto updateEmployeeRequestDto)
     {
         string query = "update TblEmployee set FullName = @fullName, Title = @title, Mail = @mail, PhoneNumber = @phoneNumber, ImageUrl = @imageUrl, Status = @status where Id = @id";
         DynamicParameters parameters = new();

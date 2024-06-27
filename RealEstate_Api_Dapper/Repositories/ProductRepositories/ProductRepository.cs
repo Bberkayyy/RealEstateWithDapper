@@ -15,7 +15,7 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async Task CreateProduct(CreateProductRequestDto createProductRequestDto)
+    public async Task CreateProductAsync(CreateProductRequestDto createProductRequestDto)
     {
         string query = "insert into TblProduct (Title,Price,CoverImage,City,District,Address,Description,Type,DealOfTheDay,CreatedDate,IsActive,CategoryId,EmployeeId) values (@title,@price,@coverImage,@city,@district,@address,@description,@type,@dealOfTheDay,@createdDate,@isActive,@categoryId,@employeeId)";
         DynamicParameters parameters = new();
@@ -38,7 +38,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task DeleteProduct(int id)
+    public async Task DeleteProductAsync(int id)
     {
         string query = "Delete from TblProduct where Id=@id";
         DynamicParameters parameters = new();
@@ -97,7 +97,7 @@ public class ProductRepository : IProductRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetProductByIdResponseDto value = await connection.QueryFirstOrDefaultAsync<GetProductByIdResponseDto>(query, parameters);
+            GetProductByIdResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetProductByIdResponseDto>(query, parameters);
             return value;
         }
     }
@@ -109,7 +109,7 @@ public class ProductRepository : IProductRepository
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            GetProductByIdWithRelationshipsResponseDto value = await connection.QueryFirstOrDefaultAsync<GetProductByIdWithRelationshipsResponseDto>(query, parameters);
+            GetProductByIdWithRelationshipsResponseDto? value = await connection.QueryFirstOrDefaultAsync<GetProductByIdWithRelationshipsResponseDto>(query, parameters);
             return value;
         }
     }
@@ -177,7 +177,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task ProductDealOfTheDayStatusChangeToFalse(int id)
+    public async Task ProductDealOfTheDayStatusChangeToFalseAsync(int id)
     {
         string query = "update TblProduct set DealOfTheDay = 0 where Id=@id";
         DynamicParameters parameters = new();
@@ -188,7 +188,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task ProductDealOfTheDayStatusChangeToTrue(int id)
+    public async Task ProductDealOfTheDayStatusChangeToTrueAsync(int id)
     {
         string query = "update TblProduct set DealOfTheDay = 1 where Id=@id";
         DynamicParameters parameters = new();
@@ -199,7 +199,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task ProductIsActiveChangeToFalse(int id)
+    public async Task ProductIsActiveChangeToFalseAsync(int id)
     {
         string query = "update TblProduct set IsActive = 0 where Id=@id";
         DynamicParameters parameters = new();
@@ -210,7 +210,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task ProductIsActiveChangeToTrue(int id)
+    public async Task ProductIsActiveChangeToTrueAsync(int id)
     {
         string query = "update TblProduct set IsActive = 1 where Id=@id";
         DynamicParameters parameters = new();
@@ -221,7 +221,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task UpdateProduct(UpdateProductRequestDto updateProductRequestDto)
+    public async Task UpdateProductAsync(UpdateProductRequestDto updateProductRequestDto)
     {
         string query = "Update TblProduct set Title = @title, Price = @price, CoverImage = @coverImage, City = @city, District = @district, Address = @address, Description = @description, Type = @type, DealOfTheDay = @dealOfTheDay, IsActive = @isActive, CategoryId = @categoryId, EmployeeId = @employeeId where Id = @id";
         DynamicParameters parameters = new();
