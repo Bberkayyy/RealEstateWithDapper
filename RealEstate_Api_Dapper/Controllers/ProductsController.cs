@@ -124,4 +124,10 @@ public class ProductsController : ControllerBase
         List<GetProductListBySearchFilterWithRelationshipsResponseDto> values = await _productRepository.GetProductListBySearchFilterWithRelationshipsAsync(containsWord, categoryId, city);
         return Ok(values);
     }
+    [HttpGet("ProductListByDealOfTheDayTrueWithRelationships")]
+    public async Task<IActionResult> GetProductListByDealOfTheDayTrueWithRelationshipsAsync()
+    {
+        List<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto> values = await _productRepository.GetProductListByDealOfTheDayTrueWithRelationshipsAsync();
+        return Ok(values);
+    }
 }

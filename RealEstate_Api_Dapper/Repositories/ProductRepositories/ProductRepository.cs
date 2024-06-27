@@ -243,4 +243,14 @@ public class ProductRepository : IProductRepository
             await connection.ExecuteAsync(query, parameters);
         }
     }
+
+    public async Task<List<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto>> GetProductListByDealOfTheDayTrueWithRelationshipsAsync()
+    {
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.DealOfTheDay = 1";
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto>(query);
+            return values.ToList();
+        }
+    }
 }

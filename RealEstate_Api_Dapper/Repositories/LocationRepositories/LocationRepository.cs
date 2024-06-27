@@ -17,10 +17,11 @@ public class LocationRepository : ILocationRepository
 
     public async void CreateLocation(CreateLocationRequestDto createLocationRequestDto)
     {
-        string query = "Insert into TblLocation (City,ImageUrl) values (@city,@imageUrl)";
+        string query = "Insert into TblLocation (City,ImageUrl,PropertyCount) values (@city,@imageUrl,@propertyCount)";
         DynamicParameters parameters = new();
         parameters.Add("@city", createLocationRequestDto.City);
         parameters.Add("@imageUrl", createLocationRequestDto.ImageUrl);
+        parameters.Add("@PropertyCount", createLocationRequestDto.PropertyCount);
         using (IDbConnection connection = _context.CreateConnection())
         {
             await connection.ExecuteAsync(query, parameters);
@@ -62,10 +63,11 @@ public class LocationRepository : ILocationRepository
 
     public async void UpdateLocation(UpdateLocationRequestDto updateLocationRequestDto)
     {
-        string query = "Update TblLocation set City = @city, ImageUrl = @imageUrl where Id = @id";
+        string query = "Update TblLocation set City = @city, ImageUrl = @imageUrl, PropertyCount = @propertyCount where Id = @id";
         DynamicParameters parameters = new();
         parameters.Add("@city", updateLocationRequestDto.City);
         parameters.Add("@imageUrl", updateLocationRequestDto.ImageUrl);
+        parameters.Add("@propertyCount", updateLocationRequestDto.PropertyCount);
         parameters.Add("@id", updateLocationRequestDto.Id);
         using (IDbConnection connection = _context.CreateConnection())
         {
