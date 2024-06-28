@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using RealEstate_UI_Dapper.Models;
 using RealEstate_UI_Dapper.Models.ProductDetailsModels;
 using RealEstate_UI_Dapper.Models.ProductModels;
 using System.Net.Http;
@@ -11,16 +13,18 @@ namespace RealEstate_UI_Dapper.Controllers;
 public class PropertyController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiSettings _apiSettings;
 
-    public PropertyController(IHttpClientFactory httpClientFactory)
+    public PropertyController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
+        _apiSettings = apiSettings.Value;
     }
 
     public async Task<IActionResult> Index()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/Products/ProductListWithRelationships");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Products/ProductListWithRelationships");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -29,11 +33,12 @@ public class PropertyController : Controller
         }
         return View();
     }
+    [HttpGet("property/propertydetail/{slug}/{id}")]
     public async Task<IActionResult> PropertyDetail(int id)
     {
         ViewBag.productId = id;
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/ProductDetails/GetByProductId?id=" + id);
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "ProductDetails/GetByProductId?id=" + id);
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -47,7 +52,7 @@ public class PropertyController : Controller
     public async Task<IActionResult> FilteredIndex(string containsWord, int categoryId, string city)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductListBySearchFilterWithRelationships?containsWord={containsWord}&categoryId={categoryId}&city={city}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductListBySearchFilterWithRelationships?containsWord={containsWord}&categoryId={categoryId}&city={city}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -106,5 +111,4 @@ public class PropertyController : Controller
             return string.Empty;
         }
     }
-    /*https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2895687731!2d-74.26055986835598!3d40.697668402590374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1562582305883!5m2!1sen!2sin */
 }

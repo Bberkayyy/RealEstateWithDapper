@@ -46,11 +46,11 @@
                         <td>
                             @if (item.IsActive)
                             {
-                                <a href="/Admin/Product/ProductIsActiveChangeToFalse/@item.id" class="btn btn-outline-default">Pasif Yap</a>
+                                <a href="/Admin/Product/ProductIsActiveChangeToFalse/@item.id" class="btn btn-outline-secondary">Pasif Yap</a>
                             }
                             else
                             {
-                                <a href="/Admin/Product/ProductIsActiveChangeToTrue/@item.id" class="btn btn-outline-default">Aktif Yap</a>
+                                <a href="/Admin/Product/ProductIsActiveChangeToTrue/@item.id" class="btn btn-outline-warning">Aktif Yap</a>
                             }
                         </td>
                         <td><a href="/Admin/Product/DeleteProduct/@item.id" class="btn btn-outline-danger">Sil</a></td>

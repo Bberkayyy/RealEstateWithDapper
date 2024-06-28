@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Areas.Admin.Models.CategoryViewModels;
+using RealEstate_UI_Dapper.Models;
 using System.Text;
 
 namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
@@ -10,20 +12,22 @@ namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
 public class CategoryController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiSettings _apiSettings;
 
-    public CategoryController(IHttpClientFactory httpClientFactory)
+    public CategoryController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
+        _apiSettings = apiSettings.Value;
     }
     [Route("Index")]
     public async Task<IActionResult> Index()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/Categories");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Categories");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<AdminPanelResultCategoryViewModel> values = JsonConvert.DeserializeObject<List<AdminPanelResultCategoryViewModel>>(jsonData);
+            List<AdminPanelResultCategoryViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultCategoryViewModel>>(jsonData);
             return View(values);
         }
         return View();
@@ -38,7 +42,7 @@ public class CategoryController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelCreateCategoryViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PostAsync("https://localhost:7221/api/Categories", content);
+        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "Categories", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Category", new { area = "Admin" });
         return View();
@@ -47,7 +51,7 @@ public class CategoryController : Controller
     public async Task<IActionResult> DeleteCategory(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.DeleteAsync($"https://localhost:7221/api/Categories?id={id}");
+        HttpResponseMessage responseMessage = await client.DeleteAsync(_apiSettings.BaseUrl + $"Categories?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Category", new { area = "Admin" });
         return View();
@@ -57,11 +61,11 @@ public class CategoryController : Controller
     public async Task<IActionResult> UpdateCategory(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Categories/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Categories/{id}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            AdminPanelUpdateCategoryViewModel value = JsonConvert.DeserializeObject<AdminPanelUpdateCategoryViewModel>(jsonData);
+            AdminPanelUpdateCategoryViewModel? value = JsonConvert.DeserializeObject<AdminPanelUpdateCategoryViewModel>(jsonData);
             return View(value);
         }
         return View();
@@ -73,7 +77,7 @@ public class CategoryController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelUpdateCategoryViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PutAsync("https://localhost:7221/api/Categories", content);
+        HttpResponseMessage responseMessage = await client.PutAsync(_apiSettings.BaseUrl + "Categories", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Category", new { area = "Admin" });
         return View();

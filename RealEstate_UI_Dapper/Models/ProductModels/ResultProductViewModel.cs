@@ -4,6 +4,7 @@ public class ResultProductViewModel
 {
     public int id { get; set; }
     public string title { get; set; }
+    public string slugUrl { get; set; }
     public decimal price { get; set; }
     public string coverImage { get; set; }
     public string city { get; set; }

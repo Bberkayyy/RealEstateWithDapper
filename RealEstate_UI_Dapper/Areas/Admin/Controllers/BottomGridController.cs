@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Areas.Admin.Models.BottomGridViewModels;
+using RealEstate_UI_Dapper.Models;
 using System.Text;
 
 namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
@@ -10,20 +12,22 @@ namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
 public class BottomGridController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiSettings _apiSettings;
 
-    public BottomGridController(IHttpClientFactory httpClientFactory)
+    public BottomGridController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
+        _apiSettings = apiSettings.Value;
     }
     [Route("Index")]
     public async Task<IActionResult> Index()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/BottomGrids");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "BottomGrids");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<AdminPanelResultBottomGridViewModel> values = JsonConvert.DeserializeObject<List<AdminPanelResultBottomGridViewModel>>(jsonData);
+            List<AdminPanelResultBottomGridViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultBottomGridViewModel>>(jsonData);
             return View(values);
         }
         return View();
@@ -38,7 +42,7 @@ public class BottomGridController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelCreateBottomGridViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PostAsync("https://localhost:7221/api/BottomGrids", content);
+        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "BottomGrids", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "BottomGrid", new { area = "Admin" });
         return View();
@@ -47,7 +51,7 @@ public class BottomGridController : Controller
     public async Task<IActionResult> DeleteBottomGrid(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.DeleteAsync($"https://localhost:7221/api/BottomGrids?id={id}");
+        HttpResponseMessage responseMessage = await client.DeleteAsync(_apiSettings.BaseUrl + $"BottomGrids?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "BottomGrid", new { area = "Admin" });
         return View();
@@ -57,11 +61,11 @@ public class BottomGridController : Controller
     public async Task<IActionResult> UpdateBottomGrid(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/BottomGrids/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"BottomGrids/{id}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            AdminPanelUpdateBottomGridViewModel value = JsonConvert.DeserializeObject<AdminPanelUpdateBottomGridViewModel>(jsonData);
+            AdminPanelUpdateBottomGridViewModel? value = JsonConvert.DeserializeObject<AdminPanelUpdateBottomGridViewModel>(jsonData);
             return View(value);
         }
         return View();
@@ -73,7 +77,7 @@ public class BottomGridController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelUpdateBottomGridViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PutAsync("https://localhost:7221/api/BottomGrids", content);
+        HttpResponseMessage responseMessage = await client.PutAsync(_apiSettings.BaseUrl + "BottomGrids", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "BottomGrid", new { area = "Admin" });
         return View();

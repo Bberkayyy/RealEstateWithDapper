@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using RealEstate_UI_Dapper.Models;
 using RealEstate_UI_Dapper.Models.LoginModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -12,10 +14,12 @@ namespace RealEstate_UI_Dapper.Controllers;
 public class LoginController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiSettings _apiSettings;
 
-    public LoginController(IHttpClientFactory httpClientFactory)
+    public LoginController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
+        _apiSettings = apiSettings.Value;
     }
     [HttpGet]
     public IActionResult Index()
@@ -27,7 +31,7 @@ public class LoginController : Controller
     {
         HttpClient client = _httpClientFactory.CreateClient();
         StringContent content = new(JsonSerializer.Serialize(createLoginViewModel), Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PostAsync("https://localhost:7221/api/Logins", content);
+        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl+"Logins", content);
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();

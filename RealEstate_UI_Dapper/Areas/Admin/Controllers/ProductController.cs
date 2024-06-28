@@ -6,6 +6,8 @@ using RealEstate_UI_Dapper.Areas.Admin.Models.EmployeeViewModels;
 using System.Text;
 using RealEstate_UI_Dapper.Areas.Admin.Models.CategoryViewModels;
 using System.Linq;
+using RealEstate_UI_Dapper.Models;
+using Microsoft.Extensions.Options;
 namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
 
 [Area("Admin")]
@@ -13,20 +15,22 @@ namespace RealEstate_UI_Dapper.Areas.Admin.Controllers;
 public class ProductController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ApiSettings _apiSettings;
 
-    public ProductController(IHttpClientFactory httpClientFactory)
+    public ProductController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
+        _apiSettings = apiSettings.Value;
     }
     [Route("Index")]
     public async Task<IActionResult> Index()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/Products/ProductListWithRelationships");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Products/ProductListWithRelationships");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<AdminPanelResultProductViewModel> values = JsonConvert.DeserializeObject<List<AdminPanelResultProductViewModel>>(jsonData);
+            List<AdminPanelResultProductViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultProductViewModel>>(jsonData);
             return View(values);
         }
         return View();
@@ -48,7 +52,7 @@ public class ProductController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelCreateProductViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PostAsync("https://localhost:7221/api/Products", content);
+        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "Products", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -57,7 +61,7 @@ public class ProductController : Controller
     public async Task<IActionResult> DeleteProduct(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.DeleteAsync($"https://localhost:7221/api/Products?id={id}");
+        HttpResponseMessage responseMessage = await client.DeleteAsync(_apiSettings.BaseUrl + $"Products?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -67,11 +71,11 @@ public class ProductController : Controller
     public async Task<IActionResult> UpdateProduct(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/{id}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            AdminPanelUpdateProductViewModel value = JsonConvert.DeserializeObject<AdminPanelUpdateProductViewModel>(jsonData);
+            AdminPanelUpdateProductViewModel? value = JsonConvert.DeserializeObject<AdminPanelUpdateProductViewModel>(jsonData);
             ViewBag.CategoriesForUpdate = await GetCategoriesList();
             ViewBag.EmployeesForUpdate = await GetEmployeesList();
             return View(value);
@@ -85,7 +89,7 @@ public class ProductController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(adminPanelUpdateProductViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PutAsync("https://localhost:7221/api/Products", content);
+        HttpResponseMessage responseMessage = await client.PutAsync(_apiSettings.BaseUrl + "Products", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -94,7 +98,7 @@ public class ProductController : Controller
     public async Task<IActionResult> ProductDealOfTheDayStatusChangeToTrue(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductDealOfTheDayStatusChangeToTrue?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductDealOfTheDayStatusChangeToTrue?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -103,7 +107,7 @@ public class ProductController : Controller
     public async Task<IActionResult> ProductDealOfTheDayStatusChangeToFalse(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductDealOfTheDayStatusChangeToFalse?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductDealOfTheDayStatusChangeToFalse?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -112,7 +116,7 @@ public class ProductController : Controller
     public async Task<IActionResult> ProductIsActiveChangeToTrue(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductIsActiveChangeToTrue?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductIsActiveChangeToTrue?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -121,7 +125,7 @@ public class ProductController : Controller
     public async Task<IActionResult> ProductIsActiveChangeToFalse(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"https://localhost:7221/api/Products/ProductIsActiveChangeToFalse?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductIsActiveChangeToFalse?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("Index", "Product", new { area = "Admin" });
         return View();
@@ -130,9 +134,9 @@ public class ProductController : Controller
     private async Task<List<SelectListItem>> GetCategoriesList()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/Categories");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Categories");
         string jsonData = await responseMessage.Content.ReadAsStringAsync();
-        List<AdminPanelResultCategoryViewModel> values = JsonConvert.DeserializeObject<List<AdminPanelResultCategoryViewModel>>(jsonData);
+        List<AdminPanelResultCategoryViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultCategoryViewModel>>(jsonData);
         List<SelectListItem> categories = (from x in values
                                            select new SelectListItem
                                            {
@@ -145,9 +149,9 @@ public class ProductController : Controller
     private async Task<List<SelectListItem>> GetEmployeesList()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/Employees");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Employees");
         string jsonData = await responseMessage.Content.ReadAsStringAsync();
-        List<AdminPanelResultEmployeeViewModel> values = JsonConvert.DeserializeObject<List<AdminPanelResultEmployeeViewModel>>(jsonData);
+        List<AdminPanelResultEmployeeViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultEmployeeViewModel>>(jsonData);
         List<SelectListItem> employees = (from x in values
                                           select new SelectListItem
                                           {
