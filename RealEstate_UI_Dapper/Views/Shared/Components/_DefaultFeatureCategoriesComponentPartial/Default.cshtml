@@ -1,0 +1,10 @@
+﻿@model List<ResultCategoryViewModel>
+<span class="input-group-btn">
+    <select class="btn btn-default" name="categoryId" required>
+        <option selected="">Gayrimenkul Türü</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+</span>

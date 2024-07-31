@@ -1,4 +1,4 @@
-﻿@model List<ResultCategoryViewModel>
+﻿
 <section class="w3l-cover-3">
     <div class="cover top-bottom">
         <div class="container">
@@ -16,27 +16,8 @@
                     </div>
                     <form asp-action="FilteredIndex" asp-controller="Property" class="w3l-cover-3-gd" method="post">
                         <input type="search" name="containsWord" placeholder="Anahtar kelimeyi girin" required>
-                        <span class="input-group-btn">
-                            <select class="btn btn-default" name="categoryId" required>
-                                <option selected="">Gayrimenkul Türü</option>
-                                @foreach (var item in Model)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
-                            </select>
-                        </span>
-                        <span class="input-group-btn">
-                            <select class="btn btn-default" name="city" required>
-                                <option selected="">Şehir Seçiniz</option>
-                                <option>Balıkesir</option>
-                                <option>London</option>
-                                <option>India</option>
-                                <option>Bangladesh</option>
-                                <option>Saudi Arabia</option>
-                                <option>America</option>
-                                <option>Srilanka</option>
-                            </select>
-                        </span>
+                        @await Component.InvokeAsync("_DefaultFeatureCategoriesComponentPartial")
+                        @await Component.InvokeAsync("_DefaultFeatureCitiesComponentPartial")
                         <button type="submit" class="btn-primary">Ara</button>
                     </form>
                 </div>

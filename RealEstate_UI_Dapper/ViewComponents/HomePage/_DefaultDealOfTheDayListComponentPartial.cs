@@ -6,12 +6,12 @@ using RealEstate_UI_Dapper.Models.ProductModels;
 
 namespace RealEstate_UI_Dapper.ViewComponents.HomePage;
 
-public class _DefaultProductListComponentPartial : ViewComponent
+public class _DefaultDealOfTheDayListComponentPartial : ViewComponent
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ApiSettings _apiSettings;
 
-    public _DefaultProductListComponentPartial(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
+    public _DefaultDealOfTheDayListComponentPartial(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
     {
         _httpClientFactory = httpClientFactory;
         _apiSettings = apiSettings.Value;

@@ -16,7 +16,7 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <a href="/Property/PropertyDetail/@item.id">
+                            <a href="@Url.Action("PropertyDetail","Property",new {slug=item.slugUrl,id=item.id})">
                                 <div class="box16">
                                     <div class="rentext-listing-category"><span>@item.type</span><span>@item.categoryName</span></div>
                                     <img class="img-fluid" style="height:200px;width:700px" src="@item.coverImage" alt="">

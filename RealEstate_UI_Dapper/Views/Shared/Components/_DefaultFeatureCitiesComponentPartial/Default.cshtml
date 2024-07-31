@@ -1,0 +1,10 @@
+﻿@model List<ResultProductViewModel>
+<span class="input-group-btn">
+    <select class="btn btn-default" name="city" required>
+        <option selected="">Şehir Seçiniz</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.city">@item.city</option>
+        }
+    </select>
+</span>
