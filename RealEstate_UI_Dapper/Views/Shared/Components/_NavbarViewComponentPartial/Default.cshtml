@@ -38,10 +38,27 @@
                         <a class="nav-link" href="listing.html">Hakkımızda</a>
                     </li>
                     <li class="nav-item @@listing__active">
-                        <a class="nav-link" href="listing.html">İletişim</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (ViewBag.userRole == "Admin")
+                            {
+                                <a class="nav-link" href="/Admin/Dashboard/Index">Admin Panel</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" href="/EstateAgent/Dashboard/Index">Emlakçı Panel</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="/Login/Index/">Giriş Yap</a>
+                        }
                     </li>
                     <li class="nav-item @@listing__active">
-                        <a class="nav-link" href="/Login/Index/">Giriş Yap</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link" href="/Login/Logout/">Çıkış Yap</a>
+                        }
                     </li>
                 </ul>
                 <div class="top-quote mt-lg-0">

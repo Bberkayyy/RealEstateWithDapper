@@ -1,14 +1,13 @@
-﻿@model CreateLoginViewModel
+﻿@model RegisterUserViewModel
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Kullanıcı Girişi</title>
+    <title>Kullanıcı Kaydı</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,9 +50,29 @@
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="text-center mb-3">
-                            <h3>Giriş Sayfası</h3>
+                            <h3>Kayıt Sayfası</h3>
                         </div>
                         <form method="post">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" asp-for="FullName">
+                                <label for="floatingInput">Adı Soyadı</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" asp-for="Title">
+                                <label for="floatingInput">Yaptığı İş</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" asp-for="Mail">
+                                <label for="floatingInput">Email Adresi</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" asp-for="PhoneNumber">
+                                <label for="floatingInput">Telefon Numarası</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" asp-for="ImageUrl">
+                                <label for="floatingInput">Görsel Url</label>
+                            </div>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" asp-for="Username">
                                 <label for="floatingInput">Kullanıcı Adı</label>
@@ -69,9 +88,9 @@
                                 </div>
                                 <a href="">Şifremi Unuttum</a>
                             </div>
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Giriş Yap</button>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Kayıt Ol</button>
                         </form>
-                        <p class="text-center mb-0">Hesabınız yok mu? <a href="/Register/Index/">Kayıt ol</a></p>
+                        <p class="text-center mb-0">Zaten hesabınız var mı? <a href="/Login/Index/">Giriş Yap</a></p>
                     </div>
                 </div>
             </div>

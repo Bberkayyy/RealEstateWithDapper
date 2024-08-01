@@ -55,10 +55,24 @@ public class LoginController : Controller
                         IsPersistent = true
                     };
                     await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
-                    return RedirectToAction("Index", "Dashboard", new { area = "EstateAgent" });
+                    bool isAdmin = claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Admin");
+
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "EstateAgent" });
+                    }
                 }
             }
         }
         return View();
+    }
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return RedirectToAction("Index", "Default");
     }
 }
