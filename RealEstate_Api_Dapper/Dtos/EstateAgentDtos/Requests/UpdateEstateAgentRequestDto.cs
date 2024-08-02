@@ -1,6 +1,6 @@
-﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.EmployeeViewModels;
+﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Requests;
 
-public class AdminPanelUpdateEmployeeViewModel
+public class UpdateEstateAgentRequestDto
 {
     public int Id { get; set; }
     public string FullName { get; set; }

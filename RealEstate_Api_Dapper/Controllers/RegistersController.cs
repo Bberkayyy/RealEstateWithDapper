@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstate_Api_Dapper.Dtos.EmployeeDtos.Requests;
+using RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Requests;
 using RealEstate_Api_Dapper.Dtos.RegisterDtos;
 using RealEstate_Api_Dapper.Models.DapperContext;
-using RealEstate_Api_Dapper.Repositories.EmployeeRepositories;
+using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories;
 using System.Data;
 
 namespace RealEstate_Api_Dapper.Controllers;
@@ -14,17 +14,17 @@ namespace RealEstate_Api_Dapper.Controllers;
 public class RegistersController : ControllerBase
 {
     private readonly Context _context;
-    private readonly IEmployeeRepository _employeeRepository;
+    private readonly IEstateAgentRepository _estateAgentRepository;
 
-    public RegistersController(Context context, IEmployeeRepository employeeRepository)
+    public RegistersController(Context context, IEstateAgentRepository estateAgentRepository)
     {
         _context = context;
-        _employeeRepository = employeeRepository;
+        _estateAgentRepository = estateAgentRepository;
     }
     [HttpPost]
     public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
     {
-        CreateEmployeeRequestDto employee = new()
+        CreateEstateAgentRequestDto EstateAgent = new()
         {
             FullName = registerUserDto.FullName,
             Title = registerUserDto.Title,
@@ -33,7 +33,7 @@ public class RegistersController : ControllerBase
             ImageUrl = registerUserDto.ImageUrl,
             Status = true
         };
-        await _employeeRepository.CreateEmployeeAsync(employee);
+        await _estateAgentRepository.CreateEstateAgentAsync(EstateAgent);
         string query = "insert into TblAppUser (Username,Password,Name,Email,RoleId) values (@username,@password,@name,@email,@roleId)";
         DynamicParameters parameters = new();
         parameters.Add("@username", registerUserDto.Username);

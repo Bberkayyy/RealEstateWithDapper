@@ -25,10 +25,10 @@ public class StatisticController : Controller
         string jsonDataActiveCategoryCount = await responseMessageActiveCategoryCount.Content.ReadAsStringAsync();
         ViewBag.activeCategoryCount = jsonDataActiveCategoryCount;
         #endregion
-        #region ActiveEmployeeCount
-        HttpResponseMessage responseMessageActiveEmployeeCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ActiveEmployeeCount");
-        string jsonDataActiveEmployeeCount = await responseMessageActiveEmployeeCount.Content.ReadAsStringAsync();
-        ViewBag.activeEmployeeCount = jsonDataActiveEmployeeCount;
+        #region ActiveEstateAgentCount
+        HttpResponseMessage responseMessageActiveEstateAgentCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ActiveEstateAgentCount");
+        string jsonDataActiveEstateAgentCount = await responseMessageActiveEstateAgentCount.Content.ReadAsStringAsync();
+        ViewBag.activeEstateAgentCount = jsonDataActiveEstateAgentCount;
         #endregion
         #region ApartmentCount
         HttpResponseMessage responseMessageApartmentCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ApartmentCount");
@@ -70,10 +70,10 @@ public class StatisticController : Controller
         string jsonDataDifferentCityCount = await responseMessageDifferentCityCount.Content.ReadAsStringAsync();
         ViewBag.differentCityCount = jsonDataDifferentCityCount;
         #endregion
-        #region EmployeeNameWithMostProductCount
-        HttpResponseMessage responseMessageEmployeeNameWithMostProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/EmployeeNameWithMostProductCount");
-        string jsonDataEmployeeNameWithMostProductCount = await responseMessageEmployeeNameWithMostProductCount.Content.ReadAsStringAsync();
-        ViewBag.employeeNameWithMostProductCount = jsonDataEmployeeNameWithMostProductCount;
+        #region EstateAgentNameWithMostProductCount
+        HttpResponseMessage responseMessageEstateAgentNameWithMostProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/EstateAgentNameWithMostProductCount");
+        string jsonDataEstateAgentNameWithMostProductCount = await responseMessageEstateAgentNameWithMostProductCount.Content.ReadAsStringAsync();
+        ViewBag.EstateAgentNameWithMostProductCount = jsonDataEstateAgentNameWithMostProductCount;
         #endregion
         #region LastAddedProductPrice
         HttpResponseMessage responseMessageLastAddedProductPrice = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/LastAddedProductPrice");

@@ -1,6 +1,6 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.EmployeeDtos.Responses;
+﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
 
-public class GetAllEmployeeResponseDto
+public class GetEstateAgentByIdResponseDto
 {
     public int Id { get; set; }
     public string FullName { get; set; }

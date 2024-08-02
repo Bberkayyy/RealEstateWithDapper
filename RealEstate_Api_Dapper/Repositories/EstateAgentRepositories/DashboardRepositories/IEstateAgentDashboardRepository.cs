@@ -1,4 +1,4 @@
-﻿using RealEstate_Api_Dapper.Dtos.EstateAgentDtos;
+﻿using RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
 
 namespace RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRepositories;
 

@@ -14,5 +14,5 @@ public class EstateAgentPanelResultLast5ProductViewModel
     public bool dealOfTheDay { get; set; }
     public DateTime createdDate { get; set; }
     public string categoryName { get; set; }
-    public string employeeName { get; set; }
+    public string estateAgentName { get; set; }
 }

@@ -18,7 +18,7 @@ public class ProductRepository : IProductRepository
 
     public async Task CreateProductAsync(CreateProductRequestDto createProductRequestDto)
     {
-        string query = "insert into TblProduct (Title,SlugUrl,Price,CoverImage,City,District,Address,Description,Type,DealOfTheDay,CreatedDate,IsActive,CategoryId,EmployeeId) values (@title,@slugUrl,@price,@coverImage,@city,@district,@address,@description,@type,@dealOfTheDay,@createdDate,@isActive,@categoryId,@employeeId)";
+        string query = "insert into TblProduct (Title,SlugUrl,Price,CoverImage,City,District,Address,Description,Type,DealOfTheDay,CreatedDate,IsActive,CategoryId,EstateAgentId) values (@title,@slugUrl,@price,@coverImage,@city,@district,@address,@description,@type,@dealOfTheDay,@createdDate,@isActive,@categoryId,@estateAgentId)";
         DynamicParameters parameters = new();
         parameters.Add("@title", createProductRequestDto.Title);
         parameters.Add("@slugUrl", CreateSlugUrl(createProductRequestDto.Title));
@@ -33,7 +33,7 @@ public class ProductRepository : IProductRepository
         parameters.Add("@createdDate", DateTime.Now);
         parameters.Add("@isActive", true);
         parameters.Add("@categoryId", createProductRequestDto.CategoryId);
-        parameters.Add("@employeeId", createProductRequestDto.EmployeeId);
+        parameters.Add("@estateAgentId", createProductRequestDto.EstateAgentId);
         using (IDbConnection connection = _context.CreateConnection())
         {
             await connection.ExecuteAsync(query, parameters);
@@ -63,7 +63,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetAllProductWithRelationshipsResponseDto>> GetAllProductWithRelationshipsAsync()
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetAllProductWithRelationshipsResponseDto> values = await connection.QueryAsync<GetAllProductWithRelationshipsResponseDto>(query);
@@ -84,7 +84,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetLast5ProductWithRelationshipsResponseDto>> GetLast5ProductWithRelationshipsAsync()
     {
-        string query = "Select top(5) TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId = TblEmployee.Id order by Id desc";
+        string query = "Select top(5) TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId = TblEstateAgent.Id order by Id desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetLast5ProductWithRelationshipsResponseDto> value = await connection.QueryAsync<GetLast5ProductWithRelationshipsResponseDto>(query);
@@ -106,7 +106,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<GetProductByIdWithRelationshipsResponseDto> GetProductByIdWithRelationshipsAsync(int id)
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.Id = @id";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id where TblProduct.Id = @id";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
@@ -118,7 +118,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetProductListBySearchFilterWithRelationshipsResponseDto>> GetProductListBySearchFilterWithRelationshipsAsync(string containsWord, int categoryId, string city)
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.Title like '%" +
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id where TblProduct.Title like '%" +
             containsWord +
             "%' and TblProduct.CategoryId = @categoryId and TblProduct.City = @city";
         DynamicParameters parameters = new();
@@ -131,50 +131,50 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseAsync(int id)
+    public async Task<List<GetProductListByEstateAgentIdResponseDto>> GetProductListByEstateAgentIdAndIsActiveFalseAsync(int id)
     {
-        string query = "Select * from TblProduct where EmployeeId=@id and IsActive=0";
+        string query = "Select * from TblProduct where EstateAgentId=@id and IsActive=0";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            IEnumerable<GetProductListByEmployeeIdResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdResponseDto>(query, parameters);
+            IEnumerable<GetProductListByEstateAgentIdResponseDto> values = await connection.QueryAsync<GetProductListByEstateAgentIdResponseDto>(query, parameters);
             return values.ToList();
         }
     }
 
-    public async Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseWithRelationshipsAsync(int id)
+    public async Task<List<GetProductListByEstateAgentIdWithRelationshipsResponseDto>> GetProductListByEstateAgentIdAndIsActiveFalseWithRelationshipsAsync(int id)
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.EmployeeId = @id and IsActive=0";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id where TblProduct.EstateAgentId = @id and IsActive=0";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            IEnumerable<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdWithRelationshipsResponseDto>(query, parameters);
+            IEnumerable<GetProductListByEstateAgentIdWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByEstateAgentIdWithRelationshipsResponseDto>(query, parameters);
             return values.ToList();
         }
     }
 
-    public async Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueAsync(int id)
+    public async Task<List<GetProductListByEstateAgentIdResponseDto>> GetProductListByEstateAgentIdAndIsActiveTrueAsync(int id)
     {
-        string query = "Select * from TblProduct where EmployeeId=@id and IsActive=1";
+        string query = "Select * from TblProduct where EstateAgentId=@id and IsActive=1";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            IEnumerable<GetProductListByEmployeeIdResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdResponseDto>(query, parameters);
+            IEnumerable<GetProductListByEstateAgentIdResponseDto> values = await connection.QueryAsync<GetProductListByEstateAgentIdResponseDto>(query, parameters);
             return values.ToList();
         }
     }
 
-    public async Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueWithRelationshipsAsync(int id)
+    public async Task<List<GetProductListByEstateAgentIdWithRelationshipsResponseDto>> GetProductListByEstateAgentIdAndIsActiveTrueWithRelationshipsAsync(int id)
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.EmployeeId = @id and IsActive=1";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.SlugUrl, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id where TblProduct.EstateAgentId = @id and IsActive=1";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            IEnumerable<GetProductListByEmployeeIdWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByEmployeeIdWithRelationshipsResponseDto>(query, parameters);
+            IEnumerable<GetProductListByEstateAgentIdWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByEstateAgentIdWithRelationshipsResponseDto>(query, parameters);
             return values.ToList();
         }
     }
@@ -225,7 +225,7 @@ public class ProductRepository : IProductRepository
 
     public async Task UpdateProductAsync(UpdateProductRequestDto updateProductRequestDto)
     {
-        string query = "Update TblProduct set Title = @title, SlugUrl = @slugUrl, Price = @price, CoverImage = @coverImage, City = @city, District = @district, Address = @address, Description = @description, Type = @type, DealOfTheDay = @dealOfTheDay, IsActive = @isActive, CategoryId = @categoryId, EmployeeId = @employeeId where Id = @id";
+        string query = "Update TblProduct set Title = @title, SlugUrl = @slugUrl, Price = @price, CoverImage = @coverImage, City = @city, District = @district, Address = @address, Description = @description, Type = @type, DealOfTheDay = @dealOfTheDay, IsActive = @isActive, CategoryId = @categoryId, EstateAgentId = @estateAgentId where Id = @id";
         DynamicParameters parameters = new();
         parameters.Add("@title", updateProductRequestDto.Title);
         parameters.Add("@slugUrl", CreateSlugUrl(updateProductRequestDto.Title));
@@ -239,7 +239,7 @@ public class ProductRepository : IProductRepository
         parameters.Add("@dealOfTheDay", updateProductRequestDto.DealOfTheDay);
         parameters.Add("@isActive", updateProductRequestDto.IsActive);
         parameters.Add("@categoryId", updateProductRequestDto.CategoryId);
-        parameters.Add("@employeeId", updateProductRequestDto.EmployeeId);
+        parameters.Add("@estateAgentId", updateProductRequestDto.EstateAgentId);
         parameters.Add("@id", updateProductRequestDto.Id);
         using (IDbConnection connection = _context.CreateConnection())
         {
@@ -249,7 +249,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto>> GetProductListByDealOfTheDayTrueWithRelationshipsAsync()
     {
-        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id where TblProduct.DealOfTheDay = 1";
+        string query = "Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id where TblProduct.DealOfTheDay = 1";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto> values = await connection.QueryAsync<GetProductListByDealOfTheDayTrueWithRelationshipsResponseDto>(query);
@@ -269,7 +269,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<GetLast3ProductWithRelationshipsResponseDto>> GetLast3ProductWithRelationshipsAsync()
     {
-        string query = "Select top(3) TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId = TblEmployee.Id order by Id desc";
+        string query = "Select top(3) TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblProduct.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId = TblEstateAgent.Id order by Id desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetLast3ProductWithRelationshipsResponseDto> value = await connection.QueryAsync<GetLast3ProductWithRelationshipsResponseDto>(query);

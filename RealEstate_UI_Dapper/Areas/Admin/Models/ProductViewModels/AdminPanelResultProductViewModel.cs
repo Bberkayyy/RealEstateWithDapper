@@ -16,5 +16,5 @@ public class AdminPanelResultProductViewModel
     public DateTime createdDate { get; set; }
     public bool IsActive { get; set; }
     public string categoryName { get; set; }
-    public string employeeName { get; set; }
+    public string estateAgentName { get; set; }
 }

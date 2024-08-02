@@ -6,7 +6,7 @@ using RealEstate_Api_Dapper.Repositories.BottomGridRepositories;
 using RealEstate_Api_Dapper.Repositories.CategoryRepositories;
 using RealEstate_Api_Dapper.Repositories.ClientRepositories;
 using RealEstate_Api_Dapper.Repositories.ContactRepositories;
-using RealEstate_Api_Dapper.Repositories.EmployeeRepositories;
+using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories;
 using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRepositories;
 using RealEstate_Api_Dapper.Repositories.LocationRepositories;
 using RealEstate_Api_Dapper.Repositories.MessageRepositories;
@@ -32,7 +32,7 @@ public static class Extensions
         services.AddTransient<IBottomGridRepository, BottomGridRepository>();
         services.AddTransient<ILocationRepository, LocationRepository>();
         services.AddTransient<IClientRepository, ClientRepository>();
-        services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+        services.AddTransient<IEstateAgentRepository, EstateAgentRepository>();
         services.AddTransient<IStatisticRepository, StatisticRepository>();
         services.AddTransient<IContactRepository, ContactRepository>();
         services.AddTransient<IToDoListRepository, ToDoListRepository>();

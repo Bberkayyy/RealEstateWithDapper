@@ -1,10 +1,9 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
+﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
 
-public class GetProductListByEmployeeIdWithRelationshipsResponseDto
+public class EstateAgentLast5ProductWithRelationshipsResponseDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
-    public string SlugUrl { get; set; }
     public decimal Price { get; set; }
     public string CoverImage { get; set; }
     public string City { get; set; }
@@ -14,7 +13,6 @@ public class GetProductListByEmployeeIdWithRelationshipsResponseDto
     public string Type { get; set; }
     public bool DealOfTheDay { get; set; }
     public DateTime CreatedDate { get; set; }
-    public bool IsActive { get; set; }
     public string CategoryName { get; set; }
-    public string EmployeeName { get; set; }
+    public string EstateAgentName { get; set; }
 }

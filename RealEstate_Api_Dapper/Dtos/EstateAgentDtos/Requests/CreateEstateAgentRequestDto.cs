@@ -1,8 +1,7 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.EmployeeDtos.Requests;
+﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Requests;
 
-public class UpdateEmployeeRequestDto
+public class CreateEstateAgentRequestDto
 {
-    public int Id { get; set; }
     public string FullName { get; set; }
     public string Title { get; set; }
     public string Mail { get; set; }

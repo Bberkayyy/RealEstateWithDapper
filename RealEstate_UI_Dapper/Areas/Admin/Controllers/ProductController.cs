@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Areas.Admin.Models.ProductViewModels;
-using RealEstate_UI_Dapper.Areas.Admin.Models.EmployeeViewModels;
+using RealEstate_UI_Dapper.Areas.Admin.Models.EstateAgentViewModels;
 using System.Text;
 using RealEstate_UI_Dapper.Areas.Admin.Models.CategoryViewModels;
 using System.Linq;
@@ -40,7 +40,7 @@ public class ProductController : Controller
     public async Task<IActionResult> CreateProduct()
     {
         ViewBag.Categories = await GetCategoriesList();
-        ViewBag.Employees = await GetEmployeesList();
+        ViewBag.EstateAgents = await GetEstateAgentsList();
         return View();
     }
     [HttpPost]
@@ -77,7 +77,7 @@ public class ProductController : Controller
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
             AdminPanelUpdateProductViewModel? value = JsonConvert.DeserializeObject<AdminPanelUpdateProductViewModel>(jsonData);
             ViewBag.CategoriesForUpdate = await GetCategoriesList();
-            ViewBag.EmployeesForUpdate = await GetEmployeesList();
+            ViewBag.EstateAgentsForUpdate = await GetEstateAgentsList();
             return View(value);
         }
         return View();
@@ -146,18 +146,18 @@ public class ProductController : Controller
         return categories;
     }
 
-    private async Task<List<SelectListItem>> GetEmployeesList()
+    private async Task<List<SelectListItem>> GetEstateAgentsList()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Employees");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents");
         string jsonData = await responseMessage.Content.ReadAsStringAsync();
-        List<AdminPanelResultEmployeeViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultEmployeeViewModel>>(jsonData);
-        List<SelectListItem> employees = (from x in values
+        List<AdminPanelResultEstateAgentViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultEstateAgentViewModel>>(jsonData);
+        List<SelectListItem> EstateAgents = (from x in values
                                           select new SelectListItem
                                           {
                                               Text = x.fullName,
                                               Value = x.id.ToString()
                                           }).ToList();
-        return employees;
+        return EstateAgents;
     }
 }

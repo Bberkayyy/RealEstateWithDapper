@@ -16,5 +16,5 @@ public class GetProductByIdWithRelationshipsResponseDto
     public DateTime CreatedDate { get; set; }
     public bool IsActive { get; set; }
     public string CategoryName { get; set; }
-    public string EmployeeName { get; set; }
+    public string EstateAgentName { get; set; }
 }

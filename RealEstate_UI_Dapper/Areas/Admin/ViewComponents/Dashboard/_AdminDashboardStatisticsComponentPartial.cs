@@ -23,10 +23,10 @@ public class _AdminDashboardStatisticsComponentPartial : ViewComponent
         string jsonDataProductCount = await responseMessageProductCount.Content.ReadAsStringAsync();
         ViewBag.productCount = jsonDataProductCount;
         #endregion
-        #region ActiveEmployeeCount
-        HttpResponseMessage responseMessageActiveEmployeeCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ActiveEmployeeCount");
-        string jsonDataActiveEmployeeCount = await responseMessageActiveEmployeeCount.Content.ReadAsStringAsync();
-        ViewBag.activeEmployeeCount = jsonDataActiveEmployeeCount;
+        #region ActiveEstateAgentCount
+        HttpResponseMessage responseMessageActiveEstateAgentCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ActiveEstateAgentCount");
+        string jsonDataActiveEstateAgentCount = await responseMessageActiveEstateAgentCount.Content.ReadAsStringAsync();
+        ViewBag.activeEstateAgentCount = jsonDataActiveEstateAgentCount;
         #endregion
         #region AverageRentPrice
         HttpResponseMessage responseMessageAverageRentPrice = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/AverageRentPrice");

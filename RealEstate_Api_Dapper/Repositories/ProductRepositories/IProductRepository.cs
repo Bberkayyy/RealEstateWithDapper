@@ -18,10 +18,10 @@ public interface IProductRepository
     Task<List<GetLast5ProductWithRelationshipsResponseDto>> GetLast5ProductWithRelationshipsAsync();
     Task<List<GetLast3ProductResponseDto>> GetLast3ProductAsync();
     Task<List<GetLast3ProductWithRelationshipsResponseDto>> GetLast3ProductWithRelationshipsAsync();
-    Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueAsync(int id);
-    Task<List<GetProductListByEmployeeIdResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseAsync(int id);
-    Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveTrueWithRelationshipsAsync(int id);
-    Task<List<GetProductListByEmployeeIdWithRelationshipsResponseDto>> GetProductListByEmployeeIdAndIsActiveFalseWithRelationshipsAsync(int id);
+    Task<List<GetProductListByEstateAgentIdResponseDto>> GetProductListByEstateAgentIdAndIsActiveTrueAsync(int id);
+    Task<List<GetProductListByEstateAgentIdResponseDto>> GetProductListByEstateAgentIdAndIsActiveFalseAsync(int id);
+    Task<List<GetProductListByEstateAgentIdWithRelationshipsResponseDto>> GetProductListByEstateAgentIdAndIsActiveTrueWithRelationshipsAsync(int id);
+    Task<List<GetProductListByEstateAgentIdWithRelationshipsResponseDto>> GetProductListByEstateAgentIdAndIsActiveFalseWithRelationshipsAsync(int id);
     Task ProductIsActiveChangeToTrueAsync(int id);
     Task ProductIsActiveChangeToFalseAsync(int id);
     Task<List<GetProductListBySearchFilterWithRelationshipsResponseDto>> GetProductListBySearchFilterWithRelationshipsAsync(string containsWord, int categoryId, string city);

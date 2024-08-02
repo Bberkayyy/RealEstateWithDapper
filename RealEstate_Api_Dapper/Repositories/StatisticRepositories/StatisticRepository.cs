@@ -22,9 +22,9 @@ public class StatisticRepository : IStatisticRepository
         }
     }
 
-    public int ActiveEmployeeCount()
+    public int ActiveEstateAgentCount()
     {
-        string query = "Select count(*) from TblEmployee where Status = 1";
+        string query = "Select count(*) from TblEstateAgent where Status = 1";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -33,7 +33,7 @@ public class StatisticRepository : IStatisticRepository
 
     public int ApartmentCount()
     {
-        string query = "SELECT COUNT(*) from (Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblCategory.Name as CategoryName, TblEmployee.FullName as EmployeeName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEmployee on TblProduct.EmployeeId=TblEmployee.Id) as query where query.CategoryName = 'Daire'";
+        string query = "SELECT COUNT(*) from (Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id) as query where query.CategoryName = 'Daire'";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -103,9 +103,9 @@ public class StatisticRepository : IStatisticRepository
         }
     }
 
-    public string EmployeeNameWithMostProductCount()
+    public string EstateAgentNameWithMostProductCount()
     {
-        string query = "SELECT top(1) FullName, Count(*) FROM TblProduct inner join TblEmployee on TblProduct.EmployeeId = TblEmployee.Id group by FullName order by COUNT(*) desc";
+        string query = "SELECT top(1) FullName, Count(*) FROM TblProduct inner join TblEstateAgent on TblProduct.EstateAgentId = TblEstateAgent.Id group by FullName order by COUNT(*) desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);

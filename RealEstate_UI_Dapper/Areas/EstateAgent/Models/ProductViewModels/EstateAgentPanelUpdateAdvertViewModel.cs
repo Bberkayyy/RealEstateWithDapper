@@ -15,5 +15,5 @@ public class EstateAgentPanelUpdateAdvertViewModel
     public bool IsActive { get; set; }
     public DateTime CreatedDate { get; set; }
     public int CategoryId { get; set; }
-    public int EmployeeId { get; set; }
+    public int EstateAgentId { get; set; }
 }

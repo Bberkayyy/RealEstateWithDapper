@@ -7,7 +7,7 @@ public interface IStatisticRepository
     int PassiveCategoryCount();
     int ProductCount();
     int ApartmentCount();
-    string EmployeeNameWithMostProductCount();
+    string EstateAgentNameWithMostProductCount();
     string CategoryNameWithMostProductCount();
     decimal AverageRentPrice();
     decimal AverageSalePrice();
@@ -17,5 +17,5 @@ public interface IStatisticRepository
     string NewestBuildingYear();
     string OldestBuildingYear();
     int AverageRoomCount();
-    int ActiveEmployeeCount();
+    int ActiveEstateAgentCount();
 }

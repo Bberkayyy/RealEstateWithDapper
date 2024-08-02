@@ -19,10 +19,10 @@ public class StatisticsController : ControllerBase
     {
         return Ok(_statisticRepository.ActiveCategoryCount());
     }
-    [HttpGet("ActiveEmployeeCount")]
-    public IActionResult ActiveEmployeeCount()
+    [HttpGet("ActiveEstateAgentCount")]
+    public IActionResult ActiveEstateAgentCount()
     {
-        return Ok(_statisticRepository.ActiveEmployeeCount());
+        return Ok(_statisticRepository.ActiveEstateAgentCount());
     }
     [HttpGet("ApartmentCount")]
     public IActionResult ApartmentCount()
@@ -64,10 +64,10 @@ public class StatisticsController : ControllerBase
     {
         return Ok(_statisticRepository.DifferentCityCount());
     }  
-    [HttpGet("EmployeeNameWithMostProductCount")]
-    public IActionResult EmployeeNameWithMostProductCount()
+    [HttpGet("EstateAgentNameWithMostProductCount")]
+    public IActionResult EstateAgentNameWithMostProductCount()
     {
-        return Ok(_statisticRepository.EmployeeNameWithMostProductCount());
+        return Ok(_statisticRepository.EstateAgentNameWithMostProductCount());
     }  
     [HttpGet("LastAddedProductPrice")]
     public IActionResult LastAddedProductPrice()

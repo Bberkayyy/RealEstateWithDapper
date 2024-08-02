@@ -1,6 +1,6 @@
-﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.EmployeeViewModels;
+﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.EstateAgentViewModels;
 
-public class AdminPanelResultEmployeeViewModel
+public class AdminPanelResultEstateAgentViewModel
 {
     public int id { get; set; }
     public string fullName { get; set; }

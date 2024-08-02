@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using RealEstate_Api_Dapper.Dtos.EstateAgentDtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Requests;
+using RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
+using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories;
 using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRepositories;
 
 namespace RealEstate_Api_Dapper.Controllers;
@@ -10,10 +11,42 @@ namespace RealEstate_Api_Dapper.Controllers;
 public class EstateAgentsController : ControllerBase
 {
     private readonly IEstateAgentDashboardRepository _estateAgentDashboardStatisticRepository;
+    private readonly IEstateAgentRepository _estateAgentRepository;
 
-    public EstateAgentsController(IEstateAgentDashboardRepository estateAgentDashboardStatisticRepository)
+    public EstateAgentsController(IEstateAgentDashboardRepository estateAgentDashboardStatisticRepository, IEstateAgentRepository estateAgentRepository)
     {
         _estateAgentDashboardStatisticRepository = estateAgentDashboardStatisticRepository;
+        _estateAgentRepository = estateAgentRepository;
+    }
+    [HttpGet]
+    public async Task<IActionResult> EstateAgentList()
+    {
+        List<GetAllEstateAgentResponseDto> values = await _estateAgentRepository.GetAllEstateAgentAsync();
+        return Ok(values);
+    }
+    [HttpPost]
+    public async Task<IActionResult> CreateEstateAgent(CreateEstateAgentRequestDto createEstateAgentRequestDto)
+    {
+        await _estateAgentRepository.CreateEstateAgentAsync(createEstateAgentRequestDto);
+        return Ok("Emlakçı Başarılı Bir Şekilde Eklendi.");
+    }
+    [HttpDelete]
+    public async Task<IActionResult> DeleteEstateAgent(int id)
+    {
+        await _estateAgentRepository.DeleteEstateAgentAsync(id);
+        return Ok("Emlakçı Başarılı Bir Şekilde Silindi.");
+    }
+    [HttpPut]
+    public async Task<IActionResult> UpdateEstateAgent(UpdateEstateAgentRequestDto updateEstateAgentRequestDto)
+    {
+        await _estateAgentRepository.UpdateEstateAgentAsync(updateEstateAgentRequestDto);
+        return Ok("Emlakçı Başarılı Bir Şekilde Güncellendi.");
+    }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetEstateAgentById(int id)
+    {
+        GetEstateAgentByIdResponseDto value = await _estateAgentRepository.GetEstateAgentByIdAsync(id);
+        return Ok(value);
     }
     [HttpGet("estateagentproductcount")]
     public IActionResult GetEstateAgentProduct(int id)

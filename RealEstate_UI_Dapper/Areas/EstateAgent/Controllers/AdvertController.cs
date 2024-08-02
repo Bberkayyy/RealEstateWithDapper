@@ -35,7 +35,7 @@ public class AdvertController : Controller
         if (token is not null)
         {
             HttpClient client = _httpClientFactory.CreateClient();
-            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEmployeeIdAndIsActiveTrueWithRelationships?id={id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEstateAgentIdAndIsActiveTrueWithRelationships?id={id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -54,7 +54,7 @@ public class AdvertController : Controller
         if (token is not null)
         {
             HttpClient client = _httpClientFactory.CreateClient();
-            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEmployeeIdAndIsActiveFalseWithRelationships?id={id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEstateAgentIdAndIsActiveFalseWithRelationships?id={id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -76,7 +76,7 @@ public class AdvertController : Controller
     public async Task<IActionResult> CreateAdvert(EstateAgentPanelCreateAdvertViewModel estateAgentPanelCreateAdvertViewModel)
     {
         estateAgentPanelCreateAdvertViewModel.DealOfTheDay = false;
-        estateAgentPanelCreateAdvertViewModel.EmployeeId = Int32.Parse(_loginService.Id);
+        estateAgentPanelCreateAdvertViewModel.EstateAgentId = Int32.Parse(_loginService.Id);
         estateAgentPanelCreateAdvertViewModel.IsActive = true;
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(estateAgentPanelCreateAdvertViewModel);
@@ -106,7 +106,7 @@ public class AdvertController : Controller
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
             EstateAgentPanelUpdateAdvertViewModel? value = JsonConvert.DeserializeObject<EstateAgentPanelUpdateAdvertViewModel>(jsonData);
             ViewBag.CategoriesForUpdate = await GetCategoriesList();
-            value.EmployeeId = Int32.Parse(_loginService.Id);
+            value.EstateAgentId = Int32.Parse(_loginService.Id);
             return View(value);
         }
         return View();

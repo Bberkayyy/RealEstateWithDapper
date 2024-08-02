@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
 
-public class GetProductListByEmployeeIdResponseDto
+public class GetProductListByEstateAgentIdResponseDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -16,5 +16,5 @@ public class GetProductListByEmployeeIdResponseDto
     public DateTime CreatedDate { get; set; }
     public bool IsActive { get; set; }
     public int CategoryId { get; set; }
-    public int EmployeeId { get; set; }
+    public int EstateAgentId { get; set; }
 }

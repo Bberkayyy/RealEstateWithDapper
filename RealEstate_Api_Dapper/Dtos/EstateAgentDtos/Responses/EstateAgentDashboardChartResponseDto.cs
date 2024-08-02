@@ -1,4 +1,4 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos;
+﻿namespace RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
 
 public class EstateAgentDashboardChartResponseDto
 {

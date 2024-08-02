@@ -1,6 +1,6 @@
-﻿namespace RealEstate_Api_Dapper.Dtos.EmployeeDtos.Responses;
+﻿namespace RealEstate_UI_Dapper.Areas.Admin.Models.EstateAgentViewModels;
 
-public class GetEmployeeByIdResponseDto
+public class AdminPanelUpdateEstateAgentViewModel
 {
     public int Id { get; set; }
     public string FullName { get; set; }

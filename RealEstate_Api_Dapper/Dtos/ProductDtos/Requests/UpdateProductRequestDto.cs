@@ -14,5 +14,5 @@ public class UpdateProductRequestDto
     public bool DealOfTheDay { get; set; }
     public bool IsActive { get; set; }
     public int CategoryId { get; set; }
-    public int EmployeeId { get; set; }
+    public int EstateAgentId { get; set; }
 }
