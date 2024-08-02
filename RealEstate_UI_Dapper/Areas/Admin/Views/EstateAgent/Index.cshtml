@@ -34,12 +34,12 @@
                         <td>@item.phoneNumber</td>
                         <td><img class="img-fluid" style="height:50px;width:80px" src="@item.imageUrl" alt=""></td>
                         <td>@(item.status ? "Aktif" : "Pasif")</td>
-                        <td><a href="/Admin/Employee/DeleteEmployee/@item.id" class="btn btn-outline-danger">Sil</a></td>
-                        <td><a href="/Admin/Employee/UpdateEmployee/@item.id" class="btn btn-outline-success">Güncelle</a></td>
+                        <td><a href="/Admin/EstateAgent/DeleteEstateAgent/@item.id" class="btn btn-outline-danger">Sil</a></td>
+                        <td><a href="/Admin/EstateAgent/UpdateEstateAgent/@item.id" class="btn btn-outline-success">Güncelle</a></td>
                     </tr>
                 }
             </tbody>
         </table>
-        <a href="/Admin/Employee/CreateEmployee/" class="btn btn-outline-primary">Personel Ekle</a>
+        <a href="/Admin/EstateAgent/CreateEstateAgent/" class="btn btn-outline-primary">Personel Ekle</a>
     </div>
 </div>
