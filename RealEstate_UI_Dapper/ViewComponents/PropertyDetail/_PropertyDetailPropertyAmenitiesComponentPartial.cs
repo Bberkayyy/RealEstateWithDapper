@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RealEstate_UI_Dapper.Models.ProductDetailsModels;
+using RealEstate_UI_Dapper.Models.PropertyDetailsModels;
 using RealEstate_UI_Dapper.Models.PropertyAmenityModels;
 
 namespace RealEstate_UI_Dapper.ViewComponents.PropertyDetail;
@@ -17,7 +17,7 @@ public class _PropertyDetailPropertyAmenitiesComponentPartial : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/PropertyAmenities/GetPropertyAmenityListByPropertyIdAndDoesHaveTrue?productId=" + id);
+        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/PropertyAmenities/GetPropertyAmenityListByPropertyIdAndDoesHaveTrue?propertyId=" + id);
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();

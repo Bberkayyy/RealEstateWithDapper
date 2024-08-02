@@ -48,34 +48,34 @@ public class EstateAgentsController : ControllerBase
         GetEstateAgentByIdResponseDto value = await _estateAgentRepository.GetEstateAgentByIdAsync(id);
         return Ok(value);
     }
-    [HttpGet("estateagentproductcount")]
-    public IActionResult GetEstateAgentProduct(int id)
+    [HttpGet("estateagentpropertycount")]
+    public IActionResult GetEstateAgentProperty(int id)
     {
-        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentProductCount(id));
+        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentPropertyCount(id));
     }
-    [HttpGet("estateagentproductcountbystatusfalse")]
-    public IActionResult GetEstateAgentProductByStatusFalse(int id)
+    [HttpGet("estateagentpropertycountbystatusfalse")]
+    public IActionResult GetEstateAgentPropertyByStatusFalse(int id)
     {
-        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentProductCountByStatusFalse(id));
+        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentPropertyCountByStatusFalse(id));
     }
-    [HttpGet("estateagentproductcountbystatustrue")]
-    public IActionResult GetEstateAgentProductByStatusTrue(int id)
+    [HttpGet("estateagentpropertycountbystatustrue")]
+    public IActionResult GetEstateAgentPropertyByStatusTrue(int id)
     {
-        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentProductCountByStatusTrue(id));
+        return Ok(_estateAgentDashboardStatisticRepository.GetEstateAgentPropertyCountByStatusTrue(id));
     }
-    [HttpGet("allproductcount")]
-    public IActionResult GetAllProductCount()
+    [HttpGet("allpropertycount")]
+    public IActionResult GetAllPropertyCount()
     {
-        return Ok(_estateAgentDashboardStatisticRepository.GetProductCount());
+        return Ok(_estateAgentDashboardStatisticRepository.GetPropertyCount());
     }
     [HttpGet("fivecityforchart")]
     public async Task<IActionResult> Get5CityForChart()
     {
         return Ok(await _estateAgentDashboardStatisticRepository.Get5CityForChart());
     }
-    [HttpGet("last5product")]
-    public async Task<IActionResult> GetEstateAgentLast5Product(int id)
+    [HttpGet("last5property")]
+    public async Task<IActionResult> GetEstateAgentLast5Property(int id)
     {
-        return Ok(await _estateAgentDashboardStatisticRepository.GetEstateAgentLast5Product(id));
+        return Ok(await _estateAgentDashboardStatisticRepository.GetEstateAgentLast5Property(id));
     }
 }

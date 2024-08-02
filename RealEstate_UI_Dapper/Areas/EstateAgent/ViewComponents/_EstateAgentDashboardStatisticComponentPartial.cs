@@ -21,25 +21,25 @@ public class _EstateAgentDashboardStatisticComponentPartial : ViewComponent
     {
         string id = _loginService.Id;
         HttpClient client = _httpClientFactory.CreateClient();
-        #region AllProductCount
-        HttpResponseMessage responseMessageProductCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/allproductcount");
-        string jsonDataProductCount = await responseMessageProductCount.Content.ReadAsStringAsync();
-        ViewBag.productCount = jsonDataProductCount;
+        #region AllPropertyCount
+        HttpResponseMessage responseMessagePropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/allpropertycount");
+        string jsonDataPropertyCount = await responseMessagePropertyCount.Content.ReadAsStringAsync();
+        ViewBag.propertyCount = jsonDataPropertyCount;
         #endregion
-        #region  EstateAgentProductCount
-        HttpResponseMessage responseMessageEstateAgentProductCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentproductcount?id=" + id);
-        string jsonDataEstateAgentProductCount = await responseMessageEstateAgentProductCount.Content.ReadAsStringAsync();
-        ViewBag.estateAgentProductCount = jsonDataEstateAgentProductCount;
+        #region  EstateAgentPropertyCount
+        HttpResponseMessage responseMessageEstateAgentPropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentpropertycount?id=" + id);
+        string jsonDataEstateAgentPropertyCount = await responseMessageEstateAgentPropertyCount.Content.ReadAsStringAsync();
+        ViewBag.estateAgentPropertyCount = jsonDataEstateAgentPropertyCount;
         #endregion
-        #region  EstateAgentActiveProductCount
-        HttpResponseMessage responseMessageEstateAgentActiveProductCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentproductcountbystatustrue?id=" + id);
-        string jsonDataEstateAgentActiveProductCount = await responseMessageEstateAgentActiveProductCount.Content.ReadAsStringAsync();
-        ViewBag.estateAgentActiveProductCount = jsonDataEstateAgentActiveProductCount;
+        #region  EstateAgentActivePropertyCount
+        HttpResponseMessage responseMessageEstateAgentActivePropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentpropertycountbystatustrue?id=" + id);
+        string jsonDataEstateAgentActivePropertyCount = await responseMessageEstateAgentActivePropertyCount.Content.ReadAsStringAsync();
+        ViewBag.estateAgentActivePropertyCount = jsonDataEstateAgentActivePropertyCount;
         #endregion
-        #region  EstateAgentActiveProductCount
-        HttpResponseMessage responseMessageEstateAgentPassiveProductCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentproductcountbystatusfalse?id=" + id);
-        string jsonDataEstateAgentPassiveProductCount = await responseMessageEstateAgentPassiveProductCount.Content.ReadAsStringAsync();
-        ViewBag.estateAgentPassiveProductCount = jsonDataEstateAgentPassiveProductCount;
+        #region  EstateAgentActivePropertyCount
+        HttpResponseMessage responseMessageEstateAgentPassivePropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "EstateAgents/estateagentpropertycountbystatusfalse?id=" + id);
+        string jsonDataEstateAgentPassivePropertyCount = await responseMessageEstateAgentPassivePropertyCount.Content.ReadAsStringAsync();
+        ViewBag.estateAgentPassivePropertyCount = jsonDataEstateAgentPassivePropertyCount;
         #endregion
         return View();
     }

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
 using RealEstate_Api_Dapper.Dtos.PropertyAmenityDtos.Responses;
 using RealEstate_Api_Dapper.Models.DapperContext;
 using System.Data;
@@ -15,11 +14,11 @@ public class PropertyAmenityRepository : IPropertyAmenityRepository
         _context = context;
     }
 
-    public async Task<List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto>> GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(int productId)
+    public async Task<List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto>> GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(int propertyId)
     {
         string query = "select TblPropertyAmenity.Id,TblPropertyAmenity.PropertyId,TblAmenity.Title as AmenityTitle from TblPropertyAmenity inner join TblAmenity on TblPropertyAmenity.AmenityId = TblAmenity.Id where TblPropertyAmenity.PropertyId = @propertyId and TblPropertyAmenity.DoesHave = 1";
         DynamicParameters parameters = new();
-        parameters.Add("@propertyId", productId);
+        parameters.Add("@propertyId", propertyId);
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto> values = await connection.QueryAsync<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto>(query, parameters);

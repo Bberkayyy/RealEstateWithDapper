@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Areas.EstateAgent.Models.NavbarViewModels;
-using RealEstate_UI_Dapper.Areas.EstateAgent.Models.ProductViewModels;
 using RealEstate_UI_Dapper.Models;
 using RealEstate_UI_Dapper.Services;
 

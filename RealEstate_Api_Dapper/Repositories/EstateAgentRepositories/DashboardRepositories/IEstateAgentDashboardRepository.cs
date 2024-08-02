@@ -4,11 +4,11 @@ namespace RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRe
 
 public interface IEstateAgentDashboardRepository
 {
-    int GetEstateAgentProductCount(int id);
-    int GetProductCount();
-    int GetEstateAgentProductCountByStatusTrue(int id);
-    int GetEstateAgentProductCountByStatusFalse(int id);
+    int GetEstateAgentPropertyCount(int id);
+    int GetPropertyCount();
+    int GetEstateAgentPropertyCountByStatusTrue(int id);
+    int GetEstateAgentPropertyCountByStatusFalse(int id);
 
     Task<List<EstateAgentDashboardChartResponseDto>> Get5CityForChart();
-    Task<List<EstateAgentLast5ProductWithRelationshipsResponseDto>> GetEstateAgentLast5Product(int id);
+    Task<List<EstateAgentLast5PropertyWithRelationshipsResponseDto>> GetEstateAgentLast5Property(int id);
 }

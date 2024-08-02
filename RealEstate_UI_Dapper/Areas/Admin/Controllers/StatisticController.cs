@@ -55,30 +55,30 @@ public class StatisticController : Controller
         string jsonDataCategoryCount = await responseMessageCategoryCount.Content.ReadAsStringAsync();
         ViewBag.categoryCount = jsonDataCategoryCount;
         #endregion
-        #region CategoryNameWithMostProductCount
-        HttpResponseMessage responseMessageCategoryNameWithMostProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/CategoryNameWithMostProductCount");
-        string jsonDataCategoryNameWithMostProductCount = await responseMessageCategoryNameWithMostProductCount.Content.ReadAsStringAsync();
-        ViewBag.categoryNameWithMostProductCount = jsonDataCategoryNameWithMostProductCount;
+        #region CategoryNameWithMostPropertyCount
+        HttpResponseMessage responseMessageCategoryNameWithMostPropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/CategoryNameWithMostPropertyCount");
+        string jsonDataCategoryNameWithMostPropertyCount = await responseMessageCategoryNameWithMostPropertyCount.Content.ReadAsStringAsync();
+        ViewBag.categoryNameWithMostPropertyCount = jsonDataCategoryNameWithMostPropertyCount;
         #endregion
-        #region CityNameWithMostProductCount
-        HttpResponseMessage responseMessageCityNameWithMostProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/CityNameWithMostProductCount");
-        string jsonDataCityNameWithMostProductCount = await responseMessageCityNameWithMostProductCount.Content.ReadAsStringAsync();
-        ViewBag.cityNameWithMostProductCount = jsonDataCityNameWithMostProductCount;
+        #region CityNameWithMostPropertyCount
+        HttpResponseMessage responseMessageCityNameWithMostPropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/CityNameWithMostPropertyCount");
+        string jsonDataCityNameWithMostPropertyCount = await responseMessageCityNameWithMostPropertyCount.Content.ReadAsStringAsync();
+        ViewBag.cityNameWithMostPropertyCount = jsonDataCityNameWithMostPropertyCount;
         #endregion
         #region DifferentCityCount
         HttpResponseMessage responseMessageDifferentCityCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/DifferentCityCount");
         string jsonDataDifferentCityCount = await responseMessageDifferentCityCount.Content.ReadAsStringAsync();
         ViewBag.differentCityCount = jsonDataDifferentCityCount;
         #endregion
-        #region EstateAgentNameWithMostProductCount
-        HttpResponseMessage responseMessageEstateAgentNameWithMostProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/EstateAgentNameWithMostProductCount");
-        string jsonDataEstateAgentNameWithMostProductCount = await responseMessageEstateAgentNameWithMostProductCount.Content.ReadAsStringAsync();
-        ViewBag.EstateAgentNameWithMostProductCount = jsonDataEstateAgentNameWithMostProductCount;
+        #region EstateAgentNameWithMostPropertyCount
+        HttpResponseMessage responseMessageEstateAgentNameWithMostPropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/EstateAgentNameWithMostPropertyCount");
+        string jsonDataEstateAgentNameWithMostPropertyCount = await responseMessageEstateAgentNameWithMostPropertyCount.Content.ReadAsStringAsync();
+        ViewBag.EstateAgentNameWithMostPropertyCount = jsonDataEstateAgentNameWithMostPropertyCount;
         #endregion
-        #region LastAddedProductPrice
-        HttpResponseMessage responseMessageLastAddedProductPrice = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/LastAddedProductPrice");
-        string jsonDataLastAddedProductPrice = await responseMessageLastAddedProductPrice.Content.ReadAsStringAsync();
-        ViewBag.lastAddedProductPrice = jsonDataLastAddedProductPrice;
+        #region LastAddedPropertyPrice
+        HttpResponseMessage responseMessageLastAddedPropertyPrice = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/LastAddedPropertyPrice");
+        string jsonDataLastAddedPropertyPrice = await responseMessageLastAddedPropertyPrice.Content.ReadAsStringAsync();
+        ViewBag.lastAddedPropertyPrice = jsonDataLastAddedPropertyPrice;
         #endregion
         #region NewestBuildingYear
         HttpResponseMessage responseMessageNewestBuildingYear = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/NewestBuildingYear");
@@ -95,10 +95,10 @@ public class StatisticController : Controller
         string jsonDataPassiveCategoryCount = await responseMessagePassiveCategoryCount.Content.ReadAsStringAsync();
         ViewBag.passiveCategoryCount = jsonDataPassiveCategoryCount;
         #endregion
-        #region ProductCount
-        HttpResponseMessage responseMessageProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ProductCount");
-        string jsonDataProductCount = await responseMessageProductCount.Content.ReadAsStringAsync();
-        ViewBag.productCount = jsonDataProductCount;
+        #region PropertyCount
+        HttpResponseMessage responseMessagePropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/PropertyCount");
+        string jsonDataPropertyCount = await responseMessagePropertyCount.Content.ReadAsStringAsync();
+        ViewBag.PropertyCount = jsonDataPropertyCount;
         #endregion
 
         return View();

@@ -10,9 +10,9 @@ using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories;
 using RealEstate_Api_Dapper.Repositories.EstateAgentRepositories.DashboardRepositories;
 using RealEstate_Api_Dapper.Repositories.LocationRepositories;
 using RealEstate_Api_Dapper.Repositories.MessageRepositories;
-using RealEstate_Api_Dapper.Repositories.ProductDetailRepositories;
-using RealEstate_Api_Dapper.Repositories.ProductImageRepositories;
-using RealEstate_Api_Dapper.Repositories.ProductRepositories;
+using RealEstate_Api_Dapper.Repositories.PropertyDetailRepositories;
+using RealEstate_Api_Dapper.Repositories.PropertyImageRepositories;
+using RealEstate_Api_Dapper.Repositories.PropertyRepositories;
 using RealEstate_Api_Dapper.Repositories.PropertyAmenityRepositoryies;
 using RealEstate_Api_Dapper.Repositories.StatisticRepositories;
 using RealEstate_Api_Dapper.Repositories.SubFeatureRepositories;
@@ -26,7 +26,7 @@ public static class Extensions
     {
         services.AddTransient<Context>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
-        services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddTransient<IPropertyRepository, PropertyRepository>();
         services.AddTransient<IAboutUsDetailRepository, AboutUsDetailRepository>();
         services.AddTransient<IAboutUsSubDetailRepository, AboutUsSubDetailRepository>();
         services.AddTransient<IBottomGridRepository, BottomGridRepository>();
@@ -38,8 +38,8 @@ public static class Extensions
         services.AddTransient<IToDoListRepository, ToDoListRepository>();
         services.AddTransient<IEstateAgentDashboardRepository, EstateAgentDashboardRepository>();
         services.AddTransient<IMessageRepository, MessageRepository>();
-        services.AddTransient<IProductDetailRepository, ProductDetailRepository>();
-        services.AddTransient<IProductImageRepository, ProductImageRepository>();
+        services.AddTransient<IPropertyDetailRepository, PropertyDetailRepository>();
+        services.AddTransient<IPropertyImageRepository, PropertyImageRepository>();
         services.AddTransient<IAmenityRepository, AmenityRepository>();
         services.AddTransient<IPropertyAmenityRepository, PropertyAmenityRepository>();
         services.AddTransient<ISubFeatureRepository, SubFeatureRepository>();

@@ -33,7 +33,7 @@ public class StatisticRepository : IStatisticRepository
 
     public int ApartmentCount()
     {
-        string query = "SELECT COUNT(*) from (Select TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId=TblEstateAgent.Id) as query where query.CategoryName = 'Daire'";
+        string query = "SELECT COUNT(*) from (Select TblProperty.Id, TblProperty.Title, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId=TblEstateAgent.Id) as query where query.CategoryName = 'Daire'";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -42,7 +42,7 @@ public class StatisticRepository : IStatisticRepository
 
     public decimal AverageRentPrice()
     {
-        string query = "SELECT AVG(Price) FROM TblProduct WHERE Type COLLATE Latin1_General_CI_AI = 'Kiralık'";
+        string query = "SELECT AVG(Price) FROM TblProperty WHERE Type COLLATE Latin1_General_CI_AI = 'Kiralık'";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -51,7 +51,7 @@ public class StatisticRepository : IStatisticRepository
 
     public int AverageRoomCount()
     {
-        string query = "SELECT Avg(RoomCount) FROM TblProductDetails";
+        string query = "SELECT Avg(RoomCount) FROM TblPropertyDetails";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -60,7 +60,7 @@ public class StatisticRepository : IStatisticRepository
 
     public decimal AverageSalePrice()
     {
-        string query = "SELECT AVG(Price) FROM TblProduct WHERE Type COLLATE Latin1_General_CI_AI = 'Satılık'";
+        string query = "SELECT AVG(Price) FROM TblProperty WHERE Type COLLATE Latin1_General_CI_AI = 'Satılık'";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -76,18 +76,18 @@ public class StatisticRepository : IStatisticRepository
         }
     }
 
-    public string CategoryNameWithMostProductCount()
+    public string CategoryNameWithMostPropertyCount()
     {
-        string query = "SELECT top(1) TblCategory.Name, Count(*) FROM TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id group by TblCategory.Name order by COUNT(*) desc";
+        string query = "SELECT top(1) TblCategory.Name, Count(*) FROM TblProperty inner join TblCategory on TblProperty.CategoryId = TblCategory.Id group by TblCategory.Name order by COUNT(*) desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);
         }
     }
 
-    public string CityNameWithMostProductCount()
+    public string CityNameWithMostPropertyCount()
     {
-        string query = "SELECT  top(1) City, Count(*) FROM TblProduct group by City order by COUNT(*) desc";
+        string query = "SELECT  top(1) City, Count(*) FROM TblProperty group by City order by COUNT(*) desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);
@@ -96,25 +96,25 @@ public class StatisticRepository : IStatisticRepository
 
     public int DifferentCityCount()
     {
-        string query = "select count(Distinct(City)) from TblProduct";
+        string query = "select count(Distinct(City)) from TblProperty";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
         }
     }
 
-    public string EstateAgentNameWithMostProductCount()
+    public string EstateAgentNameWithMostPropertyCount()
     {
-        string query = "SELECT top(1) FullName, Count(*) FROM TblProduct inner join TblEstateAgent on TblProduct.EstateAgentId = TblEstateAgent.Id group by FullName order by COUNT(*) desc";
+        string query = "SELECT top(1) FullName, Count(*) FROM TblProperty inner join TblEstateAgent on TblProperty.EstateAgentId = TblEstateAgent.Id group by FullName order by COUNT(*) desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);
         }
     }
 
-    public decimal LastAddedProductPrice()
+    public decimal LastAddedPropertyPrice()
     {
-        string query = "select top(1) Price from TblProduct order by Id desc";
+        string query = "select top(1) Price from TblProperty order by Id desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<decimal>(query);
@@ -123,7 +123,7 @@ public class StatisticRepository : IStatisticRepository
 
     public string NewestBuildingYear()
     {
-        string query = "select BuildYear from TblProductDetails order by BuildYear desc";
+        string query = "select BuildYear from TblPropertyDetails order by BuildYear desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);
@@ -132,7 +132,7 @@ public class StatisticRepository : IStatisticRepository
 
     public string OldestBuildingYear()
     {
-        string query = "select BuildYear from TblProductDetails order by BuildYear";
+        string query = "select BuildYear from TblPropertyDetails order by BuildYear";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<string>(query);
@@ -148,9 +148,9 @@ public class StatisticRepository : IStatisticRepository
         }
     }
 
-    public int ProductCount()
+    public int PropertyCount()
     {
-        string query = "SELECT Count(*) FROM TblProduct";
+        string query = "SELECT Count(*) FROM TblProperty";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);

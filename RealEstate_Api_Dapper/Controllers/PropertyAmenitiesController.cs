@@ -16,9 +16,9 @@ public class PropertyAmenitiesController : ControllerBase
         _propertyAmenityRepository = propertyAmenityRepository;
     }
     [HttpGet("GetPropertyAmenityListByPropertyIdAndDoesHaveTrue")]
-    public async Task<IActionResult> GetPropertyAmenityListByPropertyIdAndDoesHaveTrue(int productId)
+    public async Task<IActionResult> GetPropertyAmenityListByPropertyIdAndDoesHaveTrue(int propertyId)
     {
-        List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto> values = await _propertyAmenityRepository.GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(productId);
+        List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto> values = await _propertyAmenityRepository.GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(propertyId);
         return Ok(values);
     }
 }

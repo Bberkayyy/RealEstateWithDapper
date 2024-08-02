@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RealEstate_UI_Dapper.Models.ProductDetailsModels;
-using RealEstate_UI_Dapper.Models.ProductImageModels;
+using RealEstate_UI_Dapper.Models.PropertyDetailsModels;
+using RealEstate_UI_Dapper.Models.PropertyImageModels;
 
 namespace RealEstate_UI_Dapper.ViewComponents.PropertyDetail;
 
@@ -16,11 +16,11 @@ public class _PropertyDetailPropertyImagesComponentPartial : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/ProductImages/GetProductImagesByProductId?id=" + id);
+        HttpResponseMessage responseMessage = await client.GetAsync("https://localhost:7221/api/PropertyImages/GetPropertyImagesByPropertyId?id=" + id);
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultProductImageViewModel>? values = JsonConvert.DeserializeObject<List<ResultProductImageViewModel>>(jsonData);
+            List<ResultPropertyImageViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyImageViewModel>>(jsonData);
             return View(values);
         }
         return View();

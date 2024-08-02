@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Models;
-using RealEstate_UI_Dapper.Models.ProductModels;
 using RealEstate_UI_Dapper.Models.SubFeatureModels;
 
 namespace RealEstate_UI_Dapper.ViewComponents.HomePage;

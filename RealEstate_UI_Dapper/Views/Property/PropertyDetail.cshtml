@@ -1,4 +1,4 @@
-﻿@model ResultProductDetailsViewModel
+﻿@model ResultPropertyDetailsViewModel
 @{
     ViewData["Title"] = "PropertyDetail";
     Layout = "~/Views/Shared/_DefaultLayout.cshtml";
@@ -24,15 +24,15 @@
 <!--/blog-post-->
 <section class="w3l-blog post-content py-5">
     <div class="container py-lg-4 py-md-3 py-2">
-        @await Component.InvokeAsync("_PropertyDetailHeaderComponentPartial", new { id = @ViewBag.productId })
+        @await Component.InvokeAsync("_PropertyDetailHeaderComponentPartial", new { id = @ViewBag.propertyId })
         <div class="row">
             <div class="col-lg-8 w3l-news">
                 <div class="blog-single-post">
-                    @await Component.InvokeAsync("_PropertyDetailPropertyImagesComponentPartial", new { id = @ViewBag.productId })
+                    @await Component.InvokeAsync("_PropertyDetailPropertyImagesComponentPartial", new { id = @ViewBag.propertyId })
                     <div class="single-post-content">
-                        @await Component.InvokeAsync("_PropertyDetailPropertyDescriptionComponentPartial", new { id = @ViewBag.productId })
-                        @await Component.InvokeAsync("_PropertyDetailPropertyDetailsComponentPartial", new { id = @ViewBag.productId })
-                        @await Component.InvokeAsync("_PropertyDetailPropertyAmenitiesComponentPartial", new { id = @ViewBag.productId })
+                        @await Component.InvokeAsync("_PropertyDetailPropertyDescriptionComponentPartial", new { id = @ViewBag.propertyId })
+                        @await Component.InvokeAsync("_PropertyDetailPropertyDetailsComponentPartial", new { id = @ViewBag.propertyId })
+                        @await Component.InvokeAsync("_PropertyDetailPropertyAmenitiesComponentPartial", new { id = @ViewBag.propertyId })
                     </div>
 
                     <div class="single-bg-white">

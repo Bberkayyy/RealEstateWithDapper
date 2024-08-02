@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Areas.Admin.Models.CategoryViewModels;
-using RealEstate_UI_Dapper.Areas.Admin.Models.ProductViewModels;
-using RealEstate_UI_Dapper.Areas.EstateAgent.Models.ProductViewModels;
+using RealEstate_UI_Dapper.Areas.Admin.Models.PropertyViewModels;
+using RealEstate_UI_Dapper.Areas.EstateAgent.Models.PropertyViewModels;
 using RealEstate_UI_Dapper.Models;
 using RealEstate_UI_Dapper.Services;
 using System.Text;
@@ -35,7 +35,7 @@ public class AdvertController : Controller
         if (token is not null)
         {
             HttpClient client = _httpClientFactory.CreateClient();
-            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEstateAgentIdAndIsActiveTrueWithRelationships?id={id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/GetPropertyListByEstateAgentIdAndIsActiveTrueWithRelationships?id={id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -54,7 +54,7 @@ public class AdvertController : Controller
         if (token is not null)
         {
             HttpClient client = _httpClientFactory.CreateClient();
-            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/GetProductListByEstateAgentIdAndIsActiveFalseWithRelationships?id={id}");
+            HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/GetPropertyListByEstateAgentIdAndIsActiveFalseWithRelationships?id={id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -81,7 +81,7 @@ public class AdvertController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(estateAgentPanelCreateAdvertViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "Products", content);
+        HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "Properties", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("ActiveAdverts", "Advert", new { area = "EstateAgent" });
         return View();
@@ -90,7 +90,7 @@ public class AdvertController : Controller
     public async Task<IActionResult> DeleteAdvert(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.DeleteAsync(_apiSettings.BaseUrl + $"Products?id={id}");
+        HttpResponseMessage responseMessage = await client.DeleteAsync(_apiSettings.BaseUrl + $"Properties?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("ActiveAdverts", "Advert", new { area = "EstateAgent" });
         return View();
@@ -100,7 +100,7 @@ public class AdvertController : Controller
     public async Task<IActionResult> UpdateAdvert(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/{id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/{id}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -118,7 +118,7 @@ public class AdvertController : Controller
         HttpClient client = _httpClientFactory.CreateClient();
         string jsondata = JsonConvert.SerializeObject(estateAgentPanelUpdateAdvertViewModel);
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-        HttpResponseMessage responseMessage = await client.PutAsync(_apiSettings.BaseUrl + "Products", content);
+        HttpResponseMessage responseMessage = await client.PutAsync(_apiSettings.BaseUrl + "Properties", content);
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("ActiveAdverts", "Advert", new { area = "EstateAgent" });
         return View();
@@ -127,7 +127,7 @@ public class AdvertController : Controller
     public async Task<IActionResult> AdvertIsActiveChangeToTrue(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductIsActiveChangeToTrue?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/PropertyIsActiveChangeToTrue?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("ActiveAdverts", "Advert", new { area = "EstateAgent" });
         return View();
@@ -136,7 +136,7 @@ public class AdvertController : Controller
     public async Task<IActionResult> AdvertIsActiveChangeToFalse(int id)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductIsActiveChangeToFalse?id={id}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/PropertyIsActiveChangeToFalse?id={id}");
         if (responseMessage.IsSuccessStatusCode)
             return RedirectToAction("ActiveAdverts", "Advert", new { area = "EstateAgent" });
         return View();

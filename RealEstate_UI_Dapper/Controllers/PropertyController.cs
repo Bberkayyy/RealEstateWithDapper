@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RealEstate_UI_Dapper.Models;
-using RealEstate_UI_Dapper.Models.ProductDetailsModels;
-using RealEstate_UI_Dapper.Models.ProductModels;
+using RealEstate_UI_Dapper.Models.PropertyDetailsModels;
+using RealEstate_UI_Dapper.Models.PropertyModels;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -24,11 +24,11 @@ public class PropertyController : Controller
     public async Task<IActionResult> Index()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Products/ProductListWithRelationships");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Properties/PropertyListWithRelationships");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultProductViewModel>? values = JsonConvert.DeserializeObject<List<ResultProductViewModel>>(jsonData);
+            List<ResultPropertyViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyViewModel>>(jsonData);
             return View(values);
         }
         return View();
@@ -36,13 +36,13 @@ public class PropertyController : Controller
     [HttpGet("property/propertydetail/{slug}/{id}")]
     public async Task<IActionResult> PropertyDetail(int id)
     {
-        ViewBag.productId = id;
+        ViewBag.PropertyId = id;
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "ProductDetails/GetByProductId?id=" + id);
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "PropertyDetails/GetByPropertyId?id=" + id);
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            ResultProductDetailsViewModel? value = JsonConvert.DeserializeObject<ResultProductDetailsViewModel>(jsonData);
+            ResultPropertyDetailsViewModel? value = JsonConvert.DeserializeObject<ResultPropertyDetailsViewModel>(jsonData);
             ViewBag.location = ExtractPlaceName(value.location);
             ViewBag.video = ConvertToEmbedUrl(value.videoUrl);
             return View();
@@ -52,11 +52,11 @@ public class PropertyController : Controller
     public async Task<IActionResult> FilteredIndex(string containsWord, int categoryId, string city)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Products/ProductListBySearchFilterWithRelationships?containsWord={containsWord}&categoryId={categoryId}&city={city}");
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + $"Properties/PropertyListBySearchFilterWithRelationships?containsWord={containsWord}&categoryId={categoryId}&city={city}");
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultProductViewModel>? values = JsonConvert.DeserializeObject<List<ResultProductViewModel>>(jsonData);
+            List<ResultPropertyViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyViewModel>>(jsonData);
             return View(values);
         }
         return View();

@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using RealEstate_Api_Dapper.Dtos.EstateAgentDtos.Responses;
-using RealEstate_Api_Dapper.Dtos.ProductDtos.Responses;
+using RealEstate_Api_Dapper.Dtos.PropertyDtos.Responses;
 using RealEstate_Api_Dapper.Models.DapperContext;
 using System.Data;
 
@@ -15,9 +15,9 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
         _context = context;
     }
 
-    public int GetEstateAgentProductCount(int id)
+    public int GetEstateAgentPropertyCount(int id)
     {
-        string query = "select count(*) from TblProduct where EstateAgentId = @estateAgentId";
+        string query = "select count(*) from TblProperty where EstateAgentId = @estateAgentId";
         DynamicParameters parameters = new();
         parameters.Add("@estateAgentId", id);
         using (IDbConnection connection = _context.CreateConnection())
@@ -26,9 +26,9 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
         }
     }
 
-    public int GetEstateAgentProductCountByStatusFalse(int id)
+    public int GetEstateAgentPropertyCountByStatusFalse(int id)
     {
-        string query = "select count(*) from TblProduct where EstateAgentId = @estateAgentId and  IsActive = 0";
+        string query = "select count(*) from TblProperty where EstateAgentId = @estateAgentId and  IsActive = 0";
         DynamicParameters parameters = new();
         parameters.Add("@estateAgentId", id);
         using (IDbConnection connection = _context.CreateConnection())
@@ -37,9 +37,9 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
         }
     }
 
-    public int GetEstateAgentProductCountByStatusTrue(int id)
+    public int GetEstateAgentPropertyCountByStatusTrue(int id)
     {
-        string query = "select count(*) from TblProduct where EstateAgentId = @estateAgentId and  IsActive = 1";
+        string query = "select count(*) from TblProperty where EstateAgentId = @estateAgentId and  IsActive = 1";
         DynamicParameters parameters = new();
         parameters.Add("@estateAgentId", id);
         using (IDbConnection connection = _context.CreateConnection())
@@ -48,9 +48,9 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
         }
     }
 
-    public int GetProductCount()
+    public int GetPropertyCount()
     {
-        string query = "select count(*) from TblProduct";
+        string query = "select count(*) from TblProperty";
         using (IDbConnection connection = _context.CreateConnection())
         {
             return connection.ExecuteScalar<int>(query);
@@ -59,7 +59,7 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
 
     public async Task<List<EstateAgentDashboardChartResponseDto>> Get5CityForChart()
     {
-        string query = "Select City,Count(*) as CityCount From TblProduct Group by City order by CityCount desc";
+        string query = "Select City,Count(*) as CityCount From TblProperty Group by City order by CityCount desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<EstateAgentDashboardChartResponseDto> values = await connection.QueryAsync<EstateAgentDashboardChartResponseDto>(query);
@@ -67,14 +67,14 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
         }
     }
 
-    public async Task<List<EstateAgentLast5ProductWithRelationshipsResponseDto>> GetEstateAgentLast5Product(int id)
+    public async Task<List<EstateAgentLast5PropertyWithRelationshipsResponseDto>> GetEstateAgentLast5Property(int id)
     {
-        string query = "Select top(5) TblProduct.Id, TblProduct.Title, TblProduct.Price, TblProduct.CoverImage, TblProduct.City, TblProduct.District, TblProduct.Address, TblProduct.Description, TblProduct.Type, TblProduct.DealOfTheDay, TblProduct.CreatedDate, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProduct inner join TblCategory on TblProduct.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProduct.EstateAgentId = TblEstateAgent.Id where EstateAgentId=@estateAgentId order by Id desc";
+        string query = "Select top(5) TblProperty.Id, TblProperty.Title, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId = TblEstateAgent.Id where EstateAgentId=@estateAgentId order by Id desc";
         DynamicParameters parameters = new();
         parameters.Add("@estateAgentId", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            IEnumerable<EstateAgentLast5ProductWithRelationshipsResponseDto> value = await connection.QueryAsync<EstateAgentLast5ProductWithRelationshipsResponseDto>(query, parameters);
+            IEnumerable<EstateAgentLast5PropertyWithRelationshipsResponseDto> value = await connection.QueryAsync<EstateAgentLast5PropertyWithRelationshipsResponseDto>(query, parameters);
             return value.ToList();
         }
     }

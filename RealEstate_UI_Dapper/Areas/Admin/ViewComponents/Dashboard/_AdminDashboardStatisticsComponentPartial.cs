@@ -18,10 +18,10 @@ public class _AdminDashboardStatisticsComponentPartial : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        #region ProductCount
-        HttpResponseMessage responseMessageProductCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ProductCount");
-        string jsonDataProductCount = await responseMessageProductCount.Content.ReadAsStringAsync();
-        ViewBag.productCount = jsonDataProductCount;
+        #region PropertyCount
+        HttpResponseMessage responseMessagePropertyCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/PropertyCount");
+        string jsonDataPropertyCount = await responseMessagePropertyCount.Content.ReadAsStringAsync();
+        ViewBag.PropertyCount = jsonDataPropertyCount;
         #endregion
         #region ActiveEstateAgentCount
         HttpResponseMessage responseMessageActiveEstateAgentCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/ActiveEstateAgentCount");

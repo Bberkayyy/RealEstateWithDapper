@@ -1,0 +1,113 @@
+﻿@model List<AdminPanelResultPropertyViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Default/Index.cshtml";
+    int dealOfTheDayCount = Model.Count(x => x.dealOfTheDay);
+}
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">İlan Listesi</h6>
+        <p>Tema bütünlüğünün bozulmaması için en fazla 6 adet ilan günü fırsatı olmalıdır.</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Giriş Tarihi</th>
+                    <th scope="col">İlan Başlığı</th>                    
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Durumu</th>
+                    <th scope="col">İlan Sahibi</th>
+                    <th scope="col">Aktiflik Durumu</th>
+                    <th scope="col">Sil</th>
+                    <th scope="col">Güncelle</th>
+                    <th scope="col">Günün Fırsatı</th>
+                    <th scope="col">İlan Detayı</th>
+                    <th scope="col">Sitede Gör</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            @item.createdDate.ToShortDateString()
+                            <img class="img-fluid" style="height:50px;width:80px;border-radius:50%" src="@item.coverImage" alt="">
+                        </th>
+                        <td>@item.title</td>                        
+                        <td>@item.categoryName</td>
+                        <td>@item.type</td>
+                        <td>@item.estateAgentName</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <a href="/Admin/Property/PropertyIsActiveChangeToFalse/@item.id" class="btn btn-outline-secondary">Pasif Yap</a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Property/PropertyIsActiveChangeToTrue/@item.id" class="btn btn-outline-warning">Aktif Yap</a>
+                            }
+                        </td>
+                        <td><a href="/Admin/Property/DeleteProperty/@item.id" class="btn btn-outline-danger">Sil</a></td>
+                        <td><a href="/Admin/Property/UpdateProperty/@item.id" class="btn btn-outline-success">Güncelle</a></td>
+                        <td>
+                            @if (item.dealOfTheDay)
+                            {
+                                <a href="/Admin/Property/PropertyDealOfTheDayStatusChangeToFalse/@item.id" class="btn btn-outline-secondary">Pasif Yap</a>
+                            }
+                            else if (dealOfTheDayCount >= 6)
+                            {
+                                <a href="/Admin/Property/PropertyDealOfTheDayStatusChangeToTrue/@item.id" class="btn btn-outline-warning disabled">Fırsat Yap</a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Property/PropertyDealOfTheDayStatusChangeToTrue/@item.id" class="btn btn-outline-warning">Fırsat Yap</a>
+                            }
+                        </td>
+                        <td>
+                            <a class="ilan-detaylari-button btn btn-outline-info" data-id="@item.id">Detaylar</a>
+                        </td>
+                        <td><a href="@Url.Action("PropertyDetail","Property",new {slug=item.slugUrl,id=item.id})" class="btn btn-outline-dark">İlana Git</a></td>
+                    </tr>
+                    <tr class="ilan-detaylari" id="detay-@item.id" style="display:none;">
+                        <td colspan="15" style="border-bottom:none;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Fiyat</th>
+                                        <th>İl</th>
+                                        <th>İlçe</th>
+                                        <th>Adres</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.price ₺</td>
+                                        <td>@item.city</td>
+                                        <td>@item.district</td>
+                                        <td>@item.address</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Admin/Property/CreateProperty/" class="btn btn-outline-primary">Ürün Ekle</a>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".ilan-detaylari-button").click(function () {
+            var id = $(this).data("id");
+            var detayDiv = $("#detay-" + id);
+            detayDiv.toggle();
+
+            if (detayDiv.is(":visible")) {
+                $(this).text("Kapat");
+            } else {
+                $(this).text("Detaylar");
+            }
+        });
+    });
+</script>

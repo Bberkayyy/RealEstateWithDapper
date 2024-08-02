@@ -1,0 +1,40 @@
+﻿@model List<AdminPanelResultLast5PropertyWithRelationshipsViewModel>
+<div class="container-fluid pt-4 px-0">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Recent Salse</h6>
+            <a href="/Admin/Property/Index/">Tüm İlanları Gör</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th></th>
+                        <th scope="col">İlan Başlığı</th>
+                        <th scope="col">Oluşturulma Tarihi</th>
+                        <th scope="col">Şehir</th>
+                        <th scope="col">Durumu</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">İlanı Gör</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="center"><img class="img-fluid" style="height:50px;width:80px;border-radius:50%" src="@item.coverImage" alt=""></td>
+                            <td>@item.title</td>
+                            <td>@item.createdDate.ToShortDateString()</td>
+                            <td>@item.city</td>
+                            <td>@item.type</td>
+                            <td>@item.price</td>
+                            <td>@item.categoryName</td>
+                            <td><a href="#" class="btn btn-outline-success">İlanı Gör</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

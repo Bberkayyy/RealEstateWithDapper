@@ -49,30 +49,30 @@ public class StatisticsController : ControllerBase
     {
         return Ok(_statisticRepository.CategoryCount());
     }
-    [HttpGet("CategoryNameWithMostProductCount")]
-    public IActionResult CategoryNameWithMostProductCount()
+    [HttpGet("CategoryNameWithMostPropertyCount")]
+    public IActionResult CategoryNameWithMostPropertyCount()
     {
-        return Ok(_statisticRepository.CategoryNameWithMostProductCount());
+        return Ok(_statisticRepository.CategoryNameWithMostPropertyCount());
     }
-    [HttpGet("CityNameWithMostProductCount")]
-    public IActionResult CityNameWithMostProductCount()
+    [HttpGet("CityNameWithMostPropertyCount")]
+    public IActionResult CityNameWithMostPropertyCount()
     {
-        return Ok(_statisticRepository.CityNameWithMostProductCount());
+        return Ok(_statisticRepository.CityNameWithMostPropertyCount());
     }  
     [HttpGet("DifferentCityCount")]
     public IActionResult DifferentCityCount()
     {
         return Ok(_statisticRepository.DifferentCityCount());
     }  
-    [HttpGet("EstateAgentNameWithMostProductCount")]
-    public IActionResult EstateAgentNameWithMostProductCount()
+    [HttpGet("EstateAgentNameWithMostPropertyCount")]
+    public IActionResult EstateAgentNameWithMostPropertyCount()
     {
-        return Ok(_statisticRepository.EstateAgentNameWithMostProductCount());
+        return Ok(_statisticRepository.EstateAgentNameWithMostPropertyCount());
     }  
-    [HttpGet("LastAddedProductPrice")]
-    public IActionResult LastAddedProductPrice()
+    [HttpGet("LastAddedPropertyPrice")]
+    public IActionResult LastAddedPropertyPrice()
     {
-        return Ok(_statisticRepository.LastAddedProductPrice());
+        return Ok(_statisticRepository.LastAddedPropertyPrice());
     } 
     [HttpGet("NewestBuildingYear")]
     public IActionResult NewestBuildingYear()
@@ -89,9 +89,9 @@ public class StatisticsController : ControllerBase
     {
         return Ok(_statisticRepository.PassiveCategoryCount());
     }  
-    [HttpGet("ProductCount")]
-    public IActionResult ProductCount()
+    [HttpGet("PropertyCount")]
+    public IActionResult PropertyCount()
     {
-        return Ok(_statisticRepository.ProductCount());
+        return Ok(_statisticRepository.PropertyCount());
     }
 }

@@ -4,5 +4,5 @@ namespace RealEstate_Api_Dapper.Repositories.PropertyAmenityRepositoryies;
 
 public interface IPropertyAmenityRepository
 {
-    Task<List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto>> GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(int productId);
+    Task<List<GetPropertyAmenityListByPropertyIdAndDoesHaveTrueResponseDto>> GetPropertyAmenityListByPropertyIdAndDoesHaveTrueAsync(int propertyId);
 }
