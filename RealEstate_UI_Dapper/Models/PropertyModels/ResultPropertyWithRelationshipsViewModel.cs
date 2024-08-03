@@ -1,6 +1,6 @@
 ﻿namespace RealEstate_UI_Dapper.Models.PropertyModels;
 
-public class ResultPropertyViewModel
+public class ResultPropertyWithRelationshipsViewModel
 {
     public int id { get; set; }
     public string title { get; set; }
@@ -14,6 +14,6 @@ public class ResultPropertyViewModel
     public string type { get; set; }
     public bool DealOfTheDay { get; set; }
     public DateTime CreatedDate { get; set; }
-    public int categoryId{ get; set; }
-    public int estateAgentId { get; set; }
+    public string categoryName { get; set; }
+    public string estateAgentName { get; set; }
 }

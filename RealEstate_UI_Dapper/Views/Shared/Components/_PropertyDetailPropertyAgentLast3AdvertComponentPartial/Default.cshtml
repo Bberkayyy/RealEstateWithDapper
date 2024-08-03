@@ -1,0 +1,20 @@
+﻿@model List<ResultPropertyWithRelationshipsViewModel>
+<div class="sidebar-widget popular-posts">
+    <div class="sidebar-title">
+        <h4>İlan Sahibinin Son İlanları</h4>
+    </div>
+    @foreach (var item in Model)
+    {
+        <article class="post">
+            <figure class="post-thumb">
+                <img src="@item.coverImage" class="radius-image" style="height:80px;width:80px" alt="">
+            </figure>
+            <div class="text">
+                <a href="@Url.Action("PropertyDetail","Property",new {slug=item.slugUrl,id=item.id})">
+                    @item.title
+                </a>
+                <div class="post-info">@item.CreatedDate.ToString("dd-MMM-yy") / @item.type</div>
+            </div>
+        </article>
+    }
+</div>

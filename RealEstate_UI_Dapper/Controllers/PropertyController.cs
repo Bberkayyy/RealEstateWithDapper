@@ -28,7 +28,21 @@ public class PropertyController : Controller
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultPropertyViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyViewModel>>(jsonData);
+            List<ResultPropertyWithRelationshipsViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyWithRelationshipsViewModel>>(jsonData);
+            return View(values);
+        }
+        return View();
+    }
+    [HttpGet("EstateAgentProperties/{id}")]
+    public async Task<IActionResult> PropertyListByEstateAgent(int id)
+    {
+        HttpClient client = _httpClientFactory.CreateClient();
+        HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "Properties/GetPropertyListByEstateAgentIdAndIsActiveTrueWithRelationships?id=" + id);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            string jsonData = await responseMessage.Content.ReadAsStringAsync();
+            List<ResultPropertyWithRelationshipsViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyWithRelationshipsViewModel>>(jsonData);
+            ViewBag.estateAgentName = values.FirstOrDefault()?.estateAgentName;
             return View(values);
         }
         return View();
@@ -56,7 +70,7 @@ public class PropertyController : Controller
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultPropertyViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyViewModel>>(jsonData);
+            List<ResultPropertyWithRelationshipsViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyWithRelationshipsViewModel>>(jsonData);
             return View(values);
         }
         return View();

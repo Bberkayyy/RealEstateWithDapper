@@ -21,7 +21,7 @@ public class _PropertyDetailHeaderComponentPartial : ViewComponent
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            ResultPropertyViewModel? value = JsonConvert.DeserializeObject<ResultPropertyViewModel>(jsonData);
+            ResultPropertyWithRelationshipsViewModel? value = JsonConvert.DeserializeObject<ResultPropertyWithRelationshipsViewModel>(jsonData);
             return View(value);
         }
         return View();

@@ -249,7 +249,7 @@ public class PropertyRepository : IPropertyRepository
 
     public async Task<List<GetPropertyListByDealOfTheDayTrueWithRelationshipsResponseDto>> GetPropertyListByDealOfTheDayTrueWithRelationshipsAsync()
     {
-        string query = "Select TblProperty.Id, TblProperty.Title, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblProperty.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId=TblEstateAgent.Id where TblProperty.DealOfTheDay = 1";
+        string query = "Select TblProperty.Id, TblProperty.Title, TblProperty.SlugUrl, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblProperty.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId=TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId=TblEstateAgent.Id where TblProperty.DealOfTheDay = 1";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetPropertyListByDealOfTheDayTrueWithRelationshipsResponseDto> values = await connection.QueryAsync<GetPropertyListByDealOfTheDayTrueWithRelationshipsResponseDto>(query);
@@ -269,7 +269,7 @@ public class PropertyRepository : IPropertyRepository
 
     public async Task<List<GetLast3PropertyWithRelationshipsResponseDto>> GetLast3PropertyWithRelationshipsAsync()
     {
-        string query = "Select top(3) TblProperty.Id, TblProperty.Title, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblProperty.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId = TblEstateAgent.Id order by Id desc";
+        string query = "Select top(3) TblProperty.Id, TblProperty.Title, TblProperty.SlugUrl, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblProperty.IsActive, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId = TblEstateAgent.Id order by Id desc";
         using (IDbConnection connection = _context.CreateConnection())
         {
             IEnumerable<GetLast3PropertyWithRelationshipsResponseDto> value = await connection.QueryAsync<GetLast3PropertyWithRelationshipsResponseDto>(query);

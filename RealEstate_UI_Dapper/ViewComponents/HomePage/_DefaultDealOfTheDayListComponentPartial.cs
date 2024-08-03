@@ -24,7 +24,7 @@ public class _DefaultDealOfTheDayListComponentPartial : ViewComponent
         if (responseMessage.IsSuccessStatusCode)
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
-            List<ResultPropertyViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyViewModel>>(jsonData);
+            List<ResultPropertyWithRelationshipsViewModel>? values = JsonConvert.DeserializeObject<List<ResultPropertyWithRelationshipsViewModel>>(jsonData);
             return View(values);
         }
         return View();

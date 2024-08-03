@@ -77,5 +77,10 @@ public class EstateAgentsController : ControllerBase
     public async Task<IActionResult> GetEstateAgentLast5Property(int id)
     {
         return Ok(await _estateAgentDashboardStatisticRepository.GetEstateAgentLast5Property(id));
+    } 
+    [HttpGet("last3property")]
+    public async Task<IActionResult> GetEstateAgentLast3Property(int id)
+    {
+        return Ok(await _estateAgentDashboardStatisticRepository.GetEstateAgentLast3ActiveProperty(id));
     }
 }

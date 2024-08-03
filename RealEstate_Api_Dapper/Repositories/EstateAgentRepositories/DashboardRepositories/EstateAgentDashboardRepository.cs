@@ -78,4 +78,16 @@ public class EstateAgentDashboardRepository : IEstateAgentDashboardRepository
             return value.ToList();
         }
     }
+
+    public async Task<List<EstateAgentLast3PropertyWithRelationshipsResponseDto>> GetEstateAgentLast3ActiveProperty(int id)
+    {
+        string query = "Select top(3) TblProperty.Id, TblProperty.Title, TblProperty.Price, TblProperty.CoverImage, TblProperty.City, TblProperty.District, TblProperty.Address, TblProperty.Description, TblProperty.Type, TblProperty.DealOfTheDay, TblProperty.CreatedDate, TblCategory.Name as CategoryName, TblEstateAgent.FullName as EstateAgentName From TblProperty inner join TblCategory on TblProperty.CategoryId = TblCategory.Id inner join TblEstateAgent on TblProperty.EstateAgentId = TblEstateAgent.Id where EstateAgentId=@estateAgentId and IsActive=1 order by Id desc";
+        DynamicParameters parameters = new();
+        parameters.Add("@estateAgentId", id);
+        using (IDbConnection connection = _context.CreateConnection())
+        {
+            IEnumerable<EstateAgentLast3PropertyWithRelationshipsResponseDto> value = await connection.QueryAsync<EstateAgentLast3PropertyWithRelationshipsResponseDto>(query, parameters);
+            return value.ToList();
+        }
+    }
 }

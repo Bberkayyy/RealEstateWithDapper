@@ -1,0 +1,20 @@
+﻿@model ResultEstateAgentViewModel
+<div class="sidebar-widget popular-posts">
+    <div class="sidebar-title">
+        <h4>İlan Sahibi</h4>
+    </div>
+
+    <article class="post">
+        <figure class="post-thumb">
+            <img src="@Model.imageUrl" class="radius-image" alt="">
+        </figure>
+        <div class="text mb-0">
+            <a href="#blog-single">
+                @Model.fullName
+            </a>
+            <div class="post-info">@Model.phoneNumber</div>
+            <div class="post-info">@Model.mail</div>
+        </div>
+    </article>
+    <a href="@Url.Action("PropertyListByEstateAgent", "Property", new { id = Model.id })" class="btn btn-primary btn-style w-100">Diğer İlanlar</a>
+</div>
