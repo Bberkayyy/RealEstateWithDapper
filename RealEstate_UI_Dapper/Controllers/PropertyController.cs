@@ -57,8 +57,8 @@ public class PropertyController : Controller
         {
             string jsonData = await responseMessage.Content.ReadAsStringAsync();
             ResultPropertyDetailsViewModel? value = JsonConvert.DeserializeObject<ResultPropertyDetailsViewModel>(jsonData);
-            ViewBag.location = ExtractPlaceName(value.location);
-            ViewBag.video = ConvertToEmbedUrl(value.videoUrl);
+            ViewBag.location = ExtractPlaceName(value?.location);
+            ViewBag.video = ConvertToEmbedUrl(value?.videoUrl);
             return View();
         }
         return View();
@@ -75,7 +75,7 @@ public class PropertyController : Controller
         }
         return View();
     }
-    private string ExtractPlaceName(string url)
+    private string ExtractPlaceName(string? url)
     {
         try
         {
@@ -101,7 +101,7 @@ public class PropertyController : Controller
             return string.Empty;
         }
     }
-    private string ConvertToEmbedUrl(string youtubeUrl)
+    private string ConvertToEmbedUrl(string? youtubeUrl)
     {
         try
         {

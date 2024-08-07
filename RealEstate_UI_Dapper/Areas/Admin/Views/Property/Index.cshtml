@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th scope="col">Giriş Tarihi</th>
-                    <th scope="col">İlan Başlığı</th>                    
+                    <th scope="col">İlan Başlığı</th>
                     <th scope="col">Kategori</th>
                     <th scope="col">Durumu</th>
                     <th scope="col">İlan Sahibi</th>
@@ -32,7 +32,7 @@
                             @item.createdDate.ToShortDateString()
                             <img class="img-fluid" style="height:50px;width:80px;border-radius:50%" src="@item.coverImage" alt="">
                         </th>
-                        <td>@item.title</td>                        
+                        <td>@item.title</td>
                         <td>@item.categoryName</td>
                         <td>@item.type</td>
                         <td>@item.estateAgentName</td>
@@ -92,7 +92,7 @@
                 }
             </tbody>
         </table>
-        <a href="/Admin/Property/CreateProperty/" class="btn btn-outline-primary">Ürün Ekle</a>
+        <a href="/Admin/Property/CreateProperty/" class="btn btn-outline-primary">İlan Ekle</a>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
