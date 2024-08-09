@@ -31,8 +31,8 @@ public class PropertiesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateProperty(CreatePropertyRequestDto createPropertyRequestDto)
     {
-        await _propertyRepository.CreatePropertyAsync(createPropertyRequestDto);
-        return Ok("İlan Başarılı Bir Şekilde Eklendi.");
+        var createdProperty = await _propertyRepository.CreatePropertyAsync(createPropertyRequestDto);
+        return Ok(createdProperty);
     }
     [HttpDelete]
     public async Task<IActionResult> DeleteProperty(int id)

@@ -1,0 +1,52 @@
+﻿@model AdminPanelCreatePropertyDetailViewModel
+@{
+    ViewData["Title"] = "CreatePropertyDetail";
+    Layout = "~/Areas/Admin/Views/Default/Index.cshtml";
+}
+
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">İlan Detayları</h6>
+        <form method="post">
+            <input type="hidden" asp-for="PropertyId" value="@ViewBag.propertyId" />
+            <div class="mb-3">
+                <label class="form-label">Metrekaresi</label>
+                <input type="number" class="form-control" min="1" asp-for="PropertySize" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yatak Odası Sayısı</label>
+                <input type="number" class="form-control" min="1" asp-for="BedroomCount" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mutfak Sayısı</label>
+                <input type="number" class="form-control" min="1" asp-for="BathCount" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Oda Sayısı</label>
+                <input type="number" class="form-control" min="1" asp-for="RoomCount" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Otopak Sayısı</label>
+                <input type="number" class="form-control" min="0" asp-for="GarageSize" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yapım Yılı</label>
+                <input type="text" class="form-control" min="0" asp-for="BuildYear" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fiyatı</label>
+                <input type="text" class="form-control" asp-for="Price" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lokasyon Linki(Google Haritalar)</label>
+                <input type="text" class="form-control" asp-for="Location" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Video Linki</label>
+                <input type="text" class="form-control" asp-for="VideoUrl" />
+            </div>
+            <button type="submit" class="btn btn-primary">Devam Et</button>
+        </form>
+    </div>
+</div>
+

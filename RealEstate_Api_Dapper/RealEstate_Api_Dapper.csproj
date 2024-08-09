@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\MessageDtos\Requests\" />
-    <Folder Include="Dtos\PropertyDetailDtos\Requests\" />
   </ItemGroup>
 
 </Project>

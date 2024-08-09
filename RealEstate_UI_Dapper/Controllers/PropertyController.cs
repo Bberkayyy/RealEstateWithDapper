@@ -50,7 +50,7 @@ public class PropertyController : Controller
     [HttpGet("property/propertydetail/{slug}/{id}")]
     public async Task<IActionResult> PropertyDetail(int id)
     {
-        ViewBag.PropertyId = id;
+        ViewBag.propertyId = id;
         HttpClient client = _httpClientFactory.CreateClient();
         HttpResponseMessage responseMessage = await client.GetAsync(_apiSettings.BaseUrl + "PropertyDetails/GetByPropertyId?id=" + id);
         if (responseMessage.IsSuccessStatusCode)

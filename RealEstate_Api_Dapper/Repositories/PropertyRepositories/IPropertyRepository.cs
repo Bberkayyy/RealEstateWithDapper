@@ -7,7 +7,7 @@ public interface IPropertyRepository
 {
     Task<List<GetAllPropertyResponseDto>> GetAllPropertyAsync();
     Task<List<GetAllPropertyWithRelationshipsResponseDto>> GetAllPropertyWithRelationshipsAsync();
-    Task CreatePropertyAsync(CreatePropertyRequestDto createPropertyRequestDto);
+    Task<CreatedPropertyResponseDto> CreatePropertyAsync(CreatePropertyRequestDto createPropertyRequestDto);
     Task UpdatePropertyAsync(UpdatePropertyRequestDto updatePropertyRequestDto);
     Task DeletePropertyAsync(int id);
     Task<GetPropertyByIdResponseDto> GetPropertyByIdAsync(int id);

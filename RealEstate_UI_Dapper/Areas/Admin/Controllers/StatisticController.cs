@@ -41,7 +41,7 @@ public class StatisticController : Controller
         ViewBag.averageRentPrice = jsonDataAverageRentPrice;
         #endregion
         #region AverageRoomCount
-        HttpResponseMessage responseMessageAverageRoomCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/AverageRentPrice");
+        HttpResponseMessage responseMessageAverageRoomCount = await client.GetAsync(_apiSettings.BaseUrl + "Statistics/AverageRoomCount");
         string jsonDataAverageRoomCount = await responseMessageAverageRoomCount.Content.ReadAsStringAsync();
         ViewBag.averageRoomCount = jsonDataAverageRoomCount;
         #endregion

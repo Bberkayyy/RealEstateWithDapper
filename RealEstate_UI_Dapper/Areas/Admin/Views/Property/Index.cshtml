@@ -76,6 +76,8 @@
                                         <th>İl</th>
                                         <th>İlçe</th>
                                         <th>Adres</th>
+                                        <th>Ayrıntılar</th>
+                                        <th>Özellikler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,6 +86,8 @@
                                         <td>@item.city</td>
                                         <td>@item.district</td>
                                         <td>@item.address</td>
+                                        <td><a href="/Admin/PropertyDetail/UpdatePropertyDetail/@item.id" class="btn btn-outline-primary">Ayrıntılar</a></td>
+                                        <td><a href="/Admin/PropertyAmenity/SelectPropertyAmenities/@item.id" class="btn btn-outline-success">Özellikler</a></td>
                                     </tr>
                                 </tbody>
                             </table>

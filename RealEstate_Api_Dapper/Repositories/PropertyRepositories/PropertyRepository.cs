@@ -16,9 +16,9 @@ public class PropertyRepository : IPropertyRepository
         _context = context;
     }
 
-    public async Task CreatePropertyAsync(CreatePropertyRequestDto createPropertyRequestDto)
+    public async Task<CreatedPropertyResponseDto> CreatePropertyAsync(CreatePropertyRequestDto createPropertyRequestDto)
     {
-        string query = "insert into TblProperty (Title,SlugUrl,Price,CoverImage,City,District,Address,Description,Type,DealOfTheDay,CreatedDate,IsActive,CategoryId,EstateAgentId) values (@title,@slugUrl,@price,@coverImage,@city,@district,@address,@description,@type,@dealOfTheDay,@createdDate,@isActive,@categoryId,@estateAgentId)";
+        string query = @"insert into TblProperty (Title, SlugUrl, Price, CoverImage, City, District, Address, Description, Type, DealOfTheDay, CreatedDate, IsActive, CategoryId, EstateAgentId) OUTPUT INSERTED.* values (@title, @slugUrl, @price, @coverImage, @city, @district, @address, @description, @type, @dealOfTheDay, @createdDate, @isActive, @categoryId, @estateAgentId)";
         DynamicParameters parameters = new();
         parameters.Add("@title", createPropertyRequestDto.Title);
         parameters.Add("@slugUrl", CreateSlugUrl(createPropertyRequestDto.Title));
@@ -36,18 +36,24 @@ public class PropertyRepository : IPropertyRepository
         parameters.Add("@estateAgentId", createPropertyRequestDto.EstateAgentId);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            await connection.ExecuteAsync(query, parameters);
+            return await connection.QuerySingleAsync<CreatedPropertyResponseDto>(query, parameters);
         }
     }
 
     public async Task DeletePropertyAsync(int id)
     {
-        string query = "Delete from TblProperty where Id=@id";
+        string deletePropertyQuery = "Delete from TblProperty where Id=@id";
+        string deletePropertyDetailQuery = "Delete from TblPropertyDetails where PropertyId=@id";
+        string deletePropertyImageQuery = "Delete from TblPropertyImage where PropertyId=@id";
+        string deletePropertyAmenityQuery = "Delete from TblPropertyAmenity where PropertyId=@id";
         DynamicParameters parameters = new();
         parameters.Add("@id", id);
         using (IDbConnection connection = _context.CreateConnection())
         {
-            await connection.ExecuteAsync(query, parameters);
+            await connection.ExecuteAsync(deletePropertyDetailQuery, parameters);
+            await connection.ExecuteAsync(deletePropertyImageQuery, parameters);
+            await connection.ExecuteAsync(deletePropertyAmenityQuery, parameters);
+            await connection.ExecuteAsync(deletePropertyQuery, parameters);
         }
     }
 

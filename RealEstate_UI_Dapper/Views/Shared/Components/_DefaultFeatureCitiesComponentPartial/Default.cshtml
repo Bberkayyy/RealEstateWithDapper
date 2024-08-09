@@ -1,10 +1,13 @@
 ﻿@model List<ResultPropertyWithRelationshipsViewModel>
+@{
+    var distinctCities = Model.Select(m => m.city).Distinct().ToList();
+}
 <span class="input-group-btn">
     <select class="btn btn-default" name="city" required>
         <option selected="">Şehir Seçiniz</option>
-        @foreach (var item in Model)
+        @foreach (var item in distinctCities)
         {
-            <option value="@item.city">@item.city</option>
+            <option value="@item">@item</option>
         }
     </select>
 </span>

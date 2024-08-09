@@ -54,9 +54,13 @@ public class PropertyController : Controller
         StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
         HttpResponseMessage responseMessage = await client.PostAsync(_apiSettings.BaseUrl + "Properties", content);
         if (responseMessage.IsSuccessStatusCode)
-            return RedirectToAction("Index", "Property", new { area = "Admin" });
+        {
+            string jsonData = await responseMessage.Content.ReadAsStringAsync();
+            AdminPanelResultPropertyViewModel? createdProperty = JsonConvert.DeserializeObject<AdminPanelResultPropertyViewModel>(jsonData);
+            return RedirectToAction("CreatePropertyDetail", "PropertyDetail", new { area = "Admin", propertyId = createdProperty.id });
+        }
         return View();
-    }
+    }    
     [Route("DeleteProperty/{id}")]
     public async Task<IActionResult> DeleteProperty(int id)
     {
@@ -153,11 +157,11 @@ public class PropertyController : Controller
         string jsonData = await responseMessage.Content.ReadAsStringAsync();
         List<AdminPanelResultEstateAgentViewModel>? values = JsonConvert.DeserializeObject<List<AdminPanelResultEstateAgentViewModel>>(jsonData);
         List<SelectListItem> EstateAgents = (from x in values
-                                          select new SelectListItem
-                                          {
-                                              Text = x.fullName,
-                                              Value = x.id.ToString()
-                                          }).ToList();
+                                             select new SelectListItem
+                                             {
+                                                 Text = x.fullName,
+                                                 Value = x.id.ToString()
+                                             }).ToList();
         return EstateAgents;
     }
 }
